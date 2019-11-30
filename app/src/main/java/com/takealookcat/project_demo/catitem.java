@@ -4,7 +4,7 @@ package com.takealookcat.project_demo;
 //git push from desktop
 //test brc 2
 //after merge
-
+//test on dummy account
 import android.graphics.drawable.Drawable;
 
 public class catitem {
