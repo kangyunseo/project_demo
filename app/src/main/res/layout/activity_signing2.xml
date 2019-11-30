@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/thema_1"
+    android:clipToPadding="false"
+    android:fillViewport="true"
+    android:scrollbarStyle="outsideOverlay"
+    tools:context=".signing">
+
+    <LinearLayout
+        android:id="@+id/thislay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/background_thema"
+        android:orientation="vertical"
+        android:paddingHorizontal="40dp"
+        android:paddingVertical="50dp">
+
+        <ImageView
+            android:id="@+id/profile_image_link"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:background="@drawable/strock" />
+
+        <TextView
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="40dp"
+            android:text="nickname"
+            android:textColor="@color/thema_3" />
+
+        <EditText
+            android:id="@+id/password_input"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/layer_list"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:selectAllOnFocus="true" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="40dp"
+            android:text="위치"
+            android:textColor="@color/thema_3" />
+
+        <EditText
+            android:id="@+id/user_where"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/layer_list"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:selectAllOnFocus="true" />
+
+        <Button
+            android:id="@+id/login_signup"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/button_thema"
+            android:text="시작하기"
+            android:textColor="@color/thema_0" />
+
+        <LinearLayout
+            android:id="@+id/dynamiclayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+<LinearLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageButton
+        android:id="@+id/bt_choose"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:background="#00ff0000"
+        android:src="@drawable/logo"/>
+
+    <EditText
+        android:id="@+id/date_now"
+        android:layout_width="match_parent"
+        android:layout_height="71dp"
+        android:hint="Context"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/cat_context"
+        android:layout_width="match_parent"
+        android:layout_height="71dp"
+        android:hint="Context"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/cat_info"
+        android:layout_width="match_parent"
+        android:layout_height="71dp"
+        android:hint="Cat info"
+        android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/bt_upload"
+        android:layout_width="95dp"
+        android:layout_height="42dp"
+        android:layout_gravity="center"
+        android:background="@color/thema_1"
+        android:text="등록하기" />
+    <TextView
+        android:id="@+id/exif"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</LinearLayout>
+</androidx.core.widget.NestedScrollView>
