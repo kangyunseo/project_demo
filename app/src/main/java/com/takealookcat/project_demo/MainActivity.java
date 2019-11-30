@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         if(!hasPermissions(this, PERMISSIONS)){ //exif 권한
             ActivityCompat.requestPermissions(MainActivity.this, PERMISSIONS, PERMISSION_ALL);
         }
-        if ( Build.VERSION.SDK_INT >= 23 && // 위치 권한
+        if ( Build.VERSION.SDK_INT >= 23 && // 위치 권한 rr
                 ContextCompat.checkSelfPermission(this,
                         android.Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED ) {
             ActivityCompat.requestPermissions( this, new String[]
