@@ -1,6 +1,7 @@
 package com.takealookcat.project_demo;
 
 //git push from notebook
+//git push from desktop
 import android.graphics.drawable.Drawable;
 
 public class catitem {
