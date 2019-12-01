@@ -1,5 +1,4 @@
 package com.takealookcat.project_demo;
-
 import android.annotation.TargetApi;
 import android.app.ProgressDialog;
 import android.content.ContentUris;
