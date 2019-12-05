@@ -63,11 +63,11 @@ public class DonationListAdapter extends BaseAdapter{
         }
 
         TextView txtTitle = (TextView)convertView.findViewById(R.id.txtTitle);
-        TextView txtContent = (TextView)convertView.findViewById(R.id.txtContent);
+        //TextView txtContent = (TextView)convertView.findViewById(R.id.txtContent);
 
         DonationItem bbs = datas.get(position);
         txtTitle.setText(bbs.title);
-        txtContent.setText(bbs.content);
+        //txtContent.setText(bbs.content);
 
         return convertView;
     }

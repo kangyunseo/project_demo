@@ -1,23 +1,15 @@
 package com.takealookcat.project_demo;
 
-//git push from notebook
-//git push from desktop
-//test brc 2
-//after merge
-//test on dummy account
-import android.graphics.drawable.Drawable;
-
-public class catitem {
-
+public class FeedItem {
     public String title ;
     public String content ;
     public String file;
     public String key;
 
-    public catitem() {
+    public FeedItem() {
 
     }
-    public catitem(String title, String content) {
+    public FeedItem(String title, String content) {
         this.title=title;
         this.content=content;
     }

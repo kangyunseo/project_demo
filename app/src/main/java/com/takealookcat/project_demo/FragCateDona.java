@@ -27,7 +27,7 @@ import java.util.List;
 
 
 public class FragCateDona extends Fragment {
-
+    private OnFragmentInteractionListener mListener;
     FirebaseDatabase database;
     DatabaseReference donaRef;
 
@@ -35,6 +35,7 @@ public class FragCateDona extends Fragment {
     DonationListAdapter adapter;
     List<DonationItem> dona_list = new ArrayList<>();
 
+    FragDonaItem FragDonaItem;
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
         // 인플레이션이 가능하다, container 이쪽으로 붙여달라, fragment_main을
@@ -55,13 +56,20 @@ public class FragCateDona extends Fragment {
         adapter = new DonationListAdapter(dona_list, getActivity());
         listView.setAdapter(adapter);
 
+        FragDonaItem = new FragDonaItem();
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView parent, View v, int position, long id) {
-                // get TextView's Text.
-                String strText = (String) parent.getItemAtPosition(position) ;
-                // TODO : use strText
-                Toast.makeText(getActivity().getApplicationContext(),strText,Toast.LENGTH_SHORT).show();
+                // TODO :
+                String content = dona_list.get(position).getContent();
+                String title = dona_list.get(position).getTitle();
+                String camount = dona_list.get(position).getCurAmount();
+                String tamount = dona_list.get(position).getTargetAmount();
+                String sday = dona_list.get(position).getStartDate();
+                String dday = dona_list.get(position).getDueDate();
+                mListener.onFragmentInteraction(content, title, camount, tamount, sday, dday);
+
             }
         }) ;
         return rootview;            // 플레그먼트 화면으로 보여주게 된다.
@@ -79,7 +87,7 @@ public class FragCateDona extends Fragment {
                 String key  = snapshot.getKey();
                 DonationItem item = snapshot.getValue(DonationItem.class);
                 item.key = key;
-                dona_list.add(item);
+                dona_list.add(0,item);
             }
             adapter.notifyDataSetChanged();
         }
@@ -91,4 +99,19 @@ public class FragCateDona extends Fragment {
             // ...
         }
     };
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try{
+            mListener = (OnFragmentInteractionListener) context;
+        }catch(ClassCastException e){
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+
+    }
+
+    public interface OnFragmentInteractionListener {
+        void onFragmentInteraction(String title, String content, String curAmount, String targetAmount, String startDate, String dueDate);
+    }
 }

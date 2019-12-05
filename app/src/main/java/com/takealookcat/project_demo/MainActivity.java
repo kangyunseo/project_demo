@@ -1,5 +1,8 @@
 package com.takealookcat.project_demo;
 
+import androidx.fragment.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -12,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements FragCateDona.OnFragmentInteractionListener {
 
     menu_1 fragment1;
     menu_2 fragment2;
@@ -28,6 +31,21 @@ public class MainActivity extends AppCompatActivity {
             android.Manifest.permission.READ_SMS,
             android.Manifest.permission.CAMERA
     };
+    @Override
+    public void onFragmentInteraction(String title, String content, String curAmount, String targetAmount, String startDate, String dueDate) {
+        FragDonaItem FragItem = new FragDonaItem();
+        Bundle bundle = new Bundle();
+        bundle.putString("title", title);
+        bundle.putString("content", content);
+        bundle.putString("curAmount", curAmount);
+        bundle.putString("targetAmount", targetAmount);
+        bundle.putString("startDate", startDate);
+        bundle.putString("dueDate", dueDate);
+        FragItem.setArguments(bundle);
+        getSupportFragmentManager().beginTransaction().replace(R.id.view, FragItem).commit();
+
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
         //    startActivity(intent);
         //    finish();
         //}
+
+
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
