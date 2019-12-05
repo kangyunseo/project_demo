@@ -54,6 +54,9 @@ public class DonationItem {
     public String getContent() {
         return this.content ;
     }
+    public String getFile() {
+        return this.file ;
+    }
 
     public String getStartDate() {
         return this.startDate ;
@@ -67,9 +70,7 @@ public class DonationItem {
     public String getCurAmount() {
         return this.curAmount ;
     }
-    public String getFile() {
-        return this.file ;
-    }
+
 
 
 }

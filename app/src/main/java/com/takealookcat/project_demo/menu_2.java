@@ -10,14 +10,16 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 public class menu_2 extends Fragment {
-    FragCateDona fragcatedona; //donation 게시판 fragment
 
-    static final String[] CategoryList = {"게시판1", "게시판2", "기부"} ;
+    FragCateDona fragcatedona; //donation 게시판 fragment
+    FragCateBoard fragcateboard;
+    static final String[] CategoryList = {"자유게시판", "기부", "게시판1"} ;
     Button button;
 
     @Override
@@ -39,6 +41,7 @@ public class menu_2 extends Fragment {
         });
 
         fragcatedona = new FragCateDona(); //donation 게시판 fragment
+        fragcateboard = new FragCateBoard();    //자유게시판 fragment
 
         ArrayAdapter Adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, CategoryList) ;
         ListView listview = (ListView)rootview.findViewById(R.id.listview) ;
@@ -53,20 +56,20 @@ public class menu_2 extends Fragment {
 
                 switch (position){
                     case 0:
+                        getFragmentManager().beginTransaction().replace(R.id.container, fragcateboard).commit();
                         break;
                     case 1:
-                        break;
-                    case 2:
-                        //Toast.makeText(getActivity().getApplicationContext(),"!",Toast.LENGTH_SHORT).show();
                         getFragmentManager().beginTransaction().replace(R.id.container, fragcatedona).commit();
                         break;
+                    case 2:
+                        Toast.makeText(getActivity().getApplicationContext(),"아직이야",Toast.LENGTH_SHORT).show();
+                       break;
                     default:
                         throw new IllegalStateException("Unexpected value: " + position);
                 }
 
             }
         }) ;
-
 
 
         return rootview;
