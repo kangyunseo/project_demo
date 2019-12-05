@@ -73,7 +73,7 @@ public class FeedListAdapter extends BaseAdapter {
         FeedItem feed = datas.get(position);
 
         StorageReference firebaseStorage = FirebaseStorage.getInstance().getReference();
-        StorageReference storageReference = firebaseStorage.child("images/"+feed.file);
+        StorageReference storageReference = firebaseStorage.child("feed/"+feed.file);
 
         storageReference.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
             @Override
