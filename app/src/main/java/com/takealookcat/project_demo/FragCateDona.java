@@ -68,7 +68,8 @@ public class FragCateDona extends Fragment {
                 String tamount = dona_list.get(position).getTargetAmount();
                 String sday = dona_list.get(position).getStartDate();
                 String dday = dona_list.get(position).getDueDate();
-                mListener.onFragmentInteraction(content, title, camount, tamount, sday, dday);
+                String file = dona_list.get(position).getFile();
+                mListener.onFragmentInteraction(content, title, camount, tamount, sday, dday, file);
 
             }
         }) ;
@@ -112,6 +113,7 @@ public class FragCateDona extends Fragment {
     }
 
     public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(String title, String content, String curAmount, String targetAmount, String startDate, String dueDate);
+        void onFragmentInteraction(String title, String content, String curAmount, String targetAmount, String startDate,
+                                   String dueDate, String file);
     }
 }

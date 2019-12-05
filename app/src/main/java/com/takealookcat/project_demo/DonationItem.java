@@ -15,7 +15,7 @@ public class DonationItem {
     public String dueDate ;
     public String targetAmount;
     public String curAmount;
-    public Drawable iconDrawable ;
+    public String file;
 
     public DonationItem() {
 
@@ -43,8 +43,8 @@ public class DonationItem {
     public void setCurAmount(String curAmount) {
         this.curAmount = curAmount ;
     }
-    public void setIcon(Drawable icon) {
-        iconDrawable = icon ;
+    public void setFile(String file) {
+        this.file = file ;
     }
 
 
@@ -67,8 +67,8 @@ public class DonationItem {
     public String getCurAmount() {
         return this.curAmount ;
     }
-    public Drawable getIcon() {
-        return this.iconDrawable ;
+    public String getFile() {
+        return this.file ;
     }
 
 

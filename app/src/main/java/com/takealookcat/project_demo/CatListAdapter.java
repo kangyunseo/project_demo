@@ -73,7 +73,7 @@ public class CatListAdapter extends BaseAdapter {
         catitem cat = datas.get(position);
 
         StorageReference firebaseStorage = FirebaseStorage.getInstance().getReference();
-        StorageReference storageReference = firebaseStorage.child("images/"+cat.file);
+        StorageReference storageReference = firebaseStorage.child("cat/"+cat.file);
 
         storageReference.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
             @Override

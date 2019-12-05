@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements FragCateDona.OnFr
             android.Manifest.permission.CAMERA
     };
     @Override
-    public void onFragmentInteraction(String title, String content, String curAmount, String targetAmount, String startDate, String dueDate) {
+    public void onFragmentInteraction(String title, String content, String curAmount, String targetAmount, String startDate, String dueDate, String file) {
         FragDonaItem FragItem = new FragDonaItem();
         Bundle bundle = new Bundle();
         bundle.putString("title", title);
@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements FragCateDona.OnFr
         bundle.putString("targetAmount", targetAmount);
         bundle.putString("startDate", startDate);
         bundle.putString("dueDate", dueDate);
+        bundle.putString("file", file);
         FragItem.setArguments(bundle);
         getSupportFragmentManager().beginTransaction().replace(R.id.view, FragItem).commit();
 

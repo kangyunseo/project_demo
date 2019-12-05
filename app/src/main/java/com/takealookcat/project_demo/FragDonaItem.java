@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
@@ -11,8 +12,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 
 public class FragDonaItem extends Fragment {
@@ -23,6 +31,7 @@ public class FragDonaItem extends Fragment {
     public String dueDate ;
     public String targetAmount;
     public String curAmount;
+    public String file;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
@@ -35,7 +44,7 @@ public class FragDonaItem extends Fragment {
         TextView ttargetAmount = (TextView) v.findViewById(R.id.ttargetAmount);
         TextView tdueDate = (TextView) v.findViewById(R.id.tdueDate);
         TextView tstartDate = (TextView) v.findViewById(R.id.tstartDate);
-
+        final ImageView iconImageView = (ImageView) v.findViewById(R.id.imageView) ;
 
         Bundle extra = this.getArguments();
         if(extra != null) {
@@ -46,6 +55,7 @@ public class FragDonaItem extends Fragment {
             dueDate = extra.getString("dueDate");
             targetAmount = extra.getString("targetAmount");
             curAmount = extra.getString("curAmount");
+            file = extra.getString("file");
             ttitle.setText(title);
             tcontent.setText(content);
             tcurAmount.setText(curAmount);
@@ -53,6 +63,23 @@ public class FragDonaItem extends Fragment {
             tdueDate.setText(dueDate);
             tstartDate.setText(startDate);
         }
+
+        StorageReference firebaseStorage = FirebaseStorage.getInstance().getReference();
+        StorageReference storageReference = firebaseStorage.child("donation/"+file);
+        storageReference.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+                if (task.isSuccessful()) {
+                    // Glide 이용하여 이미지뷰에 로딩
+                    Glide.with(getActivity())
+                            .load(task.getResult())
+                            .into(iconImageView);
+                } else {
+                    // URL을 가져오지 못하면 토스트 메세지
+                    Toast.makeText(getActivity(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
         return v;
     }
 

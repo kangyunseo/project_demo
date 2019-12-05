@@ -157,7 +157,7 @@ public class tab_1 extends Fragment {
             Date now = new Date();
             final String filename = formatter.format(now) + ".png";
             //storage 주소와 폴더 파일명을 지정해 준다.
-            StorageReference storageRef = storage.getReferenceFromUrl("gs://projectdemo-5609c.appspot.com").child("images/" + filename);
+            StorageReference storageRef = storage.getReferenceFromUrl("gs://projectdemo-5609c.appspot.com").child("cat/" + filename);
             //올라가거라...
 
             //FirebaseDatabase database = FirebaseDatabase.getInstance();
