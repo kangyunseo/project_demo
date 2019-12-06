@@ -83,7 +83,6 @@ public class CatListAdapter extends BaseAdapter {
                     // Glide 이용하여 이미지뷰에 로딩
                     Glide.with(context)
                             .load(task.getResult())
-                            .apply(new RequestOptions().circleCrop())
                             .into(iconImageView);
                 } else {
                     // URL을 가져오지 못하면 토스트 메세지

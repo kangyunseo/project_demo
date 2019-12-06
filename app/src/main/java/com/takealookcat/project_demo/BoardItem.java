@@ -5,6 +5,7 @@ public class BoardItem {
     public String content ;
     public String file;
     public String key;
+    public String email;
 
     public BoardItem() {
 
@@ -25,6 +26,9 @@ public class BoardItem {
     public void setFile(String file) {
         this.file = file ;
     }
+    public void setemail(String email) {
+        this.email = email ;
+    }
 
     public String getTitle() {
         return this.title ;
@@ -34,5 +38,8 @@ public class BoardItem {
     }
     public String getFile() {
         return this.file ;
+    }
+    public String getemail() {
+        return this.email ;
     }
 }
