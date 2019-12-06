@@ -184,8 +184,8 @@ public class tab_2 extends Fragment {
                             postValues.put("content", catcontext);
                             postValues.put("file", filename);
                             postValues.put("info", feedinform);
-                            postValues.put("date", datenow);
-                            postValues.put("email", email);
+                            postValues.put("datenow", datenow);
+                            postValues.put("date", email);
 
                             DatabaseReference keyRef = feedRef.child(key);
                             keyRef.setValue(postValues);

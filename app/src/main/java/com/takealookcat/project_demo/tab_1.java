@@ -190,7 +190,7 @@ public class tab_1 extends Fragment {
                             postValues.put("file", filename);
                             postValues.put("info", catinform);
                             postValues.put("date", datenow);
-                            postValues.put("email", email);
+                            postValues.put("date", email);
 
                             DatabaseReference keyRef = catRef.child(key);
                             keyRef.setValue(postValues);
