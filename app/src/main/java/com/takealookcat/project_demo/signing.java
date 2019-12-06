@@ -189,6 +189,7 @@ public class signing extends AppCompatActivity {
                             Toast.makeText(signing.this, "알수없는 이유로 로그인 실패", Toast.LENGTH_SHORT).show();
                         }
                     } else {
+                        //if 분기로 인증 벨리데이션 추가
                         //로그인 성공시 이메일 저장
                         SharedPreferences pref = getSharedPreferences("sFile", MODE_PRIVATE);
                         SharedPreferences.Editor editor = pref.edit();
@@ -200,6 +201,7 @@ public class signing extends AppCompatActivity {
                         Log.d("", "loooooooooooooooooooooogin!");
                         Toast.makeText(signing.this, "로그인 성공", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(signing.this, MainActivity.class);
+                        //Intent intent = new Intent(signing.this, signing2.class);
                         startActivity(intent);
                         finish();
                     }
