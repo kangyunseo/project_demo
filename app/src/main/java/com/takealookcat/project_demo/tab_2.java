@@ -53,7 +53,7 @@ public class tab_2 extends Fragment {
     ImageButton btChoose;
     Button btUpload;
     Uri filePath;
-    EditText cat_Title, feed_Content, date_now;
+    EditText feed_info, feed_Content, date_now;
     TextView exiftext;
 
     FirebaseDatabase database;
@@ -69,17 +69,18 @@ public class tab_2 extends Fragment {
         feedRef = database.getReference("feed");
 
         feed_Content = (EditText)rootview.findViewById(R.id.feed_context);
-        date_now = (EditText)rootview.findViewById(R.id.date_now);
+        feed_info = (EditText)rootview.findViewById(R.id.feed_info);
+        date_now = (EditText)rootview.findViewById(R.id.date_now2);
         Date currentTime = Calendar.getInstance().getTime();
         String date_text = new SimpleDateFormat("yyyy년 MM월 dd일 EE요일", Locale.getDefault()).format(currentTime);
         date_now.setText(date_text);
 
         //업로드
-        btChoose = (ImageButton) rootview.findViewById(R.id.bt_choose);
-        btUpload = (Button) rootview.findViewById(R.id.bt_upload);
+        btChoose = (ImageButton) rootview.findViewById(R.id.bt_choose2);
+        btUpload = (Button) rootview.findViewById(R.id.bt_upload2);
 
         //exif
-        exiftext = (TextView) rootview.findViewById(R.id.exif);
+        exiftext = (TextView) rootview.findViewById(R.id.exif2);
         geocoder = new Geocoder(getContext());
 
         btChoose.setOnClickListener(new View.OnClickListener() {
@@ -161,6 +162,7 @@ public class tab_2 extends Fragment {
 
             //final String cattitle = cat_Title.getText().toString();
             final String catcontext = feed_Content.getText().toString();
+            final String feedinform = feed_info.getText().toString();
             //
             final String datenow = date_now.getText().toString();
 
@@ -176,6 +178,8 @@ public class tab_2 extends Fragment {
                             //postValues.put("title", cattitle);
                             postValues.put("content", catcontext);
                             postValues.put("file", filename);
+                            postValues.put("info", feedinform);
+                            postValues.put("datenow", datenow);
 
                             DatabaseReference keyRef = feedRef.child(key);
                             keyRef.setValue(postValues);
