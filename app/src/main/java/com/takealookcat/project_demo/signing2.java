@@ -8,6 +8,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -28,9 +30,16 @@ public class signing2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signing2);
 
-        Intent intent = new Intent(signing2.this, MainActivity.class);
-        //startActivity(intent);
-        //finish();
+        Button next = (Button)findViewById(R.id.login_signup);
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(signing2.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
         /*
         new Thread() {
             public void run(){
