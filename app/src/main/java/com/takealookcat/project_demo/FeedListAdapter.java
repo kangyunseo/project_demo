@@ -28,7 +28,7 @@ public class FeedListAdapter extends BaseAdapter {
     LayoutInflater inflater;
 
     // ListViewAdapter의 생성자
-    public FeedListAdapter(List<FeedItem> data,Context context) {
+    public FeedListAdapter(List<FeedItem> data, Context context) {
         this.datas = data;
         this.context = context;
         this.inflater = (LayoutInflater) context. getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -51,6 +51,7 @@ public class FeedListAdapter extends BaseAdapter {
     public Object getItem(int position) {
         return datas.get(position) ;
     }
+
 
     // position에 위치한 데이터를 화면에 출력하는데 사용될 View를 리턴. : 필수 구현
     @Override
@@ -93,7 +94,7 @@ public class FeedListAdapter extends BaseAdapter {
         // 아이템 내 각 위젯에 데이터 반영
         //iconImageView.setImageDrawable(listViewItem.getIcon());
 
-        titleTextView.setText(feed.title);
+        titleTextView.setText(feed.info);
         descTextView.setText(feed.content);
 
         return convertView;

@@ -93,8 +93,8 @@ public class CatListAdapter extends BaseAdapter {
         // 아이템 내 각 위젯에 데이터 반영
         //iconImageView.setImageDrawable(listViewItem.getIcon());
 
-        titleTextView.setText(cat.title);
-        descTextView.setText(cat.content);
+        titleTextView.setText(cat.content);
+        descTextView.setText(cat.info);
 
         return convertView;
     }
