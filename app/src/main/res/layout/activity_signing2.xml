@@ -24,7 +24,7 @@
             android:id="@+id/profile_img"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/logo"/>
+            tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
             android:id="@+id/password"
