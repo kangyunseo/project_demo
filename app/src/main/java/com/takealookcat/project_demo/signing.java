@@ -1,7 +1,12 @@
 package com.takealookcat.project_demo;
 
+import java.io.BufferedInputStream;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -13,6 +18,8 @@ import androidx.core.content.ContextCompat;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
@@ -43,47 +50,32 @@ import com.kakao.util.helper.log.Logger;
 
 public class signing extends AppCompatActivity {
 
-    //비밀번호 확인 창 하나를 생성을 위함
     private LinearLayout dynamiclayout;
     private boolean layoutadded = false;
 
-    //kakao
     private SessionCallback callback;
-    //firebase
+
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
-    /**
-     * 로그인 여부 확인
-     * 자동 로그인
-     * * check if state change
-     *
-     * button listener(수동 로그인)
-     * * 파이어베이스 로그인 처리
-     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //kakao
+        //kakao 리스너
         callback = new SessionCallback();
         Session.getCurrentSession().addCallback(callback);
         Session.getCurrentSession().checkAndImplicitOpen();
 
-        //firebase
+        //firebase 리스너
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    if(mAuth.getCurrentUser().isEmailVerified()){
-                        Intent intent = new Intent(signing.this, MainActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }
-                    else{
-                        sendEmail(mAuth);
-                    }
+                    Intent intent = new Intent(signing.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
                     // User is signed in
                     Log.d("", "onAuthStateChanged:signed_in:" + user.getUid());
                 } else {
@@ -95,92 +87,89 @@ public class signing extends AppCompatActivity {
 
         setContentView(R.layout.activity_signing);
 
-
-        //firebase 로그인 회원가입 버튼 이벤트 처리
+        ////////////////////////////////////////////////////////////////////////////////////////////
+        //firbase 시작
+        //firebase 로그인 인스턴스 호출
         mAuth = FirebaseAuth.getInstance();
+
+        //로그인 버튼 이벤트
         Button login_signup = (Button) findViewById(R.id.login_signup);
         login_signup.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 firebase_login ();
             }
         });
+        //firbase 로그인 끝
+        ////////////////////////////////////////////////////////////////////////////////////////////
 
-        //kakao 로그인 버튼 이벤트는 api에서
+
+        //kakao login 로그인 시작
+        ////////////////////////////////////////////////////////////////////////////////////////////
+
+        //kakao login 로그인 끝
+        ////////////////////////////////////////////////////////////////////////////////////////////
+
     }
 
-    /**
-     * firebase 로그인 정의
-     * 이메일, 비밀번호 유효성 검사
-     * 일단 firebase 로그인 시도, 3가지 에러 캐치
-     * 가입안된 이메일, 비밀번호 틀림, 그밖의 경우
-     * 가입 안된 경우
-     * 알림창 객체 생성, 비밀번호 재확인, 가입완료
-     *
-     * 로그인은 꼭 메일 인증한 메일주소만 통과시킴
-     */
+    //firbase 로그인 정의 시작
+    ////////////////////////////////////////////////////////////////////////////////////////////
     public void firebase_login () {
         EditText email_input = (EditText) findViewById(R.id.email_input);
         EditText password_input = (EditText) findViewById(R.id.password_input);
 
         final String email = email_input.getText().toString();
-        final String password = password_input.getText().toString();
+        String password = password_input.getText().toString();
 
-        //todo 다이얼로그로 변경
         if(!validateEmail(email) || !validatePassword(password)) {
-            Toast.makeText(signing.this, "아직 지원하지 않는 메일 도메인 입니다",
+            Toast.makeText(signing.this, "불가능한 이메일 비밀번호",
                     Toast.LENGTH_SHORT).show();
         } else {
-            //해당 이메일로 처음 로그인 시도 하는 경우
             if(layoutadded) {
                 EditText password_confirm_input = (EditText) findViewById(R.id.password_confirm);
                 String password_confirm = password_confirm_input.getText().toString();
 
-                //비밀번호 재확인
                 if(password.equals(password_confirm)) {
                     mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(signing.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (!task.isSuccessful()) {
                                 if (task.getException() instanceof FirebaseAuthUserCollisionException) {
-                                    mAuth.signInWithEmailAndPassword(email, password);
-                                    Toast.makeText(signing.this, "이미 가입된 이메일입니다 메일함을 확인해주세요",
+                                    Toast.makeText(signing.this, "이미 가입된 이메일",
                                             Toast.LENGTH_SHORT).show();
                                 }
-                                //Toast.makeText(signing.this, "알수없는 이유로 가입 못함", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(signing.this, "알수없는 이유로 가입 못함",
+                                        Toast.LENGTH_SHORT).show();
                             } else {
-                                sendEmail(mAuth);
-                                Toast.makeText(signing.this, "가입 성공 메일함을 확인해주세요", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(signing.this, "가입 성공",
+                                        Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
                 } else {
-                    Toast.makeText(signing.this, "비밀번호를 재확인 해주세요", Toast.LENGTH_SHORT).show();
+                    Log.d("", "재확인ㄴㄴㄴㄴㄴㄴ");
+                    Toast.makeText(signing.this, "비밀번호 재확인", Toast.LENGTH_SHORT).show();
                 }
             }
 
-            //if(layoutadded)의 else 다이얼로그에서 yes하면 회원가입 절차진행
             mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(signing.this, new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
-
-                    ////////////////////////////////////////////////////////////////////////////////
                     //다이얼로그 설정
                     AlertDialog.Builder builder = new AlertDialog.Builder(signing.this);
                     builder.setTitle("처음보네");
                     builder.setMessage("가입허쉴?");
                     builder.setPositiveButton("그랭", new DialogInterface.OnClickListener(){
-                        //오른쪽 버튼 = positive 버튼 처리
+                        // 확인 버튼 클릭시 설정, 오른쪽 버튼입니다.
                         public void onClick(DialogInterface dialog, int whichButton){
                             add_view_dynamic ();
                         }
                     });
                     builder.setNegativeButton("아니", new DialogInterface.OnClickListener(){
-                        //왼쪽 버튼 = negative 버튼 처리
+                        // 취소 버튼 클릭시 설정, 왼쪽 버튼입니다.
                         public void onClick(DialogInterface dialog, int whichButton){
+                            //원하는 클릭 이벤트를 넣으시면 됩니다.
                         }
                     });
-                    //다이얼로그 정의 끝
-                    ////////////////////////////////////////////////////////////////////////////////
 
                     //로그인 실패시 분기
                     if (!task.isSuccessful()){
@@ -192,50 +181,35 @@ public class signing extends AppCompatActivity {
                                 dialog.show();
                             }
                         } catch (FirebaseAuthInvalidCredentialsException wrongPassword) {
+                            Log.d("", "wrong pass wordddddddd");
                             Toast.makeText(signing.this, "비밀번호 틀림", Toast.LENGTH_SHORT).show();
 
                         } catch (Exception e) {
+                            Log.d("", "loooooooooooooooooooooogin!no");
                             Toast.makeText(signing.this, "알수없는 이유로 로그인 실패", Toast.LENGTH_SHORT).show();
                         }
-                        //아래는 성공적으로 로그인 한 경우다 verified 된 이메일인지 검사해야함
                     } else {
                         //if 분기로 인증 벨리데이션 추가
-                        if(mAuth.getCurrentUser().isEmailVerified()){
-                            //로그인 성공시 이메일 저장
-                            SharedPreferences pref = getSharedPreferences("sFile", MODE_PRIVATE);
-                            SharedPreferences.Editor editor = pref.edit();
-                            editor.putString("email", email);
-                            editor.commit();
+                        //로그인 성공시 이메일 저장
+                        SharedPreferences pref = getSharedPreferences("sFile", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = pref.edit();
+                        editor.putString("email", email);
+                        editor.commit();
 
 
-                            //로그인 성공 이벤트 추가
-                            Intent intent = new Intent(signing.this, MainActivity.class);
-                            //signing2.class에서 프로필 사진 닉네임등 설정 이어가기
-                            //Intent intent = new Intent(signing.this, signing2.class);
-                            startActivity(intent);
-                            finish();
-                        }
-                        else {
-                            ////////////////////////////////////////////////////////////////////////
-                            //이메일 인증 다이얼로그 설정
-                            AlertDialog.Builder veri = new AlertDialog.Builder(signing.this);
-                            builder.setTitle("이메일");
-                            builder.setMessage("메일함을 확인해주세요?");
-                            builder.setPositiveButton("그랭", new DialogInterface.OnClickListener(){
-                                public void onClick(DialogInterface dialog, int whichButton){
-                                }
-                            });
-                            //이메일 인증 다이얼로그 정의 끝
-                            ////////////////////////////////////////////////////////////////////////
-                            sendEmail(mAuth);
-                        }
+                        //로그인 성공 이벤트 추가
+                        Log.d("", "loooooooooooooooooooooogin!");
+                        Toast.makeText(signing.this, "로그인 성공", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(signing.this, MainActivity.class);
+                        //Intent intent = new Intent(signing.this, signing2.class);
+                        startActivity(intent);
+                        finish();
                     }
                 }
             });
         }
     }
 
-    //비밀번호 확인을 위해 비밀번호 입력창 하나 더 생성
     public void add_view_dynamic () {
         float pixels = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 50, getResources().getDisplayMetrics());
 
@@ -253,7 +227,6 @@ public class signing extends AppCompatActivity {
         layoutadded = true;
     }
 
-    //todo 학교 이메일만 가능하게 쭉 가져오기
     public static final Pattern VALID_EMAIL_ADDRESS_REGEX
             //= Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$"
             = Pattern.compile("^[A-Z0-9._%+-]+@+(sogang.ac.kr)|(skku.edu)$"
@@ -278,7 +251,8 @@ public class signing extends AppCompatActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        //Toast.makeText(signing.this, "mail sent", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(signing.this, "mail sent",
+                                Toast.LENGTH_SHORT).show();
                     }
                 });
     }
