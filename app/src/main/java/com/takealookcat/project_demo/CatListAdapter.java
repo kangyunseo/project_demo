@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.storage.FirebaseStorage;
@@ -82,6 +83,7 @@ public class CatListAdapter extends BaseAdapter {
                     // Glide 이용하여 이미지뷰에 로딩
                     Glide.with(context)
                             .load(task.getResult())
+                            .apply(new RequestOptions().circleCrop())
                             .into(iconImageView);
                 } else {
                     // URL을 가져오지 못하면 토스트 메세지
