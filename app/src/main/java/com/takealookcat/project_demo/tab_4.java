@@ -166,7 +166,7 @@ public class tab_4 extends Fragment {
                             postValues.put("targetAmount", target);
                             postValues.put("curAmount", "5000000");
                             postValues.put("file", filename);
-                            postValues.put("date", email);
+                            postValues.put("email", email);
 
                             DatabaseReference keyRef = donaRef.child(key);
                             keyRef.setValue(postValues);
