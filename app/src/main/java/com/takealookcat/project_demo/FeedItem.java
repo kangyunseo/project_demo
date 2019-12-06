@@ -8,6 +8,7 @@ public class FeedItem {
     public String info ;
     public String content ;
     public String file ;
+    public String email;
 
     public void setinfo(String info) {
         this.info = info ;
@@ -22,6 +23,9 @@ public class FeedItem {
         iconDrawable = icon ;
     }
     public void setDesc(String con) { content = con ; }
+    public void setEmail(String email) {
+        this.email = email ;
+    }
     public Drawable getIcon() {
         return this.iconDrawable ;
     }
@@ -33,5 +37,8 @@ public class FeedItem {
     }
     public String getFile() {
         return this.file ;
+    }
+    public String getemail() {
+        return this.email ;
     }
 }

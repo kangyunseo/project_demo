@@ -13,9 +13,13 @@ public class catitem {
     public String info ;
     public String content ;
     public String file ;
+    public String email ;
 
     public void setinfo(String info) {
         this.info = info ;
+    }
+    public void setEmail(String email) {
+        this.email = email ;
     }
     public void setContent(String content) {
         this.content = content ;
@@ -32,5 +36,8 @@ public class catitem {
     }
     public String getFile() {
         return this.file ;
+    }
+    public String getemail() {
+        return this.email ;
     }
 }
