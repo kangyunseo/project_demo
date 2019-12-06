@@ -7,7 +7,10 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.v4.media.session.MediaSessionCompat;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -26,21 +29,15 @@ public class signing2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signing2);
+        Button tomain = (Button)findViewById(R.id.login_signup);
 
-        Intent intent = new Intent(signing2.this, MainActivity.class);
-        //startActivity(intent);
-        //finish();
-        /*
-        new Thread() {
-            public void run(){
-                SharedPreferences pref = getSharedPreferences("sFile",MODE_PRIVATE);
-                String image_link = pref.getString("profile_image_url","http://kinimage.naver.net/20160619_255/1466325466712W1TRH_JPEG/1466325466562.jpeg");
-                profile_image_file = GetImageFromURL(image_link);
+        tomain.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(signing2.this, MainActivity.class);
+                startActivity(intent);
+                finish();
             }
-        }.start();
-        profile_image_view = (ImageView)findViewById(R.id.profile_image_link);
-        profile_image_view.setImageBitmap(profile_image_file);
-        */
+        });
     }
 
 
