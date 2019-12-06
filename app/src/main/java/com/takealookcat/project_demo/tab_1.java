@@ -1,4 +1,5 @@
 package com.takealookcat.project_demo;
+
 import android.annotation.TargetApi;
 import android.app.ProgressDialog;
 import android.content.ContentUris;
@@ -53,7 +54,7 @@ public class tab_1 extends Fragment {
     ImageButton btChoose;
     Button btUpload;
     Uri filePath;
-    EditText cat_Title, cat_Content, date_now;
+    EditText cat_info, cat_Content, date_now;
     TextView exiftext;
 
     FirebaseDatabase database;
@@ -71,6 +72,7 @@ public class tab_1 extends Fragment {
 
         //cat_Title= (EditText)rootview.findViewById(R.id.cat_title);
         cat_Content = (EditText)rootview.findViewById(R.id.cat_context);
+        cat_info = (EditText)rootview.findViewById(R.id.cat_info);
         date_now = (EditText)rootview.findViewById(R.id.date_now);
         Date currentTime = Calendar.getInstance().getTime();
         String date_text = new SimpleDateFormat("yyyy년 MM월 dd일 EE요일", Locale.getDefault()).format(currentTime);
@@ -165,6 +167,7 @@ public class tab_1 extends Fragment {
 
             //final String cattitle = cat_Title.getText().toString();
             final String catcontext = cat_Content.getText().toString();
+            final String catinform = cat_info.getText().toString();
             //
             final String datenow = date_now.getText().toString();
 
@@ -180,6 +183,8 @@ public class tab_1 extends Fragment {
                             //postValues.put("title", cattitle);
                             postValues.put("content", catcontext);
                             postValues.put("file", filename);
+                            postValues.put("info", catinform);
+                            postValues.put("date", datenow);
 
                             DatabaseReference keyRef = catRef.child(key);
                             keyRef.setValue(postValues);

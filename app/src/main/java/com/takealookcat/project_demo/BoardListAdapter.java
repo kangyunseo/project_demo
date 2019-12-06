@@ -20,15 +20,15 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.List;
 
-public class FeedListAdapter extends BaseAdapter {
+public class BoardListAdapter extends BaseAdapter {
     // Adapter에 추가된 데이터를 저장하기 위한 ArrayList
 
-    List<FeedItem> datas;
+    List<BoardItem> datas;
     Context context;
     LayoutInflater inflater;
 
     // ListViewAdapter의 생성자
-    public FeedListAdapter(List<FeedItem> data, Context context) {
+    public BoardListAdapter(List<BoardItem> data, Context context) {
         this.datas = data;
         this.context = context;
         this.inflater = (LayoutInflater) context. getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -52,7 +52,6 @@ public class FeedListAdapter extends BaseAdapter {
         return datas.get(position) ;
     }
 
-
     // position에 위치한 데이터를 화면에 출력하는데 사용될 View를 리턴. : 필수 구현
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -71,10 +70,10 @@ public class FeedListAdapter extends BaseAdapter {
         TextView descTextView = (TextView) convertView.findViewById(R.id.textView2) ;
 
         // Data Set(listViewItemList)에서 position에 위치한 데이터 참조 획득
-        FeedItem feed = datas.get(position);
+        BoardItem item = datas.get(position);
 
         StorageReference firebaseStorage = FirebaseStorage.getInstance().getReference();
-        StorageReference storageReference = firebaseStorage.child("feed/"+feed.file);
+        StorageReference storageReference = firebaseStorage.child("board/"+item.file);
 
         storageReference.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
             @Override
@@ -94,10 +93,9 @@ public class FeedListAdapter extends BaseAdapter {
         // 아이템 내 각 위젯에 데이터 반영
         //iconImageView.setImageDrawable(listViewItem.getIcon());
 
-        titleTextView.setText(feed.info);
-        descTextView.setText(feed.content);
+        titleTextView.setText(item.title);
+        descTextView.setText(item.content);
 
         return convertView;
     }
-
 }

@@ -2,30 +2,14 @@ package com.takealookcat.project_demo;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Toast;
-
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class menu_1 extends Fragment {
 
@@ -63,7 +47,7 @@ public class menu_1 extends Fragment {
         btn_cat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity().getApplicationContext(), "menu1", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity().getApplicationContext(), "고양이 게시판", Toast.LENGTH_LONG).show();
                 getFragmentManager().beginTransaction().replace(R.id.container1, menu_1_1).commit();
             }
         });
@@ -71,7 +55,7 @@ public class menu_1 extends Fragment {
         btn_feed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity().getApplicationContext(), "menu2", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity().getApplicationContext(), "급식소 게시판", Toast.LENGTH_LONG).show();
                 getFragmentManager().beginTransaction().replace(R.id.container1, menu_1_2).commit();
             }
         });
@@ -79,7 +63,7 @@ public class menu_1 extends Fragment {
         btn_write.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity().getApplicationContext(), "menu3", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity().getApplicationContext(), "커뮤니티 게시판", Toast.LENGTH_LONG).show();
                 getFragmentManager().beginTransaction().replace(R.id.container1, menu_1_3).commit();
             }
         });
@@ -88,3 +72,4 @@ public class menu_1 extends Fragment {
     }
 
 }
+
