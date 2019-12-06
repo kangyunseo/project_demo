@@ -77,7 +77,7 @@ public class signing extends AppCompatActivity {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     if(mAuth.getCurrentUser().isEmailVerified()){
-                        Intent intent = new Intent(signing.this, signing2.class);
+                        Intent intent = new Intent(signing.this, MainActivity.class);
                         startActivity(intent);
                         finish();
                     }
@@ -106,7 +106,6 @@ public class signing extends AppCompatActivity {
         });
 
         //kakao 로그인 버튼 이벤트는 api에서
-
     }
 
     /**
@@ -143,6 +142,7 @@ public class signing extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (!task.isSuccessful()) {
                                 if (task.getException() instanceof FirebaseAuthUserCollisionException) {
+                                    mAuth.signInWithEmailAndPassword(email, password);
                                     Toast.makeText(signing.this, "이미 가입된 이메일입니다 메일함을 확인해주세요",
                                             Toast.LENGTH_SHORT).show();
                                 }
@@ -158,8 +158,7 @@ public class signing extends AppCompatActivity {
                 }
             }
 
-            //if(layoutadded)의 else
-            //다이얼로그에서 yes하면 회원가입 절차진행
+            //if(layoutadded)의 else 다이얼로그에서 yes하면 회원가입 절차진행
             mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(signing.this, new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
@@ -210,22 +209,22 @@ public class signing extends AppCompatActivity {
 
 
                             //로그인 성공 이벤트 추가
-                            //Intent intent = new Intent(signing.this, MainActivity.class);
+                            Intent intent = new Intent(signing.this, MainActivity.class);
                             //signing2.class에서 프로필 사진 닉네임등 설정 이어가기
-                            Intent intent = new Intent(signing.this, signing2.class);
+                            //Intent intent = new Intent(signing.this, signing2.class);
                             startActivity(intent);
                             finish();
                         }
                         else {
                             ////////////////////////////////////////////////////////////////////////
                             //이메일 인증 다이얼로그 설정
-                            /*AlertDialog.Builder veri = new AlertDialog.Builder(signing.this);
+                            AlertDialog.Builder veri = new AlertDialog.Builder(signing.this);
                             builder.setTitle("이메일");
                             builder.setMessage("메일함을 확인해주세요?");
                             builder.setPositiveButton("그랭", new DialogInterface.OnClickListener(){
                                 public void onClick(DialogInterface dialog, int whichButton){
                                 }
-                            });*/
+                            });
                             //이메일 인증 다이얼로그 정의 끝
                             ////////////////////////////////////////////////////////////////////////
                             sendEmail(mAuth);
@@ -355,7 +354,6 @@ public class signing extends AppCompatActivity {
                         editor.putString("profile_image_url", url.trim());
                     }
                     editor.commit();
-                    Toast.makeText(signing.this, email, Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(signing.this, MainActivity.class);
                     startActivity(intent);
@@ -391,4 +389,5 @@ public class signing extends AppCompatActivity {
 
     //kakao login 로그인 정의 끝
     ////////////////////////////////////////////////////////////////////////////////////////////
+
 }
