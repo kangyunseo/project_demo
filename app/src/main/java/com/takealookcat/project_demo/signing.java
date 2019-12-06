@@ -200,8 +200,8 @@ public class signing extends AppCompatActivity {
                         //로그인 성공 이벤트 추가
                         Log.d("", "loooooooooooooooooooooogin!");
                         Toast.makeText(signing.this, "로그인 성공", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(signing.this, MainActivity.class);
-                        //Intent intent = new Intent(signing.this, signing2.class);
+                        //Intent intent = new Intent(signing.this, MainActivity.class);
+                        Intent intent = new Intent(signing.this, signing2.class);
                         startActivity(intent);
                         finish();
                     }

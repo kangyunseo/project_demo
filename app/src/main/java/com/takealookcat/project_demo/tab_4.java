@@ -2,6 +2,7 @@ package com.takealookcat.project_demo;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -39,6 +40,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static android.app.Activity.RESULT_OK;
+import static android.content.Context.MODE_PRIVATE;
 
 public class tab_4 extends Fragment {
 
@@ -134,6 +136,9 @@ public class tab_4 extends Fragment {
 
             //FirebaseDatabase database = FirebaseDatabase.getInstance();
             //final DatabaseReference myRef = database.getReference("message");
+            SharedPreferences sf = getActivity().getSharedPreferences("sFile",MODE_PRIVATE);
+            //text라는 key에 저장된 값이 있는지 확인. 아무값도 들어있지 않으면 ""를 반환
+            final String email = sf.getString("email","");
 
             storageRef.putFile(filePath)
                     //성공시
@@ -161,6 +166,7 @@ public class tab_4 extends Fragment {
                             postValues.put("targetAmount", target);
                             postValues.put("curAmount", "5000000");
                             postValues.put("file", filename);
+                            postValues.put("date", email);
 
                             DatabaseReference keyRef = donaRef.child(key);
                             keyRef.setValue(postValues);
