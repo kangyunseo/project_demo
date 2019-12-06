@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.location.Geocoder;
@@ -47,6 +48,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import static android.app.Activity.RESULT_OK;
+import static android.content.Context.MODE_PRIVATE;
 
 public class tab_3 extends Fragment {
 
@@ -163,6 +165,9 @@ public class tab_3 extends Fragment {
             final String boardinfo = board_info.getText().toString();
             //
             final String datenow = date_now.getText().toString();
+            SharedPreferences sf = getActivity().getSharedPreferences("sFile",MODE_PRIVATE);
+            //text라는 key에 저장된 값이 있는지 확인. 아무값도 들어있지 않으면 ""를 반환
+            final String email = sf.getString("email","");
 
             storageRef.putFile(filePath)
                     //성공시
@@ -177,6 +182,7 @@ public class tab_3 extends Fragment {
                             postValues.put("content", board_context);
                             postValues.put("file", filename);
                             postValues.put("info", boardinfo);
+                            postValues.put("date", email);
 
                             DatabaseReference keyRef = feedRef.child(key);
                             keyRef.setValue(postValues);

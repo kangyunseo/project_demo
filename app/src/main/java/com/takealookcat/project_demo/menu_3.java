@@ -84,28 +84,28 @@ public class menu_3 extends Fragment {
         btn_cat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity().getApplicationContext(), "tab1", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity().getApplicationContext(), "고양이 등록", Toast.LENGTH_LONG).show();
                 getFragmentManager().beginTransaction().replace(R.id.container, tab_1).commit();
             }
         });
         btn_feed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity().getApplicationContext(), "tab2", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity().getApplicationContext(), "급식소 등록", Toast.LENGTH_LONG).show();
                 getFragmentManager().beginTransaction().replace(R.id.container, tab_2).commit();
             }
         });
         btn_write.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity().getApplicationContext(), "tab3", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity().getApplicationContext(), "게시판 등록", Toast.LENGTH_LONG).show();
                 getFragmentManager().beginTransaction().replace(R.id.container, tab_3).commit();
             }
         });
         btn_dona.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity().getApplicationContext(), "tab4", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity().getApplicationContext(), "기부글 등록", Toast.LENGTH_LONG).show();
                 getFragmentManager().beginTransaction().replace(R.id.container, tab_4).commit();
             }
         });

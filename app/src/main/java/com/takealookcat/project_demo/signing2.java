@@ -12,8 +12,10 @@ import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v4.media.session.MediaSessionCompat;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -41,7 +43,8 @@ public class signing2 extends AppCompatActivity {
 
     private ImageView profile_image_view;
     private Bitmap profile_image_file;
-
+    FirebaseDatabase database;
+    DatabaseReference catRef;
     ImageButton btChoose;
     Uri filePath;
 
@@ -49,9 +52,17 @@ public class signing2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signing2);
+        Button tomain = (Button)findViewById(R.id.login_signup);
 
-        Intent intent = new Intent(signing2.this, MainActivity.class);
         btChoose = (ImageButton) findViewById(R.id.profile_img);
+
+        tomain.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(signing2.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         btChoose.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,19 +75,6 @@ public class signing2 extends AppCompatActivity {
             }
         });
 
-        //startActivity(intent);
-        //finish();
-        /*
-        new Thread() {
-            public void run(){
-                SharedPreferences pref = getSharedPreferences("sFile",MODE_PRIVATE);
-                String image_link = pref.getString("profile_image_url","http://kinimage.naver.net/20160619_255/1466325466712W1TRH_JPEG/1466325466562.jpeg");
-                profile_image_file = GetImageFromURL(image_link);
-            }
-        }.start();
-        profile_image_view = (ImageView)findViewById(R.id.profile_image_link);
-        profile_image_view.setImageBitmap(profile_image_file);
-        */
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -85,7 +83,14 @@ public class signing2 extends AppCompatActivity {
         //request코드가 0이고 OK를 선택했고 data에 뭔가가 들어 있다면
         if (requestCode == 0 && resultCode == RESULT_OK) {
             filePath = data.getData(); // uri값
-            //Log.d(TAG, "uri:" + String.valueOf(filePath));
+
+            try {
+                //Uri 파일을 Bitmap으로 만들어서 ImageView에 집어 넣는다.
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
+                btChoose.setImageBitmap(bitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -107,8 +112,8 @@ public class signing2 extends AppCompatActivity {
             StorageReference storageRef = storage.getReferenceFromUrl("gs://projectdemo-5609c.appspot.com").child("user/" + filename);
             //올라가거라...
 
-            FirebaseDatabase database = FirebaseDatabase.getInstance();
-            final DatabaseReference user = database.getReference("user");
+            database = FirebaseDatabase.getInstance();
+            catRef = database.getReference("user");
 
             storageRef.putFile(filePath)
                     //성공시
@@ -117,14 +122,11 @@ public class signing2 extends AppCompatActivity {
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             progressDialog.dismiss(); //업로드 진행 Dialog 상자 닫기
 
-                            String key = user.push().getKey();
+                            String key = catRef.push().getKey();
                             Map<String, String > postValues = new HashMap<>();
-                            //postValues.put("title", cattitle);
-
                             postValues.put("file", filename);
-                            //일단 스토리지에 사진이랑 데베에 사진이름만 저장.
 
-                            DatabaseReference keyRef = user.child(key);
+                            DatabaseReference keyRef = catRef.child(key);
                             keyRef.setValue(postValues);
 
                             //myRef.push().setValue(filename);
@@ -154,6 +156,7 @@ public class signing2 extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "파일을 먼저 선택하세요.", Toast.LENGTH_SHORT).show();
         }
     }
+
 
     private Bitmap GetImageFromURL(String strImageURL) {
         Bitmap imgBitmap = null;

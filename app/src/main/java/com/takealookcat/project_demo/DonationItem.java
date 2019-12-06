@@ -16,6 +16,7 @@ public class DonationItem {
     public String targetAmount;
     public String curAmount;
     public String file;
+    public String email;
 
     public DonationItem() {
 
@@ -46,7 +47,9 @@ public class DonationItem {
     public void setFile(String file) {
         this.file = file ;
     }
-
+    public void setEmail(String email) {
+        this.email = email ;
+    }
 
     public String getTitle() {
         return this.title ;
@@ -70,7 +73,9 @@ public class DonationItem {
     public String getCurAmount() {
         return this.curAmount ;
     }
-
+    public String getemail() {
+        return this.email ;
+    }
 
 
 }

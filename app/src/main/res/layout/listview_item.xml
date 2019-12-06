@@ -6,7 +6,8 @@
     android:minHeight="?android:attr/listPreferredItemHeight"
     android:orientation="vertical"
     android:weightSum="4"
-    android:padding="10dp">
+    android:padding="10dp"
+    android:background="@drawable/background_thema">
     ​
 
     <ImageView
