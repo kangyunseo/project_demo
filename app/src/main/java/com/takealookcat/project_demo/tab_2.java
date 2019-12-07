@@ -57,6 +57,8 @@ public class tab_2 extends Fragment {
     Uri filePath;
     EditText feed_info, feed_Content, date_now;
     TextView exiftext;
+    TextView latitude;
+    TextView longitude;
 
     FirebaseDatabase database;
     DatabaseReference feedRef;
@@ -76,7 +78,8 @@ public class tab_2 extends Fragment {
         Date currentTime = Calendar.getInstance().getTime();
         String date_text = new SimpleDateFormat("yyyy년 MM월 dd일 EE요일", Locale.getDefault()).format(currentTime);
         date_now.setText(date_text);
-
+        latitude = (TextView) rootview.findViewById(R.id.latitude2);
+        longitude = (TextView) rootview.findViewById(R.id.longitude2);
         //업로드
         btChoose = (ImageButton) rootview.findViewById(R.id.bt_choose2);
         btUpload = (Button) rootview.findViewById(R.id.bt_upload2);
@@ -117,8 +120,13 @@ public class tab_2 extends Fragment {
 
             try {
                 ExifInterface exif = new ExifInterface(filename);
-                String datetime = getTagString(ExifInterface.TAG_DATETIME, exif);
+                String datetime = exif.getAttribute(ExifInterface.TAG_DATETIME);
                 exiftext.setText(datetime);
+                float lon = getTagString(exif,0);
+                float lat = getTagString(exif,1);
+                //float longitude = convertToDegree(lon);
+                longitude.setText(String.valueOf(lon));
+                latitude.setText(String.valueOf(lat));
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -133,12 +141,6 @@ public class tab_2 extends Fragment {
                 e.printStackTrace();
             }
         }
-    }
-
-    /* exif*/
-    private String getTagString (String tag, ExifInterface exif){
-
-        return (tag + " : " + exif.getAttribute(tag) + "\n");
     }
 
     private void uploadFile() {
@@ -297,5 +299,67 @@ public class tab_2 extends Fragment {
 
     public static boolean isMediaDocument(Uri uri) {
         return "com.android.providers.media.documents".equals(uri.getAuthority());
+    }
+
+    private Float convertToDegree(String stringDMS) {
+        Float result = null;
+        String[] DMS = stringDMS.split(",", 3);
+
+        String[] stringD = DMS[0].split("/", 2);
+        Double D0 = new Double(stringD[0]);
+        Double D1 = new Double(stringD[1]);
+        Double FloatD = D0 / D1;
+
+        String[] stringM = DMS[1].split("/", 2);
+        Double M0 = new Double(stringM[0]);
+        Double M1 = new Double(stringM[1]);
+        Double FloatM = M0 / M1;
+
+        String[] stringS = DMS[2].split("/", 2);
+        Double S0 = new Double(stringS[0]);
+        Double S1 = new Double(stringS[1]);
+        Double FloatS = S0 / S1;
+
+        result = new Float(FloatD + (FloatM / 60) + (FloatS / 3600));
+
+        return result;
+
+    };
+
+    private Float getTagString ( ExifInterface exif,int a) {
+        Float latitude =0.0F , longitude =0.0F;
+        boolean valid = false;
+
+        String attrLATITUDE = exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE);
+        String attrLATITUDE_REF = exif.getAttribute(ExifInterface.TAG_GPS_LATITUDE_REF);
+        String attrLONGITUDE = exif.getAttribute(ExifInterface.TAG_GPS_LONGITUDE);
+        String attrLONGITUDE_REF = exif.getAttribute(ExifInterface.TAG_GPS_LONGITUDE_REF);
+
+        if ((attrLATITUDE != null) && (attrLATITUDE_REF != null) && (attrLONGITUDE != null)
+                && (attrLONGITUDE_REF != null)) {
+
+            valid = true;
+
+            if (attrLATITUDE_REF.equals("N")) {
+                latitude = convertToDegree(attrLATITUDE);
+            } else {
+                latitude = 0 - convertToDegree(attrLATITUDE);
+            }
+
+            if (attrLONGITUDE_REF.equals("E")) {
+                longitude = convertToDegree(attrLONGITUDE);
+            } else {
+                longitude = 0 - convertToDegree(attrLONGITUDE);
+            }
+        }
+
+        if(a == 0) {
+            return latitude;
+        }
+        else if (a==1){
+            return longitude;
+        }
+
+        return 0.0F;
     }
 }
