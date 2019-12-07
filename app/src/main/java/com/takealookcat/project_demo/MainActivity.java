@@ -101,43 +101,73 @@ public class MainActivity extends AppCompatActivity implements FragCateDona.OnFr
 
         getSupportFragmentManager().beginTransaction().replace(R.id.view, fragment1).commit();
 
-        ImageButton button1 = (ImageButton)findViewById(R.id.btn1);
+        final ImageButton button1 = (ImageButton)findViewById(R.id.btn1);
+        final ImageButton button2 = (ImageButton)findViewById(R.id.btn2);
+        final ImageButton button3 = (ImageButton)findViewById(R.id.btn3);
+        final ImageButton button4 = (ImageButton)findViewById(R.id.btn4);
+        final ImageButton button5 = (ImageButton)findViewById(R.id.btn5);
+
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.view, fragment1).commit();
+                button1.setImageResource(R.drawable.ic_botnavi_icon_home_on);
+
+                button2.setImageResource(R.drawable.ic_botnavi_icon_commu_off);
+                button3.setImageResource(R.drawable.ic_botnavi_icon_write_off);
+                button4.setImageResource(R.drawable.ic_botnavi_icon_map_off);
+                button5.setImageResource(R.drawable.ic_botnavi_icon_user_off);
             }
         });
 
-        ImageButton button2 = (ImageButton)findViewById(R.id.btn2);
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
                 getSupportFragmentManager().beginTransaction().replace(R.id.view, fragment2).commit();
+
+                button1.setImageResource(R.drawable.ic_botnavi_icon_home_off);
+                button2.setImageResource(R.drawable.ic_botnavi_icon_commu_on);
+                button3.setImageResource(R.drawable.ic_botnavi_icon_write_off);
+                button4.setImageResource(R.drawable.ic_botnavi_icon_map_off);
+                button5.setImageResource(R.drawable.ic_botnavi_icon_user_off);
             }
         });
 
-        ImageButton button3 = (ImageButton)findViewById(R.id.btn3);
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
                 getSupportFragmentManager().beginTransaction().replace(R.id.view, fragment3).commit();
+                button1.setImageResource(R.drawable.ic_botnavi_icon_home_off);
+                button2.setImageResource(R.drawable.ic_botnavi_icon_commu_off);
+                button3.setImageResource(R.drawable.ic_botnavi_icon_write_on);
+                button4.setImageResource(R.drawable.ic_botnavi_icon_map_off);
+                button5.setImageResource(R.drawable.ic_botnavi_icon_user_off);
             }
         });
 
-        ImageButton button4 = (ImageButton)findViewById(R.id.btn4);
         button4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
                 getSupportFragmentManager().beginTransaction().replace(R.id.view, fragment4).commit();
+                button1.setImageResource(R.drawable.ic_botnavi_icon_home_off);
+
+                button2.setImageResource(R.drawable.ic_botnavi_icon_commu_off);
+                button3.setImageResource(R.drawable.ic_botnavi_icon_write_off);
+                button4.setImageResource(R.drawable.ic_botnavi_icon_map_on);
+                button5.setImageResource(R.drawable.ic_botnavi_icon_user_off);
             }
         });
 
-        ImageButton button5 = (ImageButton)findViewById(R.id.btn5);
         button5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.view, fragment5).commit();
+                button1.setImageResource(R.drawable.ic_botnavi_icon_home_off);
+
+                button2.setImageResource(R.drawable.ic_botnavi_icon_commu_off);
+                button3.setImageResource(R.drawable.ic_botnavi_icon_write_off);
+                button4.setImageResource(R.drawable.ic_botnavi_icon_map_off);
+                button5.setImageResource(R.drawable.ic_botnavi_icon_user_on);
             }
         });
 

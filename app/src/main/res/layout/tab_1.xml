@@ -20,6 +20,12 @@
         android:background="#00ff0000"
         android:src="@drawable/logo"/>
 
+    <TextView
+        android:id="@+id/exif"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Photo Date" />
+
     <EditText
         android:id="@+id/date_now"
         android:layout_width="match_parent"
@@ -38,23 +44,16 @@
         android:id="@+id/cat_info"
         android:layout_width="match_parent"
         android:layout_height="71dp"
-        android:hint="Cat info"
+        android:hint="Cat name"
         android:inputType="textPersonName" />
 
-    <Button
+    <ImageButton
         android:id="@+id/bt_upload"
-        android:layout_width="95dp"
-        android:layout_height="42dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:background="@color/thema_1"
-        android:text="등록하기" />
-    <TextView
-        android:id="@+id/exif"
-        android:layout_width="match_parent"
-        android:layout_height="75dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:src="@drawable/ic_icon_upload"/>
 
 </LinearLayout>
 </androidx.core.widget.NestedScrollView>

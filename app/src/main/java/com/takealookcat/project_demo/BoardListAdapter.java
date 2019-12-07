@@ -13,13 +13,14 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.List;
-
+//
 public class BoardListAdapter extends BaseAdapter {
     // Adapter에 추가된 데이터를 저장하기 위한 ArrayList
 
@@ -80,9 +81,12 @@ public class BoardListAdapter extends BaseAdapter {
             public void onComplete(@NonNull Task<Uri> task) {
                 if (task.isSuccessful()) {
                     // Glide 이용하여 이미지뷰에 로딩
+
                     Glide.with(context)
                             .load(task.getResult())
                             .into(iconImageView);
+
+
                 } else {
                     // URL을 가져오지 못하면 토스트 메세지
                     Toast.makeText(context, task.getException().getMessage(), Toast.LENGTH_SHORT).show();

@@ -22,10 +22,11 @@ public class menu_1 extends Fragment {
     ImageButton btn_feed;
     ImageButton btn_write;
 
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
     }
 
     @Nullable
