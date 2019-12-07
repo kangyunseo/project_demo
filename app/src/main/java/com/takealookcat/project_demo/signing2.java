@@ -2,14 +2,20 @@ package com.takealookcat.project_demo;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.LocationManager;
 import android.media.ExifInterface;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.media.session.MediaSessionCompat;
@@ -54,6 +60,15 @@ public class signing2 extends AppCompatActivity {
         setContentView(R.layout.activity_signing2);
         Button tomain = (Button)findViewById(R.id.login_signup);
 
+        final LocationManager lm = (LocationManager)this.getSystemService(Context.LOCATION_SERVICE);
+
+        if ( Build.VERSION.SDK_INT >= 23 &&
+                ContextCompat.checkSelfPermission( this,
+                        android.Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED ) {
+            ActivityCompat.requestPermissions( this, new String[]
+                    { android.Manifest.permission.ACCESS_FINE_LOCATION },0 );
+        }
+
         btChoose = (ImageButton) findViewById(R.id.profile_img);
 
         tomain.setOnClickListener(new View.OnClickListener() {
@@ -74,6 +89,7 @@ public class signing2 extends AppCompatActivity {
                 startActivityForResult(Intent.createChooser(intent, "이미지를 선택하세요."), 0);
             }
         });
+
 
     }
 
