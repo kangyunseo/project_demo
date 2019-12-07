@@ -1,6 +1,8 @@
 package com.takealookcat.project_demo;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -70,6 +73,17 @@ public class CatListAdapter extends BaseAdapter {
         TextView titleTextView = (TextView) convertView.findViewById(R.id.textView1) ;
         TextView descTextView = (TextView) convertView.findViewById(R.id.textView2) ;
 
+
+        //라운딩입니다.
+        GradientDrawable drawable=
+                (GradientDrawable)  context.getResources().getDrawable(R.drawable.background_rounding);
+        iconImageView.setBackground(drawable);
+        iconImageView.setClipToOutline(true);
+
+
+
+
+
         // Data Set(listViewItemList)에서 position에 위치한 데이터 참조 획득
         catitem cat = datas.get(position);
 
@@ -81,9 +95,13 @@ public class CatListAdapter extends BaseAdapter {
             public void onComplete(@NonNull Task<Uri> task) {
                 if (task.isSuccessful()) {
                     // Glide 이용하여 이미지뷰에 로딩
+
                     Glide.with(context)
                             .load(task.getResult())
                             .into(iconImageView);
+
+
+                    //Glide.with(context).load(task.getResult()).apply(new RequestOptions().circleCrop()).into(iconImageView);
                 } else {
                     // URL을 가져오지 못하면 토스트 메세지
                     Toast.makeText(context, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
