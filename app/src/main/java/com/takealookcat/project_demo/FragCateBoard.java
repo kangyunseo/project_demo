@@ -25,7 +25,7 @@ import java.util.List;
 
 
 public class FragCateBoard extends Fragment {
-    //private FragCateDona.OnFragmentInteractionListener mListener;
+    private FragCateDona.OnFragmentInteractionListener mListener;
     FirebaseDatabase database;
     DatabaseReference boardRef;
 
@@ -33,12 +33,10 @@ public class FragCateBoard extends Fragment {
     BoardListAdapter adapter;
     List<BoardItem> board_list = new ArrayList<>();
 
-    FragDonaItem FragDonaItem;
-
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
         // 인플레이션이 가능하다, container 이쪽으로 붙여달라, fragment_main을
-        final ViewGroup rootview = (ViewGroup) inflater.inflate(R.layout.fragment_frag_cate_dona,container,false);
+        final ViewGroup rootview = (ViewGroup) inflater.inflate(R.layout.fragment_frag_cate_board,container,false);
 
         // 1. 파이어베이스 연결 - DB Connection
         database = FirebaseDatabase.getInstance();
@@ -55,7 +53,6 @@ public class FragCateBoard extends Fragment {
         adapter = new BoardListAdapter(board_list, getActivity());
         listView.setAdapter(adapter);
 
-        FragDonaItem = new FragDonaItem();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -64,7 +61,7 @@ public class FragCateBoard extends Fragment {
                 String content = board_list.get(position).getContent();
                 String title = board_list.get(position).getTitle();
                 String file = board_list.get(position).getFile();
-                //mListener.onFragmentInteraction(content, title, file);
+                mListener.onFragmentInteraction_board(title, content , file);
 
             }
         }) ;
@@ -95,7 +92,7 @@ public class FragCateBoard extends Fragment {
             // ...
         }
     };
-    /*
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -108,9 +105,4 @@ public class FragCateBoard extends Fragment {
 
     }
 
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(String title, String content, String curAmount, String targetAmount, String startDate,
-                                   String dueDate, String file);
-    }
-    */
 }

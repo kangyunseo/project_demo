@@ -1,6 +1,7 @@
 package com.takealookcat.project_demo;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -35,7 +37,6 @@ public class FragCateDona extends Fragment {
     DonationListAdapter adapter;
     List<DonationItem> dona_list = new ArrayList<>();
 
-    FragDonaItem FragDonaItem;
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
         // 인플레이션이 가능하다, container 이쪽으로 붙여달라, fragment_main을
@@ -56,7 +57,6 @@ public class FragCateDona extends Fragment {
         adapter = new DonationListAdapter(dona_list, getActivity());
         listView.setAdapter(adapter);
 
-        FragDonaItem = new FragDonaItem();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -69,7 +69,7 @@ public class FragCateDona extends Fragment {
                 String sday = dona_list.get(position).getStartDate();
                 String dday = dona_list.get(position).getDueDate();
                 String file = dona_list.get(position).getFile();
-                mListener.onFragmentInteraction(content, title, camount, tamount, sday, dday, file);
+                mListener.onFragmentInteraction_dona(content, title, camount, tamount, sday, dday, file);
 
             }
         }) ;
@@ -113,7 +113,8 @@ public class FragCateDona extends Fragment {
     }
 
     public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(String title, String content, String curAmount, String targetAmount, String startDate,
-                                   String dueDate, String file);
+        void onFragmentInteraction_dona(String title, String content, String curAmount, String targetAmount, String startDate,
+                                        String dueDate, String file);
+        void onFragmentInteraction_board(String title, String content, String file);
     }
 }

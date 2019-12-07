@@ -24,37 +24,19 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 
-public class FragDonaItem extends Fragment {
+public class FragBoardItem extends Fragment {
     public String key;
     public String title ;
     public String content ;
-    public String startDate ;
-    public String dueDate ;
-    public String targetAmount;
-    public String curAmount;
     public String file;
-    public Button btn_dona;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
         // Inflate the layout for this fragment
-        View v =  inflater.inflate(R.layout.fragment_frag_dona_item, container, false);
-
-        btn_dona = (Button)v.findViewById(R.id.btn_dona);
-        btn_dona.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),kakaoPay.class);
-                startActivity(intent);
-            }
-        });
+        View v =  inflater.inflate(R.layout.fragment_frag_board_item, container, false);
 
         TextView ttitle = (TextView) v.findViewById(R.id.ttitle);
         TextView tcontent = (TextView) v.findViewById(R.id.tcontent);
-        TextView tcurAmount = (TextView) v.findViewById(R.id.tcurAmount);
-        TextView ttargetAmount = (TextView) v.findViewById(R.id.ttargetAmount);
-        TextView tdueDate = (TextView) v.findViewById(R.id.tdueDate);
-        TextView tstartDate = (TextView) v.findViewById(R.id.tstartDate);
 
         final ImageView iconImageView = (ImageView) v.findViewById(R.id.imageView) ;
 
@@ -63,21 +45,13 @@ public class FragDonaItem extends Fragment {
             extra = getArguments();
             title = extra.getString("title");
             content = extra.getString("content");
-            startDate = extra.getString("startDate");
-            dueDate = extra.getString("dueDate");
-            targetAmount = extra.getString("targetAmount");
-            curAmount = extra.getString("curAmount");
             file = extra.getString("file");
             ttitle.setText(title);
             tcontent.setText(content);
-            tcurAmount.setText(curAmount);
-            ttargetAmount.setText(targetAmount);
-            tdueDate.setText(dueDate);
-            tstartDate.setText(startDate);
         }
 
         StorageReference firebaseStorage = FirebaseStorage.getInstance().getReference();
-        StorageReference storageReference = firebaseStorage.child("donation/"+file);
+        StorageReference storageReference = firebaseStorage.child("board/"+file);
         storageReference.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
             @Override
             public void onComplete(@NonNull Task<Uri> task) {
