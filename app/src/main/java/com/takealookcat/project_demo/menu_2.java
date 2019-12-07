@@ -20,8 +20,6 @@ public class menu_2 extends Fragment {
     FragCateDona fragcatedona; //donation 게시판 fragment
     FragCateBoard fragcateboard;
     static final String[] CategoryList = {"자유게시판", "기부", "게시판1"} ;
-    Button button;
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,14 +29,7 @@ public class menu_2 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup rootview = (ViewGroup) inflater.inflate(R.layout.menu_2,container,false);
-        button = (Button)rootview.findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(),kakaoPay.class);
-                startActivity(intent);
-            }
-        });
+
 
         fragcatedona = new FragCateDona(); //donation 게시판 fragment
         fragcateboard = new FragCateBoard();    //자유게시판 fragment
@@ -63,7 +54,7 @@ public class menu_2 extends Fragment {
                         break;
                     case 2:
                         Toast.makeText(getActivity().getApplicationContext(),"아직이야",Toast.LENGTH_SHORT).show();
-                       break;
+                        break;
                     default:
                         throw new IllegalStateException("Unexpected value: " + position);
                 }
