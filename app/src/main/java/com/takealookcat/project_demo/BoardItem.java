@@ -1,5 +1,5 @@
 package com.takealookcat.project_demo;
-
+//
 public class BoardItem {
     public String title ;
     public String content ;
