@@ -13,53 +13,44 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:background="@color/thema_1"
-            android:orientation="horizontal"
-            android:paddingVertical="2dp"
-            android:paddingHorizontal="10dp"
-            android:layout_weight="1"
-            android:weightSum="4">
+            android:gravity="center|top"
+            android:orientation="horizontal">
 
             <ImageButton
                 android:id="@+id/btn_cat"
-                android:src="@drawable/ic_bot_icon_map_off"
-                android:background="@color/thema_1"
-                android:visibility="visible"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:adjustViewBounds="true"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_gravity="center" />
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_icon_cat" />
 
             <ImageButton
                 android:id="@+id/btn_feed"
-                android:src="@drawable/ic_bot_icon_user_off"
-                android:background="@color/thema_1"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:adjustViewBounds="true"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_gravity="center"/>
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_icon_feedplace" />
 
             <ImageButton
                 android:id="@+id/btn_write"
-                android:src="@drawable/ic_bot_icon_comm_off"
-                android:background="@color/thema_1"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:adjustViewBounds="true"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_gravity="center"/>
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_botnavi_icon_commu_off" />
 
             <ImageButton
                 android:id="@+id/btn_dona"
-                android:src="@drawable/ic_icon_share"
-                android:background="@color/thema_1"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:adjustViewBounds="true"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_gravity="center"/>
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_icon_share" />
 
 
         </LinearLayout>

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -17,9 +18,9 @@ public class menu_1 extends Fragment {
     menu_1_2 menu_1_2;
     menu_1_3 menu_1_3;
 
-    Button btn_cat;
-    Button btn_feed;
-    Button btn_write;
+    ImageButton btn_cat;
+    ImageButton btn_feed;
+    ImageButton btn_write;
 
 
     @Override
@@ -37,9 +38,9 @@ public class menu_1 extends Fragment {
         menu_1_2 = new menu_1_2();
         menu_1_3 = new menu_1_3();
 
-        btn_cat = (Button)rootview.findViewById(R.id.main_cat);
-        btn_feed = (Button) rootview.findViewById(R.id.main_feed);
-        btn_write = (Button)rootview.findViewById(R.id.main_board);
+        btn_cat = (ImageButton)rootview.findViewById(R.id.main_cat);
+        btn_feed = (ImageButton) rootview.findViewById(R.id.main_feed);
+        btn_write = (ImageButton)rootview.findViewById(R.id.main_board);
 
         getFragmentManager().beginTransaction().replace(R.id.container1, menu_1_1).commit();
 
