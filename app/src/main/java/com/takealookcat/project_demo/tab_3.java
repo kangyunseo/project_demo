@@ -22,7 +22,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,11 +55,11 @@ public class tab_3 extends Fragment {
     ImageButton btChoose;
     Button btUpload;
     Uri filePath;
-    EditText board_info,board_Content, date_now;
+    EditText board_title,board_Content, date_now;
     TextView exiftext;
 
     FirebaseDatabase database;
-    DatabaseReference feedRef;
+    DatabaseReference boardRef;
 
     Geocoder geocoder;
 
@@ -70,10 +69,10 @@ public class tab_3 extends Fragment {
 
         //파베
         database = FirebaseDatabase.getInstance();
-        feedRef = database.getReference("board");
+        boardRef = database.getReference("board");
 
         board_Content = (EditText)rootview.findViewById(R.id.board_context);
-        board_info = (EditText)rootview.findViewById(R.id.board_info);
+        board_title = (EditText)rootview.findViewById(R.id.board_title);
         date_now = (EditText)rootview.findViewById(R.id.date_now3);
         Date currentTime = Calendar.getInstance().getTime();
         String date_text = new SimpleDateFormat("yyyy년 MM월 dd일 EE요일", Locale.getDefault()).format(currentTime);
@@ -162,7 +161,7 @@ public class tab_3 extends Fragment {
             //올라가거라...
 
             final String board_context = board_Content.getText().toString();
-            final String boardinfo = board_info.getText().toString();
+            final String boardtitle = board_title.getText().toString();
             //
             final String datenow = date_now.getText().toString();
             SharedPreferences sf = getActivity().getSharedPreferences("sFile",MODE_PRIVATE);
@@ -176,16 +175,15 @@ public class tab_3 extends Fragment {
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             progressDialog.dismiss(); //업로드 진행 Dialog 상자 닫기
 
-                            String key = feedRef.push().getKey();
+                            String key = boardRef.push().getKey();
                             Map<String, String > postValues = new HashMap<>();
-                            //postValues.put("title", cattitle);
                             postValues.put("content", board_context);
                             postValues.put("file", filename);
-                            postValues.put("info", boardinfo);
+                            postValues.put("title", boardtitle);
                             postValues.put("datenow", datenow);
                             postValues.put("email", email);
 
-                            DatabaseReference keyRef = feedRef.child(key);
+                            DatabaseReference keyRef = boardRef.child(key);
                             keyRef.setValue(postValues);
 
                             //myRef.push().setValue(filename);
@@ -211,9 +209,9 @@ public class tab_3 extends Fragment {
                             progressDialog.setMessage("Uploaded " + ((int) progress) + "% ...");
                         }
                     });
-        } else {
-            Toast.makeText(getActivity().getApplicationContext(), "파일을 먼저 선택하세요.", Toast.LENGTH_SHORT).show();
-        }
+       } else {
+          Toast.makeText(getActivity().getApplicationContext(), "파일을 먼저 선택하세요.", Toast.LENGTH_SHORT).show();
+       }
     }
     /* exif*/
     @TargetApi(Build.VERSION_CODES.KITKAT)
