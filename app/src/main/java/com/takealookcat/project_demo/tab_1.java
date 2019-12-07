@@ -59,6 +59,7 @@ public class tab_1 extends Fragment {
     EditText cat_info, cat_Content, date_now;
     TextView latitude;
     TextView longitude;
+    TextView exiftext;
 
     FirebaseDatabase database;
     DatabaseReference catRef;
@@ -81,7 +82,7 @@ public class tab_1 extends Fragment {
         String date_text = new SimpleDateFormat("yyyy년 MM월 dd일 EE요일", Locale.getDefault()).format(currentTime);
         date_now.setText(date_text);
 
-
+        exiftext = (TextView) rootview.findViewById(R.id.exif);
         //업로드
         btChoose = (ImageButton) rootview.findViewById(R.id.bt_choose);
         btUpload = (ImageButton) rootview.findViewById(R.id.bt_upload);
@@ -125,6 +126,8 @@ public class tab_1 extends Fragment {
 
             try {
                 ExifInterface exif = new ExifInterface(filename);
+                String datetime = exif.getAttribute(ExifInterface.TAG_DATETIME);
+                exiftext.setText(datetime);
                 float lon = getTagString(exif,0);
                 float lat = getTagString(exif,1);
                 //float longitude = convertToDegree(lon);
