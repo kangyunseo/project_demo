@@ -22,6 +22,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -177,6 +178,7 @@ public class tab_3 extends Fragment {
 
                             String key = boardRef.push().getKey();
                             Map<String, String > postValues = new HashMap<>();
+
                             postValues.put("content", board_context);
                             postValues.put("file", filename);
                             postValues.put("title", boardtitle);
@@ -209,9 +211,9 @@ public class tab_3 extends Fragment {
                             progressDialog.setMessage("Uploaded " + ((int) progress) + "% ...");
                         }
                     });
-       } else {
-          Toast.makeText(getActivity().getApplicationContext(), "파일을 먼저 선택하세요.", Toast.LENGTH_SHORT).show();
-       }
+        } else {
+            Toast.makeText(getActivity().getApplicationContext(), "파일을 먼저 선택하세요.", Toast.LENGTH_SHORT).show();
+        }
     }
     /* exif*/
     @TargetApi(Build.VERSION_CODES.KITKAT)
