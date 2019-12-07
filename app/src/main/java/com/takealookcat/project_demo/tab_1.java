@@ -54,7 +54,7 @@ public class tab_1 extends Fragment {
 
     //ImageView ivPreview;
     ImageButton btChoose;
-    Button btUpload;
+    ImageButton btUpload;
     Uri filePath;
     EditText cat_info, cat_Content, date_now;
     TextView exiftext;
@@ -83,7 +83,7 @@ public class tab_1 extends Fragment {
 
         //업로드
         btChoose = (ImageButton) rootview.findViewById(R.id.bt_choose);
-        btUpload = (Button) rootview.findViewById(R.id.bt_upload);
+        btUpload = (ImageButton) rootview.findViewById(R.id.bt_upload);
         //ivPreview = (ImageView) rootview.findViewById(R.id.iv_preview);
 
         //exif
