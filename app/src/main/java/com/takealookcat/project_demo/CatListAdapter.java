@@ -72,7 +72,7 @@ public class CatListAdapter extends BaseAdapter {
         final ImageView iconImageView = (ImageView) convertView.findViewById(R.id.imageView1) ;
         TextView titleTextView = (TextView) convertView.findViewById(R.id.textView1) ;
         TextView descTextView = (TextView) convertView.findViewById(R.id.textView2) ;
-
+        TextView email = (TextView) convertView.findViewById(R.id.textView3) ;
 
         //라운딩입니다.
         GradientDrawable drawable=
@@ -114,7 +114,7 @@ public class CatListAdapter extends BaseAdapter {
 
         titleTextView.setText(cat.content);
         descTextView.setText(cat.info);
-
+        email.setText(cat.email);
         return convertView;
     }
 
