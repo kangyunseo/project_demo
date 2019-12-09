@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
@@ -32,6 +33,8 @@ import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
 
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.kakao.auth.ISessionCallback;
 import com.kakao.auth.Session;
 import com.kakao.network.ErrorResult;
@@ -77,9 +80,28 @@ public class signing extends AppCompatActivity {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
                     if(mAuth.getCurrentUser().isEmailVerified()){
-                        Intent intent = new Intent(signing.this, signing2.class);
-                        startActivity(intent);
-                        finish();
+
+                        String useremail ;
+                        SharedPreferences pref = getSharedPreferences("sFile", MODE_PRIVATE);
+                        useremail = pref.getString("email", "");
+
+                        StorageReference firebaseStorage = FirebaseStorage.getInstance().getReference();
+                        StorageReference storageReference2 = firebaseStorage.child("user/"+useremail);
+
+                        storageReference2.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Uri> task) {
+                                if (task.isSuccessful()) {
+                                    Intent intent = new Intent(signing.this, MainActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                } else {
+                                    Intent intent = new Intent(signing.this, signing2.class);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            }
+                        });
                     }
                     else{
                         sendEmail(mAuth);
@@ -212,9 +234,27 @@ public class signing extends AppCompatActivity {
                             //로그인 성공 이벤트 추가
                             //Intent intent = new Intent(signing.this, MainActivity.class);
                             //signing2.class에서 프로필 사진 닉네임등 설정 이어가기
-                            Intent intent = new Intent(signing.this, signing2.class);
-                            startActivity(intent);
-                            finish();
+                            String useremail ;
+                            SharedPreferences pref2 = getSharedPreferences("sFile", MODE_PRIVATE);
+                            useremail = pref2.getString("email", "");
+
+                            StorageReference firebaseStorage = FirebaseStorage.getInstance().getReference();
+                            StorageReference storageReference2 = firebaseStorage.child("user/"+useremail);
+
+                            storageReference2.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Uri> task) {
+                                    if (task.isSuccessful()) {
+                                        Intent intent = new Intent(signing.this, MainActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    } else{
+                                        Intent intent = new Intent(signing.this, signing2.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                }
+                            });
                         }
                         else {
                             ////////////////////////////////////////////////////////////////////////

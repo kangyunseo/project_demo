@@ -27,8 +27,10 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -52,13 +54,15 @@ public class signing2 extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference catRef;
     ImageButton btChoose;
+    Button upload;
+    Button tomain;
     Uri filePath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_signing2);
-        Button tomain = (Button)findViewById(R.id.login_signup);
 
         final LocationManager lm = (LocationManager)this.getSystemService(Context.LOCATION_SERVICE);
 
@@ -70,14 +74,8 @@ public class signing2 extends AppCompatActivity {
         }
 
         btChoose = (ImageButton) findViewById(R.id.profile_img);
-
-        tomain.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(signing2.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
+        upload = (Button) findViewById(R.id.upload_profile);
+        tomain = (Button)findViewById(R.id.login_signup);
 
         btChoose.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,6 +88,25 @@ public class signing2 extends AppCompatActivity {
             }
         });
 
+        upload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                uploadFile();
+                String email ;
+                SharedPreferences pref = getSharedPreferences("sFile", MODE_PRIVATE);
+                email = pref.getString("email", "");
+                pref.edit().putString("profile_image", "user/"+email+".jpeg");
+                pref.edit().commit();
+            }
+        });
+
+        tomain.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(signing2.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
     }
 
@@ -124,8 +141,12 @@ public class signing2 extends AppCompatActivity {
             SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMHH_mmss");
             Date now = new Date();
             final String filename = formatter.format(now) + ".png";
+            //
+            String email ;
+            SharedPreferences pref = getSharedPreferences("sFile", MODE_PRIVATE);
+            email = pref.getString("email", "");
             //storage 주소와 폴더 파일명을 지정해 준다.
-            StorageReference storageRef = storage.getReferenceFromUrl("gs://projectdemo-5609c.appspot.com").child("user/" + filename);
+            StorageReference storageRef = storage.getReferenceFromUrl("gs://projectdemo-5609c.appspot.com").child("user/" + email);
             //올라가거라...
 
             database = FirebaseDatabase.getInstance();

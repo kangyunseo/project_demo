@@ -127,6 +127,7 @@ public class MainActivity extends AppCompatActivity implements FragCateDona.OnFr
         final ImageButton button3 = (ImageButton)findViewById(R.id.btn3);
         final ImageButton button4 = (ImageButton)findViewById(R.id.btn4);
         final ImageButton button5 = (ImageButton)findViewById(R.id.btn5);
+        button1.setImageResource(R.drawable.ic_botnavi_icon_home_on);
 
         button1.setOnClickListener(new View.OnClickListener() {
             @Override

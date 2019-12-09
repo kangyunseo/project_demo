@@ -73,12 +73,15 @@ public class CatListAdapter extends BaseAdapter {
         TextView titleTextView = (TextView) convertView.findViewById(R.id.textView1) ;
         TextView descTextView = (TextView) convertView.findViewById(R.id.textView2) ;
         TextView email = (TextView) convertView.findViewById(R.id.textView3) ;
-
+        final ImageView profile = (ImageView) convertView.findViewById(R.id.imageView2);
         //라운딩입니다.
         GradientDrawable drawable=
                 (GradientDrawable)  context.getResources().getDrawable(R.drawable.background_thema);
         iconImageView.setBackground(drawable);
         iconImageView.setClipToOutline(true);
+
+        profile.setBackground(drawable);
+        profile.setClipToOutline(true);
 
 
 
@@ -89,6 +92,8 @@ public class CatListAdapter extends BaseAdapter {
 
         StorageReference firebaseStorage = FirebaseStorage.getInstance().getReference();
         StorageReference storageReference = firebaseStorage.child("cat/"+cat.file);
+        String useremail = cat.email;
+        StorageReference storageReference2 = firebaseStorage.child("user/"+useremail);
 
         storageReference.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
             @Override
@@ -99,6 +104,25 @@ public class CatListAdapter extends BaseAdapter {
                     Glide.with(context)
                             .load(task.getResult())
                             .into(iconImageView);
+
+
+                    //Glide.with(context).load(task.getResult()).apply(new RequestOptions().circleCrop()).into(iconImageView);
+                } else {
+                    // URL을 가져오지 못하면 토스트 메세지
+                    Toast.makeText(context, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        storageReference2.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+                if (task.isSuccessful()) {
+                    // Glide 이용하여 이미지뷰에 로딩
+
+                    Glide.with(context)
+                            .load(task.getResult())
+                            .into(profile);
 
 
                     //Glide.with(context).load(task.getResult()).apply(new RequestOptions().circleCrop()).into(iconImageView);

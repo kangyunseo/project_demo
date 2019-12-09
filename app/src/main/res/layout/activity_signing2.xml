@@ -26,38 +26,14 @@
             android:layout_height="wrap_content"
             android:src="@drawable/logo"/>
 
-        <TextView
-            android:id="@+id/password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="40dp"
-            android:text="nickname"
-            android:textColor="@color/thema_3" />
-
-        <EditText
-            android:id="@+id/password_input"
+        <Button
+            android:id="@+id/upload_profile"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@drawable/layer_list"
-            android:ems="10"
-            android:inputType="textPassword"
-            android:selectAllOnFocus="true" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="40dp"
-            android:text="위치"
-            android:textColor="@color/thema_3" />
-
-        <EditText
-            android:id="@+id/user_where"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@drawable/layer_list"
-            android:ems="10"
-            android:inputType="textPassword"
-            android:selectAllOnFocus="true" />
+            android:layout_marginTop="30dp"
+            android:background="@drawable/button_thema"
+            android:text="프로필 사진 업로드하기"
+            android:textColor="@color/thema_0" />
 
         <Button
             android:id="@+id/login_signup"
