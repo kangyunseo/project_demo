@@ -15,43 +15,49 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:gravity="center|top"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:background="@color/thema_1"
+            android:weightSum="4">
 
             <ImageButton
                 android:id="@+id/btn_cat"
                 style="?android:attr/borderlessButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
                 android:layout_weight="1"
+                android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
-                android:src="@drawable/ic_icon_cat" />
+                android:src="@drawable/ic_icon_cat"
+                android:background="@drawable/button_backgound" />
 
             <ImageButton
                 android:id="@+id/btn_feed"
                 style="?android:attr/borderlessButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
                 android:layout_weight="1"
+                android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
-                android:src="@drawable/ic_icon_feedplace" />
+                android:src="@drawable/ic_icon_feedplace"
+                android:background="@drawable/button_backgound" />
 
             <ImageButton
                 android:id="@+id/btn_write"
                 style="?android:attr/borderlessButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
                 android:layout_weight="1"
+                android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
-                android:src="@drawable/ic_botnavi_icon_commu_off" />
+                android:src="@drawable/ic_botnavi_icon_commu_off"
+                android:background="@drawable/button_backgound" />
 
             <ImageButton
                 android:id="@+id/btn_dona"
                 style="?android:attr/borderlessButtonStyle"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:adjustViewBounds="true"
-                android:src="@drawable/ic_icon_share" />
+                android:src="@drawable/ic_icon_share"
+                android:background="@drawable/button_backgound" />
 
 
         </LinearLayout>

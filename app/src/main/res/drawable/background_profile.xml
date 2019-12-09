@@ -5,5 +5,5 @@
         android:radius="30dp"/>
 
     <solid
-        android:color="@color/thema_0"/>
+        android:color="@color/thema_2"/>
 </shape>

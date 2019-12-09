@@ -4,9 +4,9 @@
         android:drawable="@color/thema_2">
     </item>
     <item
-        android:drawable="@drawable/logo"
-        android:height="85dp"
-        android:width="112dp"
+        android:drawable="@drawable/logo_text"
+        android:width="167dp"
+        android:height="151dp"
         android:gravity="center">
     </item>
 </layer-list>

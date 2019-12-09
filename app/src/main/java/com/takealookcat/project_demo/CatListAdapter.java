@@ -76,7 +76,7 @@ public class CatListAdapter extends BaseAdapter {
 
         //라운딩입니다.
         GradientDrawable drawable=
-                (GradientDrawable)  context.getResources().getDrawable(R.drawable.background_rounding);
+                (GradientDrawable)  context.getResources().getDrawable(R.drawable.background_thema);
         iconImageView.setBackground(drawable);
         iconImageView.setClipToOutline(true);
 
