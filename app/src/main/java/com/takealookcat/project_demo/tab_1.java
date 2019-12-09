@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.Matrix;
 import android.location.Geocoder;
 import android.media.ExifInterface;
 import android.net.Uri;
@@ -63,6 +64,7 @@ public class tab_1 extends Fragment {
 
     FirebaseDatabase database;
     DatabaseReference catRef;
+    DatabaseReference locationRef;
 
     Geocoder geocoder;
 
@@ -73,6 +75,7 @@ public class tab_1 extends Fragment {
         //파베
         database = FirebaseDatabase.getInstance();
         catRef = database.getReference("cat");
+        locationRef = database.getReference("location");
 
         //cat_Title= (EditText)rootview.findViewById(R.id.cat_title);
         cat_Content = (EditText)rootview.findViewById(R.id.cat_context);
@@ -142,11 +145,23 @@ public class tab_1 extends Fragment {
             try {
                 //Uri 파일을 Bitmap으로 만들어서 ImageView에 집어 넣는다.
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), filePath);
-                btChoose.setImageBitmap(bitmap);
+                //btChoose.setImageBitmap(bitmap);
+                btChoose.setImageBitmap(rotateImage(bitmap,90));
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
+    }
+
+    public Bitmap rotateImage(Bitmap src, float degree) {
+
+        // Matrix 객체 생성
+        Matrix matrix = new Matrix();
+        // 회전 각도 셋팅
+        matrix.postRotate(degree);
+        // 이미지와 Matrix 를 셋팅해서 Bitmap 객체 생성
+        return Bitmap.createBitmap(src, 0, 0, src.getWidth(),
+                src.getHeight(), matrix, true);
     }
 
     /* exif*/
@@ -176,6 +191,10 @@ public class tab_1 extends Fragment {
             final String catinform = cat_info.getText().toString();
             //
             final String datenow = date_now.getText().toString();
+
+            final String lati= latitude.getText().toString();
+            final String longi = longitude.getText().toString();
+
             SharedPreferences sf = getActivity().getSharedPreferences("sFile",MODE_PRIVATE);
             //text라는 key에 저장된 값이 있는지 확인. 아무값도 들어있지 않으면 ""를 반환
             final String email = sf.getString("email","");
@@ -198,6 +217,16 @@ public class tab_1 extends Fragment {
 
                             DatabaseReference keyRef = catRef.child(key);
                             keyRef.setValue(postValues);
+
+                            String key2 = locationRef.push().getKey();
+                            Map<String, String > postValues2 = new HashMap<>();
+                            //postValues.put("title", cattitle);
+                            postValues2.put("latitude", lati);
+                            postValues2.put("longitude", longi);
+                            postValues2.put("category", "고양이");
+
+                            DatabaseReference keyRef2 = locationRef.child(key2);
+                            keyRef2.setValue(postValues2);
 
                             //myRef.push().setValue(filename);
                             Toast.makeText(getActivity().getApplicationContext(), "업로드 완료!", Toast.LENGTH_SHORT).show();

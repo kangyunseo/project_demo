@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.Matrix;
 import android.location.Geocoder;
 import android.media.ExifInterface;
 import android.net.Uri;
@@ -53,7 +54,7 @@ public class tab_2 extends Fragment {
 
     //ImageView ivPreview;
     ImageButton btChoose;
-    Button btUpload;
+    ImageButton btUpload;
     Uri filePath;
     EditText feed_info, feed_Content, date_now;
     TextView exiftext;
@@ -62,6 +63,7 @@ public class tab_2 extends Fragment {
 
     FirebaseDatabase database;
     DatabaseReference feedRef;
+    DatabaseReference locationRef;
 
     Geocoder geocoder;
     @Override
@@ -71,6 +73,7 @@ public class tab_2 extends Fragment {
         //파베
         database = FirebaseDatabase.getInstance();
         feedRef = database.getReference("feed");
+        locationRef = database.getReference("location");
 
         feed_Content = (EditText)rootview.findViewById(R.id.feed_context);
         feed_info = (EditText)rootview.findViewById(R.id.feed_info);
@@ -82,7 +85,7 @@ public class tab_2 extends Fragment {
         longitude = (TextView) rootview.findViewById(R.id.longitude2);
         //업로드
         btChoose = (ImageButton) rootview.findViewById(R.id.bt_choose2);
-        btUpload = (Button) rootview.findViewById(R.id.bt_upload2);
+        btUpload = (ImageButton) rootview.findViewById(R.id.bt_upload2);
 
         //exif
         exiftext = (TextView) rootview.findViewById(R.id.exif2);
@@ -136,11 +139,21 @@ public class tab_2 extends Fragment {
             try {
                 //Uri 파일을 Bitmap으로 만들어서 ImageView에 집어 넣는다.
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), filePath);
-                btChoose.setImageBitmap(bitmap);
+                btChoose.setImageBitmap(rotateImage(bitmap,90));
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
+    }
+    public Bitmap rotateImage(Bitmap src, float degree) {
+
+        // Matrix 객체 생성
+        Matrix matrix = new Matrix();
+        // 회전 각도 셋팅
+        matrix.postRotate(degree);
+        // 이미지와 Matrix 를 셋팅해서 Bitmap 객체 생성
+        return Bitmap.createBitmap(src, 0, 0, src.getWidth(),
+                src.getHeight(), matrix, true);
     }
 
     private void uploadFile() {
@@ -169,6 +182,9 @@ public class tab_2 extends Fragment {
             final String feedinform = feed_info.getText().toString();
             //
             final String datenow = date_now.getText().toString();
+            final String lati= latitude.getText().toString();
+            final String longi = longitude.getText().toString();
+
             SharedPreferences sf = getActivity().getSharedPreferences("sFile",MODE_PRIVATE);
             //text라는 key에 저장된 값이 있는지 확인. 아무값도 들어있지 않으면 ""를 반환
             final String email = sf.getString("email","");
@@ -191,6 +207,16 @@ public class tab_2 extends Fragment {
 
                             DatabaseReference keyRef = feedRef.child(key);
                             keyRef.setValue(postValues);
+
+                            String key2 = locationRef.push().getKey();
+                            Map<String, String > postValues2 = new HashMap<>();
+                            //postValues.put("title", cattitle);
+                            postValues2.put("latitude", lati);
+                            postValues2.put("longitude", longi);
+                            postValues2.put("category", "급식소");
+
+                            DatabaseReference keyRef2 = locationRef.child(key2);
+                            keyRef2.setValue(postValues2);
 
                             //myRef.push().setValue(filename);
                             Toast.makeText(getActivity().getApplicationContext(), "업로드 완료!", Toast.LENGTH_SHORT).show();
