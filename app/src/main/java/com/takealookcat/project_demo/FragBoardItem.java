@@ -24,11 +24,30 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 
-public class FragBoardItem extends Fragment {
+public class FragBoardItem extends Fragment implements MainActivity.onKeyBackPressedListener{
     public String key;
     public String title ;
     public String content ;
     public String file;
+
+    //뒤로가기 구현
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        //메인뷰 액티비티의 뒤로가기 callback 붙이기
+        ((MainActivity)context).setOnKeyBackPressedListener(this);
+    }
+
+    @Override
+    public void onBackKey() {
+        getActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container, new FragCateBoard())
+                .addToBackStack(null)
+                .commit();
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){

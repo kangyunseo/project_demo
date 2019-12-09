@@ -33,6 +33,8 @@ public class FragCateBoard extends Fragment {
     BoardListAdapter adapter;
     List<BoardItem> board_list = new ArrayList<>();
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
         // 인플레이션이 가능하다, container 이쪽으로 붙여달라, fragment_main을

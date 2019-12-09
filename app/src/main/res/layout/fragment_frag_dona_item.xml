@@ -6,52 +6,64 @@
     android:layout_height="match_parent"
     android:background="#FFC107"
     android:orientation="vertical">
-
-    <Button
-        android:id="@+id/btn_dona"
+    <FrameLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="기부하기" />
+        android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        tools:srcCompat="@tools:sample/avatars" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/ttitle"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:text="TextView" />
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                tools:srcCompat="@tools:sample/avatars" />
 
-    <TextView
-        android:id="@+id/tcontent"
-        android:layout_width="match_parent"
-        android:layout_height="240dp"
-        android:text="TextView" />
+            <TextView
+                android:id="@+id/tcontent"
+                android:layout_width="match_parent"
+                android:layout_height="240dp"
+                android:text="TextView" />
 
-    <TextView
-        android:id="@+id/tcurAmount"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:text="TextView" />
+            <TextView
+                android:id="@+id/tstartDate"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:text="TextView" />
 
-    <TextView
-        android:id="@+id/ttargetAmount"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:text="TextView" />
+            <TextView
+                android:id="@+id/tdueDate"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:text="TextView" />
 
-    <TextView
-        android:id="@+id/tdueDate"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:text="TextView" />
+            <TextView
+                android:id="@+id/ttitle"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:text="TextView" />
 
-    <TextView
-        android:id="@+id/tstartDate"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:text="TextView" />
+            <TextView
+                android:id="@+id/tcurAmount"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:text="TextView" />
+
+            <Button
+                android:id="@+id/btn_dona"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="기부하기" />
+
+            <TextView
+                android:id="@+id/ttargetAmount"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:text="TextView" />
+        </LinearLayout>
+
+    </FrameLayout>
 </LinearLayout>

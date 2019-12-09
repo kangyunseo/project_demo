@@ -31,6 +31,27 @@ public class MainActivity extends AppCompatActivity implements FragCateDona.OnFr
             android.Manifest.permission.READ_SMS,
             android.Manifest.permission.CAMERA
     };
+
+    public interface onKeyBackPressedListener{
+        void onBackKey();
+    }
+    private onKeyBackPressedListener mOnKeyBackPressedListener;
+
+    public void setOnKeyBackPressedListener(onKeyBackPressedListener listener){
+        mOnKeyBackPressedListener = listener;
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        //Fragment 로 뒤로가기 callback 보내기위한 로직
+        if (mOnKeyBackPressedListener != null) {
+            mOnKeyBackPressedListener.onBackKey();
+        } else {
+            super.onBackPressed();
+        }
+    }
+
     @Override
     public void onFragmentInteraction_dona(String title, String content, String curAmount, String targetAmount, String startDate, String dueDate, String file) {
         FragDonaItem FragItem = new FragDonaItem();
