@@ -4,50 +4,50 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/thema_1">
+    android:background="@color/thema_0">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:background="@color/thema_1"
             android:gravity="center|top"
             android:orientation="horizontal"
-            android:background="@color/thema_1"
             android:weightSum="4">
 
             <ImageButton
                 android:id="@+id/btn_cat"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:adjustViewBounds="true"
-                android:src="@drawable/ic_icon_cat"
-                android:background="@drawable/button_backgound" />
+                android:background="@drawable/button_backgound"
+                android:src="@drawable/ic_icon_cat" />
 
             <ImageButton
                 android:id="@+id/btn_feed"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:adjustViewBounds="true"
-                android:src="@drawable/ic_icon_feedplace"
-                android:background="@drawable/button_backgound" />
+                android:background="@drawable/button_backgound"
+                android:src="@drawable/ic_icon_feedplace" />
 
             <ImageButton
                 android:id="@+id/btn_write"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:adjustViewBounds="true"
-                android:src="@drawable/ic_botnavi_icon_commu_off"
-                android:background="@drawable/button_backgound" />
+                android:background="@drawable/button_backgound"
+                android:src="@drawable/ic_botnavi_icon_commu_off" />
 
             <ImageButton
                 android:id="@+id/btn_dona"
@@ -56,8 +56,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:adjustViewBounds="true"
-                android:src="@drawable/ic_icon_share"
-                android:background="@drawable/button_backgound" />
+                android:background="@drawable/button_backgound"
+                android:src="@drawable/ic_icon_share" />
 
 
         </LinearLayout>

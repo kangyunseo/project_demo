@@ -7,4 +7,11 @@
     <color name="thema_1">#F9F1DE</color>
     <color name="thema_2">#F2CCA6</color>
     <color name="thema_3">#EB9339</color>
+    <color name="addButtonGray">#CCCCCC</color>
+    <color name="baseProfileGray">#F7F7F7</color>
+    <color name="mainTextBlack">#191919</color>
+    <color name="secondTextGray">#999999</color>
+    <color name="thirdTextGray">#b7b6b5</color>
+    <color name="firstBorderSilver">#eeeeee</color>
+    <color name="secondBorderSilver">#f0f0f0</color>
 </resources>

@@ -107,7 +107,7 @@ public class signing2 extends AppCompatActivity {
                 finish();
             }
         });
-
+        
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

@@ -24,7 +24,9 @@
             android:id="@+id/profile_img"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/logo"/>
+            android:background="@color/baseProfileGray"
+            android:scaleType="centerInside"
+            android:src="@drawable/baseprofile_img" />
 
         <Button
             android:id="@+id/upload_profile"

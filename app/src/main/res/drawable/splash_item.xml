@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:drawable="@color/thema_2">
+        android:drawable="@color/thema_1">
     </item>
     <item
-        android:drawable="@drawable/logo_text"
-        android:width="167dp"
-        android:height="151dp"
+        android:drawable="@drawable/splash_logo"
+
         android:gravity="center">
     </item>
 </layer-list>
