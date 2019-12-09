@@ -9,5 +9,5 @@
         android:right="1dip"
         android:bottom="1dip" />
     <solid
-        android:color="@color/thema_3"/>
+        android:color="@color/thema_1"/>
 </shape>
