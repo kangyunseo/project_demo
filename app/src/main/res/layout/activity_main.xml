@@ -29,7 +29,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:adjustViewBounds="true"
-            android:background="@color/thema_0"
+            android:background="?attr/selectableItemBackgroundBorderless"
+
             android:src="@drawable/ic_botnavi_icon_home_off" />
 
         <ImageButton
