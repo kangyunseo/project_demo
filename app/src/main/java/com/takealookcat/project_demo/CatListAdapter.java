@@ -24,6 +24,8 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class CatListAdapter extends BaseAdapter {
     // Adapter에 추가된 데이터를 저장하기 위한 ArrayList
 
@@ -69,17 +71,24 @@ public class CatListAdapter extends BaseAdapter {
         }
 
         // 화면에 표시될 View(Layout이 inflate된)으로부터 위젯에 대한 참조 획득
-        final ImageView iconImageView = (ImageView) convertView.findViewById(R.id.imageView1) ;
-        TextView titleTextView = (TextView) convertView.findViewById(R.id.textView1) ;
-        TextView descTextView = (TextView) convertView.findViewById(R.id.textView2) ;
-        TextView email = (TextView) convertView.findViewById(R.id.textView3) ;
-        final ImageView profile = (ImageView) convertView.findViewById(R.id.imageView2);
+        final ImageView iconImageView = (ImageView) convertView.findViewById(R.id.imageView1);
+        TextView titleTextView = (TextView) convertView.findViewById(R.id.textView1);
+        TextView descTextView = (TextView) convertView.findViewById(R.id.textView2);
+        TextView email = (TextView) convertView.findViewById(R.id.textView3);
+        //final ImageView profile = (ImageView) convertView.findViewById(R.id.imageView2);
+        final CircleImageView profile = (CircleImageView) convertView.findViewById(R.id.imageView2);
         //라운딩입니다.
         GradientDrawable drawable=
                 (GradientDrawable)  context.getResources().getDrawable(R.drawable.background_thema);
         iconImageView.setBackground(drawable);
         iconImageView.setClipToOutline(true);
-
+/*
+        Bitmap bmp=BitmapFactory.decodeResource(getResources(), R.drawable.img1); // 비트맵 이미지를 만든다.
+        int width=(int)(getWindowManager().getDefaultDisplay().getWidth()); // 가로 사이즈 지정
+        int height=(int)((width*불러올 이미지의 높이)/불러올 이미지의 너비); // 세로 사이즈 지정
+        Bitmap resizedbitmap=Bitmap.createScaledBitmap(bmp, width, height, true); // 이미지 사이즈 조정
+        imgview.setImageBitmap(resizedbitmap); // 이미지뷰에 조정한 이미지 넣기
+*/
         profile.setBackground(drawable);
         profile.setClipToOutline(true);
 

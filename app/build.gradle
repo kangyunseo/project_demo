@@ -39,4 +39,9 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation files('libs/com.skt.Tmap_1.62.jar')
+    // 툴바
+    implementation 'androidx.appcompat:appcompat:1.0.0'
+    // 프로필용 원형 이미지 크롭
+    implementation 'de.hdodenhof:circleimageview:3.0.1'
+
 }

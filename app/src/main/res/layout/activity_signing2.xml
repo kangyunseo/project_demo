@@ -10,6 +10,7 @@
     android:scrollbarStyle="outsideOverlay"
     tools:context=".signing">
 
+
     <LinearLayout
         android:id="@+id/thislay"
         android:layout_width="match_parent"
@@ -20,11 +21,11 @@
         android:paddingHorizontal="40dp"
         android:paddingVertical="50dp">
 
+
         <ImageButton
             android:id="@+id/profile_img"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/baseProfileGray"
             android:scaleType="centerInside"
             android:src="@drawable/baseprofile_img" />
 

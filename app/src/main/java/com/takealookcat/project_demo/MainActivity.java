@@ -1,21 +1,28 @@
 package com.takealookcat.project_demo;
 
-import androidx.fragment.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+
+import androidx.appcompat.widget.Toolbar; // 툴바
+
 public class MainActivity extends AppCompatActivity implements FragCateDona.OnFragmentInteractionListener {
+
+    Menu toolbarRightBtn;     // 툴바 우측 버튼
 
     menu_1 fragment1;
     menu_2 fragment2;
@@ -40,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements FragCateDona.OnFr
     public void setOnKeyBackPressedListener(onKeyBackPressedListener listener){
         mOnKeyBackPressedListener = listener;
     }
+
 
     @Override
     public void onBackPressed() {
@@ -94,6 +102,19 @@ public class MainActivity extends AppCompatActivity implements FragCateDona.OnFr
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // 툴바 설정
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);                      // 액션바를 툴바로 대체
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowTitleEnabled(false); // 기본 타이틀 가리기
+        actionBar.setDisplayShowCustomEnabled(true); //커스터마이징 하기 위해 필요
+
+        // 툴바 타이틀 변경
+        TextView toolbarTitle = (TextView)findViewById(R.id.toolbarTitle);
+        toolbarTitle.setText("TAKE A LOOK 고양이");
+
+
         if(!hasPermissions(this, PERMISSIONS)){ //exif 권한
             ActivityCompat.requestPermissions(MainActivity.this, PERMISSIONS, PERMISSION_ALL);
         }
@@ -114,14 +135,12 @@ public class MainActivity extends AppCompatActivity implements FragCateDona.OnFr
         //TextView textView1 = (TextView) findViewById(R.id.text1) ;
         //textView1.setText(getString);
 
+
+        // * 액티비티 첫 실행시 화면
+        // 프래그먼트 초기화
         fragment1 = new menu_1();
-        fragment2 = new menu_2();
-        fragment3 = new menu_3();
-        fragment4 = new menu_4();
-        fragment5 = new menu_5();
-
         getSupportFragmentManager().beginTransaction().replace(R.id.view, fragment1).commit();
-
+        // 버튼
         final ImageButton button1 = (ImageButton)findViewById(R.id.btn1);
         final ImageButton button2 = (ImageButton)findViewById(R.id.btn2);
         final ImageButton button3 = (ImageButton)findViewById(R.id.btn3);
@@ -129,12 +148,22 @@ public class MainActivity extends AppCompatActivity implements FragCateDona.OnFr
         final ImageButton button5 = (ImageButton)findViewById(R.id.btn5);
         button1.setImageResource(R.drawable.ic_botnavi_icon_home_on);
 
+        // * 1. 홈
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // 프래그먼트 초기화
+                fragment1 = new menu_1();
                 getSupportFragmentManager().beginTransaction().replace(R.id.view, fragment1).commit();
-                button1.setImageResource(R.drawable.ic_botnavi_icon_home_on);
 
+                // 상단 툴바
+                TextView toolbarTitle = (TextView)findViewById(R.id.toolbarTitle);
+                toolbarTitle.setText("TAKE A LOOK 고양이"); // 타이틀 변경
+                ActionBar actionBar = getSupportActionBar();
+                actionBar.setDisplayHomeAsUpEnabled(false); // 뒤로가기 버튼 지우기
+
+                // 하단 탭 버튼 변경
+                button1.setImageResource(R.drawable.ic_botnavi_icon_home_on);
                 button2.setImageResource(R.drawable.ic_botnavi_icon_commu_off);
                 button3.setImageResource(R.drawable.ic_botnavi_icon_write_off);
                 button4.setImageResource(R.drawable.ic_botnavi_icon_map_off);
@@ -142,11 +171,21 @@ public class MainActivity extends AppCompatActivity implements FragCateDona.OnFr
             }
         });
 
+        // * 2. 커뮤니티
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
+                // 프래그먼트 초기화
+                fragment2 = new menu_2();
                 getSupportFragmentManager().beginTransaction().replace(R.id.view, fragment2).commit();
 
+                // 상단 툴바
+                TextView toolbarTitle = (TextView)findViewById(R.id.toolbarTitle);
+                toolbarTitle.setText("커뮤니티"); // 타이틀 변경
+                ActionBar actionBar = getSupportActionBar();
+                actionBar.setDisplayHomeAsUpEnabled(false); // 뒤로가기 버튼 지우기
+
+                // 하단 탭 버튼 변경
                 button1.setImageResource(R.drawable.ic_botnavi_icon_home_off);
                 button2.setImageResource(R.drawable.ic_botnavi_icon_commu_on);
                 button3.setImageResource(R.drawable.ic_botnavi_icon_write_off);
@@ -155,10 +194,21 @@ public class MainActivity extends AppCompatActivity implements FragCateDona.OnFr
             }
         });
 
+        // * 3. 글 쓰기
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
+                fragment3 = new menu_3(); // 프래그먼트 초기화
                 getSupportFragmentManager().beginTransaction().replace(R.id.view, fragment3).commit();
+
+                // 상단 툴바
+                TextView toolbarTitle = (TextView)findViewById(R.id.toolbarTitle);
+                toolbarTitle.setText("글 쓰기"); // 타이틀 변경
+                ActionBar actionBar = getSupportActionBar();
+                actionBar.setDisplayHomeAsUpEnabled(true); // 뒤로가기 버튼 생성
+                actionBar.setHomeAsUpIndicator(R.drawable.ic_cancel); // 버튼 모양 변경(취소)
+
+                // 하단 탭 버튼 변경
                 button1.setImageResource(R.drawable.ic_botnavi_icon_home_off);
                 button2.setImageResource(R.drawable.ic_botnavi_icon_commu_off);
                 button3.setImageResource(R.drawable.ic_botnavi_icon_write_on);
@@ -167,12 +217,29 @@ public class MainActivity extends AppCompatActivity implements FragCateDona.OnFr
             }
         });
 
+        // * 4. 지도
         button4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
+                // 프래그먼트 초기화
+                fragment4 = new menu_4();
                 getSupportFragmentManager().beginTransaction().replace(R.id.view, fragment4).commit();
-                button1.setImageResource(R.drawable.ic_botnavi_icon_home_off);
 
+                // 상단 툴바
+                TextView toolbarTitle = (TextView)findViewById(R.id.toolbarTitle);
+                toolbarTitle.setText("지도"); // 타이틀 변경
+                ActionBar actionBar = getSupportActionBar();
+                actionBar.setDisplayHomeAsUpEnabled(false); // 뒤로가기 버튼 지우기
+                /*
+                if (toolbarRightBtn != null) {
+                    MenuItem item = (MenuItem)toolbarRightBtn.findItem(R.id.toolbarRightBtn);
+                    item.setIcon(R.drawable.ic_icon_search);
+                    item.setVisible(true);
+                }
+                */
+
+                // 하단 탭 버튼 변경
+                button1.setImageResource(R.drawable.ic_botnavi_icon_home_off);
                 button2.setImageResource(R.drawable.ic_botnavi_icon_commu_off);
                 button3.setImageResource(R.drawable.ic_botnavi_icon_write_off);
                 button4.setImageResource(R.drawable.ic_botnavi_icon_map_on);
@@ -180,12 +247,22 @@ public class MainActivity extends AppCompatActivity implements FragCateDona.OnFr
             }
         });
 
+        // * 5. 사용자 관리
         button5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // 프래그먼트 초기화
+                fragment5 = new menu_5();
                 getSupportFragmentManager().beginTransaction().replace(R.id.view, fragment5).commit();
-                button1.setImageResource(R.drawable.ic_botnavi_icon_home_off);
 
+                // 상단 툴바
+                TextView toolbarTitle = (TextView)findViewById(R.id.toolbarTitle);
+                toolbarTitle.setText("내 정보"); // 타이틀 변경
+                ActionBar actionBar = getSupportActionBar();
+                actionBar.setDisplayHomeAsUpEnabled(false); // 뒤로가기 버튼 지우기
+
+                // 하단 탭 버튼 변경
+                button1.setImageResource(R.drawable.ic_botnavi_icon_home_off);
                 button2.setImageResource(R.drawable.ic_botnavi_icon_commu_off);
                 button3.setImageResource(R.drawable.ic_botnavi_icon_write_off);
                 button4.setImageResource(R.drawable.ic_botnavi_icon_map_off);
@@ -194,6 +271,18 @@ public class MainActivity extends AppCompatActivity implements FragCateDona.OnFr
         });
 
     }
+
+    // 툴바
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+
+        inflater.inflate(R.menu.appbar_menu, menu);
+        toolbarRightBtn = menu; // 툴바 오른쪽 버튼
+
+        return true;
+    }
+
     public boolean hasPermissions(Context context, String... permissions) {
         if (context != null && permissions != null) {
             for (String permission : permissions) {
@@ -204,4 +293,5 @@ public class MainActivity extends AppCompatActivity implements FragCateDona.OnFr
         }
         return true;
     }
+
 }

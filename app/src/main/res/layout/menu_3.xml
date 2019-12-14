@@ -27,7 +27,7 @@
                 android:layout_weight="1"
                 android:adjustViewBounds="true"
                 android:background="@drawable/button_backgound"
-                android:src="@drawable/ic_icon_cat" />
+                android:src="@drawable/ic_cat" />
 
             <ImageButton
                 android:id="@+id/btn_feed"
@@ -37,7 +37,7 @@
                 android:layout_weight="1"
                 android:adjustViewBounds="true"
                 android:background="@drawable/button_backgound"
-                android:src="@drawable/ic_icon_feedplace" />
+                android:src="@drawable/ic_feedplace" />
 
             <ImageButton
                 android:id="@+id/btn_write"

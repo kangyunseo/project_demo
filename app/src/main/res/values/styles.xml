@@ -1,19 +1,36 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/thema_2</item>
-        <item name="colorPrimaryDark">@color/thema_2</item>
-        <item name="colorAccent">@color/thema_accent_0</item>
-
+    <style name="Theme.AppCompat.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+    </style>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/thema_1</item>
+        <item name="colorPrimaryDark">@color/thema_1</item>
+        <item name="colorAccent">@color/thema_accent_0</item>
+
+
 
         <!-- color high light -->
         <item name="colorControlHighlight">@color/thema_accent_0</item>
 
     </style>
+
+    <!-- 액션바 색상 -->
+    <style name="AppTheme.MainTheme">
+        <item name="android:actionBarStyle">@style/MyActionBar</item>
+    </style>
+    <style name="MyActionBar" parent="@android:style/Widget.Holo.Light.ActionBar.Solid">
+        <item name="android:titleTextStyle">@style/ActionBarTextColor</item>
+    </style>
+    <style name="ActionBarTextColor" parent="android:TextAppearance.Holo.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/mainTextBlack</item>
+    </style>
+
+
     <!--splash_logo theme-->
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowBackground">@drawable/splash_item</item>

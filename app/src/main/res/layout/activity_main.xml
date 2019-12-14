@@ -4,6 +4,24 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/thema_1">
+
+        <TextView
+            android:id="@+id/toolbarTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/bm_jua"
+            android:text="Toolbar Title"
+            android:textColor="@color/mainTextBlack"
+            android:textSize="20sp" />
+
+    </androidx.appcompat.widget.Toolbar>
+
     <FrameLayout
         android:id="@+id/view"
         android:layout_width="match_parent"
@@ -40,7 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:adjustViewBounds="true"
-            android:background="@color/thema_0"
+            android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/ic_botnavi_icon_commu_off" />
 
         <ImageButton
@@ -50,7 +68,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:adjustViewBounds="true"
-            android:background="@color/thema_0"
+            android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/ic_botnavi_icon_write_off" />
 
         <ImageButton
@@ -60,7 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:adjustViewBounds="true"
-            android:background="@color/thema_0"
+            android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/ic_botnavi_icon_map_off" />
 
         <ImageButton
@@ -70,7 +88,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:adjustViewBounds="true"
-            android:background="@color/thema_0"
+            android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/ic_botnavi_icon_user_off" />
 
 
