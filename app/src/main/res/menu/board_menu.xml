@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <item
+        android:id="@+id/notice"
+        android:title="공지" />
+
+    <item
+        android:id="@+id/cat"
+        android:title="고양이" />
+
+    <item
+        android:id="@+id/feedplace"
+        android:title="급식소" />
+
+    <item
+        android:id="@+id/talk"
+        android:title="대화" />
+
+    <item
+        android:id="@+id/dona"
+        android:title="기부" />
+
+</menu>

@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -14,6 +15,9 @@ import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class menu_5 extends Fragment {
 
@@ -29,12 +33,40 @@ public class menu_5 extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup rootview = (ViewGroup) inflater.inflate(R.layout.menu_5,container,false);
 
+        // 상단 툴바
+        TextView toolbarTitle = (TextView)((MainActivity)getActivity()).findViewById(R.id.toolbarTitle);
+        toolbarTitle.setText("사용자 관리"); // 타이틀 변경
+        ActionBar actionBar = ((MainActivity)getActivity()).getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(false); // 뒤로가기 버튼 지우기
+
         // 어댑터
-        ArrayAdapter Adapter = new ArrayAdapter<String>(getActivity(), R.layout.list_item_commu, CategoryList) ;
+        /*
+        ArrayAdapter Adapter = new ArrayAdapter<String>(getActivity(), R.layout.listview_item_basetext, CategoryList) ;
         ListView listview = (ListView)rootview.findViewById(R.id.listview) ;
         listview.setAdapter(Adapter) ;
+*/
 
-        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        // ListView
+        int dataSize = 0;
+        ArrayList<BasetextItem> basetexts = new ArrayList<>();
+
+        ListView listView = null;
+        BasetextListAdapter adapter;
+
+        for (int i = 0; i < 2; i++) {
+            BasetextItem item = new BasetextItem();
+            item.title = CategoryList[i];
+            dataSize++;
+            basetexts.add(item);
+        }
+
+        // Adapter 생성
+        adapter = new BasetextListAdapter(basetexts);
+        listView = (ListView)rootview.findViewById(R.id.basetextListView);
+        listView.setAdapter(adapter);
+
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView parent, View v, int position, long id) {
                 // get TextView's Text.

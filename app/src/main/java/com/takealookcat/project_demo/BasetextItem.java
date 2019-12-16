@@ -1,7 +1,6 @@
 package com.takealookcat.project_demo;
 
-public class CommupageItem {
-
+public class BasetextItem {
     public String title;
 
     public String getTitle() {

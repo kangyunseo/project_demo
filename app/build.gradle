@@ -43,5 +43,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.0.0'
     // 프로필용 원형 이미지 크롭
     implementation 'de.hdodenhof:circleimageview:3.0.1'
+    // 플로팅 버튼
+    implementation 'com.google.android.material:material:1.0.0-rc01'
 
 }

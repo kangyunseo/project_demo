@@ -1,5 +1,7 @@
 package com.takealookcat.project_demo;
 
+
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -19,6 +21,9 @@ import androidx.core.content.ContextCompat;
 
 
 import androidx.appcompat.widget.Toolbar; // 툴바
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 public class MainActivity extends AppCompatActivity implements FragCateDona.OnFragmentInteractionListener {
 
@@ -97,23 +102,8 @@ public class MainActivity extends AppCompatActivity implements FragCateDona.OnFr
         //    finish();
         //}
 
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        // 툴바 설정
-        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);                      // 액션바를 툴바로 대체
-
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayShowTitleEnabled(false); // 기본 타이틀 가리기
-        actionBar.setDisplayShowCustomEnabled(true); //커스터마이징 하기 위해 필요
-
-        // 툴바 타이틀 변경
-        TextView toolbarTitle = (TextView)findViewById(R.id.toolbarTitle);
-        toolbarTitle.setText("TAKE A LOOK 고양이");
-
 
         if(!hasPermissions(this, PERMISSIONS)){ //exif 권한
             ActivityCompat.requestPermissions(MainActivity.this, PERMISSIONS, PERMISSION_ALL);
@@ -137,9 +127,13 @@ public class MainActivity extends AppCompatActivity implements FragCateDona.OnFr
 
 
         // * 액티비티 첫 실행시 화면
+        TextView toolbarTitle;
+        final ActionBar actionBar;
+
         // 프래그먼트 초기화
         fragment1 = new menu_1();
         getSupportFragmentManager().beginTransaction().replace(R.id.view, fragment1).commit();
+
         // 버튼
         final ImageButton button1 = (ImageButton)findViewById(R.id.btn1);
         final ImageButton button2 = (ImageButton)findViewById(R.id.btn2);
@@ -148,11 +142,28 @@ public class MainActivity extends AppCompatActivity implements FragCateDona.OnFr
         final ImageButton button5 = (ImageButton)findViewById(R.id.btn5);
         button1.setImageResource(R.drawable.ic_botnavi_icon_home_on);
 
+        // 툴바
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);                      // 액션바를 툴바로 대체
+
+        actionBar = getSupportActionBar();
+        actionBar.setDisplayShowTitleEnabled(false); // 기본 타이틀 가리기
+        actionBar.setDisplayShowCustomEnabled(true); //커스터마이징 하기 위해 필요
+
+        // 툴바 타이틀 변경
+        toolbarTitle = (TextView)findViewById(R.id.toolbarTitle);
+        toolbarTitle.setText("TAKE A LOOK 고양이");
+
         // * 1. 홈
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // 프래그먼트 초기화
+                FragmentManager fragManager = getSupportFragmentManager();
+                for(int i = 0; i < fragManager.getBackStackEntryCount(); i++) {
+                    fragManager.popBackStack();
+                }
+
                 fragment1 = new menu_1();
                 getSupportFragmentManager().beginTransaction().replace(R.id.view, fragment1).commit();
 
@@ -161,6 +172,7 @@ public class MainActivity extends AppCompatActivity implements FragCateDona.OnFr
                 toolbarTitle.setText("TAKE A LOOK 고양이"); // 타이틀 변경
                 ActionBar actionBar = getSupportActionBar();
                 actionBar.setDisplayHomeAsUpEnabled(false); // 뒤로가기 버튼 지우기
+                actionBar.show();
 
                 // 하단 탭 버튼 변경
                 button1.setImageResource(R.drawable.ic_botnavi_icon_home_on);
@@ -176,6 +188,11 @@ public class MainActivity extends AppCompatActivity implements FragCateDona.OnFr
             @Override
             public void onClick(View v){
                 // 프래그먼트 초기화
+                FragmentManager fragManager = getSupportFragmentManager();
+                for(int i = 0; i < fragManager.getBackStackEntryCount(); i++) {
+                    fragManager.popBackStack();
+                }
+
                 fragment2 = new menu_2();
                 getSupportFragmentManager().beginTransaction().replace(R.id.view, fragment2).commit();
 
@@ -184,6 +201,7 @@ public class MainActivity extends AppCompatActivity implements FragCateDona.OnFr
                 toolbarTitle.setText("커뮤니티"); // 타이틀 변경
                 ActionBar actionBar = getSupportActionBar();
                 actionBar.setDisplayHomeAsUpEnabled(false); // 뒤로가기 버튼 지우기
+                actionBar.show();
 
                 // 하단 탭 버튼 변경
                 button1.setImageResource(R.drawable.ic_botnavi_icon_home_off);
@@ -198,7 +216,13 @@ public class MainActivity extends AppCompatActivity implements FragCateDona.OnFr
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                fragment3 = new menu_3(); // 프래그먼트 초기화
+                // 프래그먼트 초기화
+                FragmentManager fragManager = getSupportFragmentManager();
+                for(int i = 0; i < fragManager.getBackStackEntryCount(); i++) {
+                    fragManager.popBackStack();
+                }
+
+                fragment3 = new menu_3();
                 getSupportFragmentManager().beginTransaction().replace(R.id.view, fragment3).commit();
 
                 // 상단 툴바
@@ -207,6 +231,7 @@ public class MainActivity extends AppCompatActivity implements FragCateDona.OnFr
                 ActionBar actionBar = getSupportActionBar();
                 actionBar.setDisplayHomeAsUpEnabled(true); // 뒤로가기 버튼 생성
                 actionBar.setHomeAsUpIndicator(R.drawable.ic_cancel); // 버튼 모양 변경(취소)
+                actionBar.show();
 
                 // 하단 탭 버튼 변경
                 button1.setImageResource(R.drawable.ic_botnavi_icon_home_off);
@@ -222,14 +247,21 @@ public class MainActivity extends AppCompatActivity implements FragCateDona.OnFr
             @Override
             public void onClick(View v){
                 // 프래그먼트 초기화
+                FragmentManager fragManager = getSupportFragmentManager();
+                for(int i = 0; i < fragManager.getBackStackEntryCount(); i++) {
+                    fragManager.popBackStack();
+                }
+
                 fragment4 = new menu_4();
                 getSupportFragmentManager().beginTransaction().replace(R.id.view, fragment4).commit();
 
                 // 상단 툴바
                 TextView toolbarTitle = (TextView)findViewById(R.id.toolbarTitle);
                 toolbarTitle.setText("지도"); // 타이틀 변경
+
                 ActionBar actionBar = getSupportActionBar();
-                actionBar.setDisplayHomeAsUpEnabled(false); // 뒤로가기 버튼 지우기
+                actionBar.hide();
+                //actionBar.setDisplayHomeAsUpEnabled(false); // 뒤로가기 버튼 지우기
                 /*
                 if (toolbarRightBtn != null) {
                     MenuItem item = (MenuItem)toolbarRightBtn.findItem(R.id.toolbarRightBtn);
@@ -252,14 +284,16 @@ public class MainActivity extends AppCompatActivity implements FragCateDona.OnFr
             @Override
             public void onClick(View v) {
                 // 프래그먼트 초기화
+                FragmentManager fragManager = getSupportFragmentManager();
+                for(int i = 0; i < fragManager.getBackStackEntryCount(); i++) {
+                    fragManager.popBackStack();
+                }
+                //fragManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+
                 fragment5 = new menu_5();
                 getSupportFragmentManager().beginTransaction().replace(R.id.view, fragment5).commit();
+                actionBar.show();
 
-                // 상단 툴바
-                TextView toolbarTitle = (TextView)findViewById(R.id.toolbarTitle);
-                toolbarTitle.setText("내 정보"); // 타이틀 변경
-                ActionBar actionBar = getSupportActionBar();
-                actionBar.setDisplayHomeAsUpEnabled(false); // 뒤로가기 버튼 지우기
 
                 // 하단 탭 버튼 변경
                 button1.setImageResource(R.drawable.ic_botnavi_icon_home_off);

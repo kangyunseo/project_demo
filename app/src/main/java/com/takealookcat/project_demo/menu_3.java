@@ -18,12 +18,17 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -46,8 +51,6 @@ import android.content.SharedPreferences;
 public class menu_3 extends Fragment {
 
     //프레그먼트
-    tab_1 tab_1;
-    tab_2 tab_2;
     tab_3 tab_3;
     tab_4 tab_4;
 
@@ -55,6 +58,9 @@ public class menu_3 extends Fragment {
     ImageButton btn_feed;
     ImageButton btn_write;
     ImageButton btn_dona;
+
+    ImageView selectboardIcon; // 게시판 메뉴 선택 아이콘
+    TextView selectedBoardTitle; // 선택된 게시판 종류
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -68,6 +74,79 @@ public class menu_3 extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup rootview = (ViewGroup) inflater.inflate(R.layout.menu_3,container,false);
 
+        selectboardIcon = (ImageView)rootview.findViewById(R.id.selectboardIcon);
+        selectedBoardTitle = (TextView)rootview.findViewById(R.id.selectedBoardTitle);
+
+        selectboardIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu popup= new PopupMenu(getActivity().getApplicationContext(), v);//v는 클릭된 뷰를 의미
+
+                getActivity().getMenuInflater().inflate(R.menu.board_menu, popup.getMenu());
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+
+                        FragmentManager fragManager;
+                        FragmentTransaction fragTransaction;
+                        TextView toolbarTitle;
+                        ActionBar actionBar;
+                        switch (item.getItemId()){
+                            case R.id.notice:
+
+
+                                break;
+                            case R.id.cat:
+                                // 프래그먼트
+                                tab_1 tab_1 = new tab_1();
+
+                                fragManager = getFragmentManager();
+                                fragTransaction = fragManager.beginTransaction();
+                                fragTransaction.replace(R.id.container, tab_1);
+                                fragTransaction.addToBackStack(null);
+                                fragTransaction.commit();
+
+                                // 선택된 게시판 타이틀 변경
+                                selectedBoardTitle.setText("고양이");
+                                selectedBoardTitle.setTextColor(getResources().getColor(R.color.mainTextBlack));
+
+                                break;
+                            case R.id.feedplace:
+                                tab_2 tab_2 = new tab_2();
+
+                                fragManager = getFragmentManager();
+                                fragTransaction = fragManager.beginTransaction();
+                                fragTransaction.replace(R.id.container, tab_2);
+                                fragTransaction.addToBackStack(null);
+                                fragTransaction.commit();
+
+                                // 선택된 게시판 타이틀 변경
+                                selectedBoardTitle.setText("급식소");
+                                selectedBoardTitle.setTextColor(getResources().getColor(R.color.mainTextBlack));
+                                break;
+                            case R.id.talk:
+
+                                // 선택된 게시판 타이틀 변경
+                                selectedBoardTitle.setText("대화");
+                                selectedBoardTitle.setTextColor(getResources().getColor(R.color.mainTextBlack));
+                                break;
+                            case R.id.dona:
+
+                                // 선택된 게시판 타이틀 변경
+                                selectedBoardTitle.setText("기부");
+                                selectedBoardTitle.setTextColor(getResources().getColor(R.color.mainTextBlack));
+                                break;
+                            default:
+                                break;
+                        }
+                        return false;
+                    }
+                });
+
+                popup.show();//Popup Menu 보이기
+            }
+        });
+       /*
         //프래그먼트
         tab_1 = new tab_1();
         tab_2 = new tab_2();
@@ -109,7 +188,7 @@ public class menu_3 extends Fragment {
                 getFragmentManager().beginTransaction().replace(R.id.container, tab_4).commit();
             }
         });
-
+*/
         return rootview;
     }
 

@@ -46,6 +46,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class signing2 extends AppCompatActivity {
@@ -54,7 +55,7 @@ public class signing2 extends AppCompatActivity {
     private Bitmap profile_image_file;
     FirebaseDatabase database;
     DatabaseReference catRef;
-    ImageButton btChoose;
+    CircleImageView btChoose;
     Button upload;
     Button tomain;
     Uri filePath;
@@ -74,7 +75,7 @@ public class signing2 extends AppCompatActivity {
                     { android.Manifest.permission.ACCESS_FINE_LOCATION },0 );
         }
 
-        btChoose = (ImageButton) findViewById(R.id.profile_img);
+        btChoose = (CircleImageView) findViewById(R.id.profile_img);
         upload = (Button) findViewById(R.id.upload_profile);
         tomain = (Button)findViewById(R.id.login_signup);
 

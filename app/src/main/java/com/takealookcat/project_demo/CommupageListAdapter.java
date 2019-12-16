@@ -1,37 +1,25 @@
 package com.takealookcat.project_demo;
 
 import android.content.Context;
-import android.net.Uri;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-
-import com.bumptech.glide.Glide;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class CommupageListAdapter extends BaseAdapter {
     // Adapter에 추가된 데이터를 저장하기 위한 ArrayList
-    List<CommupageItem> datas;
-    Context context;
-    LayoutInflater inflater;
+    private ArrayList<CommupageItem> datas;
+    LayoutInflater inflater = null;
 
     // ListViewAdapter의 생성자
-    public CommupageListAdapter(List<CommupageItem> data, Context context) {
+    public CommupageListAdapter(ArrayList<CommupageItem> data) {
         this.datas = data;
-        this.context = context;
-        this.inflater = (LayoutInflater) context. getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     // Adapter에 사용되는 데이터의 개수를 리턴. : 필수 구현
@@ -61,17 +49,17 @@ public class CommupageListAdapter extends BaseAdapter {
         // "listview_item" Layout을 inflate하여 convertView 참조 획득.
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.list_item_normalboard, parent, false);
+            convertView = inflater.inflate(R.layout.listview_item_commupage, parent, false);
         }
 
         // 화면에 표시될 View(Layout이 inflate된)으로부터 위젯에 대한 참조 획득
-        TextView titleTextView = (TextView) convertView.findViewById(R.id.textView3); // 제목
+        TextView commupageTitle = (TextView) convertView.findViewById(R.id.textView3); // 제목
 
         // Data Set(listViewItemList)에서 position에 위치한 데이터 참조 획득
         CommupageItem item = datas.get(position);
 
-        StorageReference firebaseStorage = FirebaseStorage.getInstance().getReference();
-        StorageReference storageReference = firebaseStorage.child("board/"+item.file);
+        // 아이템 내, 각 위젯에 데이터 반영
+        commupageTitle.setText(item.title);
 
         return convertView;
     }
