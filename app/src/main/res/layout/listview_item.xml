@@ -15,15 +15,16 @@
         android:weightSum="11"
         android:background="@drawable/background_thema">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imageView2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
             android:layout_weight="2"
+            android:adjustViewBounds="false"
             android:paddingVertical="8dp"
-            android:paddingLeft="12dp"
-            android:src="@drawable/logo" />
+            android:scaleType="centerCrop"
+            android:src="@drawable/baseprofile_img" />
+
 
         <TextView
             android:id="@+id/textView3"
@@ -32,17 +33,18 @@
             android:layout_weight="6"
             android:gravity="center|left"
             android:text="New Text"
-            android:textColor="#000000"
-            android:textSize="16sp"/>
+            android:textColor="@color/mainTextBlack"
+            android:textSize="16sp" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:fontFamily="@font/bm_jua"
             android:gravity="center"
-            android:text="|"
-            android:textColor="#000000"
-            android:textSize="16sp"/>
+            android:text="||"
+            android:textColor="@color/thema_accent_0"
+            android:textSize="17sp" />
 
         <TextView
             android:id="@+id/textView2"
@@ -50,8 +52,8 @@
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:gravity="center|left"
-            android:textColor="#000000"
-            android:textSize="16sp"/>
+            android:textColor="@color/mainTextBlack"
+            android:textSize="16sp" />
 
 
     </LinearLayout>
@@ -61,19 +63,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
-        android:background="@drawable/background_thema"
+        android:background="@color/thema_0"
         android:scaleType="centerCrop"
-        android:src="@drawable/loading"/>
+        android:src="@drawable/loading" />
 
     <TextView
         android:id="@+id/textView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:background="@drawable/background_thema"
         android:padding="15dp"
         android:text="New Text"
-        android:textColor="#000000"
-        android:textSize="16sp"
-        android:layout_marginTop="10dp"/>
+        android:textColor="@color/secondTextGray"
+        android:textSize="14sp" />
 
 </LinearLayout>

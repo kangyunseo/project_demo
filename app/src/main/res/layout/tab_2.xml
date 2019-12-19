@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/thema_1"
+    android:background="@color/thema_0"
     android:orientation="vertical">
 
     <LinearLayout
@@ -101,7 +101,7 @@
             android:layout_height="45dp"
             android:layout_gravity="center"
             android:layout_marginBottom="10dp"
-            android:background="@color/thema_1"
+            android:background="@color/thema_0"
             android:inputType="textMultiLine"
             android:src="@drawable/ic_icon_upload" />
 
