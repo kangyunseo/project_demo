@@ -138,7 +138,7 @@ public class menu_2 extends Fragment {
                 //String strText = (String) parent.getItemAtPosition(position) ;
                 // TODO : use strText
 
-               // fragcatedona = new FragCateDona(); //donation 게시판 fragmen
+                //fragcatedona = new FragCateDona(); //donation 게시판 fragmen
                 //fragcateboard = new FragCateBoard();    //자유게시판 fragment
 
 

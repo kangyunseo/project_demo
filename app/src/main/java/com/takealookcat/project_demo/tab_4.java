@@ -52,6 +52,7 @@ public class tab_4 extends Fragment {
     Button btUpload;
     FirebaseDatabase database;
     DatabaseReference donaRef;
+    DatabaseReference allRef;
     Uri filePath;
     ImageView dona_image;
 
@@ -64,6 +65,7 @@ public class tab_4 extends Fragment {
 
         // 2. CRUD 작업의 기준이 되는 노드를 레퍼런스로 가져온다.
         donaRef = database.getReference("donation");
+        allRef = database.getReference("all");
 
         btn_dona= (Button)rootview.findViewById(R.id.btn_dona);
         btUpload = (Button) rootview.findViewById(R.id.bt_upload);
@@ -164,13 +166,28 @@ public class tab_4 extends Fragment {
                             postValues.put("startDate", start);
                             postValues.put("dueDate", due);
                             postValues.put("targetAmount", target);
-                            postValues.put("curAmount", "5000000");
+                            postValues.put("curAmount", "0");
                             postValues.put("file", filename);
                             postValues.put("email", email);
 
 
                             DatabaseReference keyRef = donaRef.child(key);
                             keyRef.setValue(postValues);
+
+                            //all
+                            String key3 = allRef.push().getKey();
+                            Map<String, String > postValues3 = new HashMap<>();
+                            postValues3.put("type", "donation");
+                            postValues.put("title", title);
+                            postValues.put("content", content);
+                            postValues.put("startDate", start);
+                            postValues.put("dueDate", due);
+                            postValues.put("targetAmount", target);
+                            postValues.put("curAmount", "0");
+                            postValues.put("file", filename);
+                            postValues.put("email", email);
+                            DatabaseReference keyRef3 = allRef.child(key3);
+                            keyRef3.setValue(postValues3);
 
                             //myRef.push().setValue(filename);
 

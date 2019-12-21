@@ -64,6 +64,7 @@ public class tab_1 extends Fragment {
 
     FirebaseDatabase database;
     DatabaseReference catRef;
+    DatabaseReference allRef;
     DatabaseReference locationRef;
 
     Geocoder geocoder;
@@ -75,6 +76,7 @@ public class tab_1 extends Fragment {
         //파베
         database = FirebaseDatabase.getInstance();
         catRef = database.getReference("cat");
+        allRef = database.getReference("all");
         locationRef = database.getReference("location");
 
         //cat_Title= (EditText)rootview.findViewById(R.id.cat_title);
@@ -206,6 +208,7 @@ public class tab_1 extends Fragment {
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             progressDialog.dismiss(); //업로드 진행 Dialog 상자 닫기
 
+                            //cat
                             String key = catRef.push().getKey();
                             Map<String, String > postValues = new HashMap<>();
                             //postValues.put("title", cattitle);
@@ -218,6 +221,7 @@ public class tab_1 extends Fragment {
                             DatabaseReference keyRef = catRef.child(key);
                             keyRef.setValue(postValues);
 
+                            //location
                             String key2 = locationRef.push().getKey();
                             Map<String, String > postValues2 = new HashMap<>();
                             //postValues.put("title", cattitle);
@@ -227,6 +231,19 @@ public class tab_1 extends Fragment {
 
                             DatabaseReference keyRef2 = locationRef.child(key2);
                             keyRef2.setValue(postValues2);
+
+                            //all
+                            String key3 = allRef.push().getKey();
+                            Map<String, String > postValues3 = new HashMap<>();
+                            postValues3.put("type", "cat");
+                            postValues3.put("content", catcontext);
+                            postValues3.put("file", filename);
+                            postValues3.put("info", catinform);
+                            postValues3.put("date", datenow);
+                            postValues3.put("email", email);
+
+                            DatabaseReference keyRef3 = allRef.child(key3);
+                            keyRef3.setValue(postValues3);
 
                             //myRef.push().setValue(filename);
                             Toast.makeText(getActivity().getApplicationContext(), "업로드 완료!", Toast.LENGTH_SHORT).show();

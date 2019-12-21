@@ -64,6 +64,7 @@ public class tab_2 extends Fragment {
     FirebaseDatabase database;
     DatabaseReference feedRef;
     DatabaseReference locationRef;
+    DatabaseReference allRef;
 
     Geocoder geocoder;
     @Override
@@ -74,6 +75,7 @@ public class tab_2 extends Fragment {
         database = FirebaseDatabase.getInstance();
         feedRef = database.getReference("feed");
         locationRef = database.getReference("location");
+        allRef = database.getReference("all");
 
         feed_Content = (EditText)rootview.findViewById(R.id.feed_context);
         feed_info = (EditText)rootview.findViewById(R.id.feed_info);
@@ -217,6 +219,18 @@ public class tab_2 extends Fragment {
 
                             DatabaseReference keyRef2 = locationRef.child(key2);
                             keyRef2.setValue(postValues2);
+
+                            //all
+                            String key3 = allRef.push().getKey();
+                            Map<String, String > postValues3 = new HashMap<>();
+                            postValues3.put("type", "feed");
+                            postValues3.put("content", catcontext);
+                            postValues3.put("file", filename);
+                            postValues3.put("info", feedinform);
+                            postValues3.put("datenow", datenow);
+                            postValues3.put("email", email);
+                            DatabaseReference keyRef3 = allRef.child(key3);
+                            keyRef3.setValue(postValues3);
 
                             //myRef.push().setValue(filename);
                             Toast.makeText(getActivity().getApplicationContext(), "업로드 완료!", Toast.LENGTH_SHORT).show();

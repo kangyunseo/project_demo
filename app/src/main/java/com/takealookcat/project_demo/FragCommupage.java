@@ -41,8 +41,6 @@ public class FragCommupage extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
     }
 
     @Override
@@ -58,12 +56,12 @@ public class FragCommupage extends Fragment {
 
         // 3. 레퍼런스 기준으로 데이터베이스에 쿼리를 날리는데, 자동으로 쿼리가 된다.
         //    ( * 파이어 베이스가
-  //      catRef.addValueEventListener(postListener);
+        //      catRef.addValueEventListener(postListener);
 
         // 4. 리스트뷰에 목록 세팅
-       // listView = (ListView)rootview.findViewById(R.id.listView);
-//        adapter = new CommupageListAdapter(commupage_list, getContext());
-  //      listView.setAdapter(adapter);
+        // listView = (ListView)rootview.findViewById(R.id.listView);
+        // adapter = new CommupageListAdapter(commupage_list, getContext());
+        // listView.setAdapter(adapter);
 
         // Inflate the layout for this fragment
 
@@ -95,7 +93,6 @@ public class FragCommupage extends Fragment {
                                 fragTransaction.replace(R.id.container2, fragCommupageBoard);
                                 fragTransaction.addToBackStack(null);
                                 fragTransaction.commit();
-
                                 break;
                             case R.id.cat:
                                 // 프래그먼트

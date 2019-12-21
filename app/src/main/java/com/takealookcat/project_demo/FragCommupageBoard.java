@@ -18,8 +18,6 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class FragCommupageBoard extends Fragment {
-
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
