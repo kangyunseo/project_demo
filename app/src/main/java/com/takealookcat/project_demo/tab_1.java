@@ -151,8 +151,9 @@ public class tab_1 extends Fragment {
 
             try {
                 //Uri 파일을 Bitmap으로 만들어서 ImageView에 집어 넣는다.
+
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), filePath);
-                btChoose.setImageBitmap(rotateImage(bitmap,90));
+                btChoose.setImageBitmap(rotateImage(bitmap,getOrientationOfImage(filename)));
                 //ivPreview.setImageBitmap(rotateImage(bitmap,90));
 
             } catch (IOException e) {
@@ -170,6 +171,34 @@ public class tab_1 extends Fragment {
         // 이미지와 Matrix 를 셋팅해서 Bitmap 객체 생성
         return Bitmap.createBitmap(src, 0, 0, src.getWidth(),
                 src.getHeight(), matrix, true);
+    }
+
+    public int getOrientationOfImage(String filepath) {
+        ExifInterface exif = null;
+
+        try {
+            exif = new ExifInterface(filepath);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return -1;
+        }
+
+        int orientation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, -1);
+
+        if (orientation != -1) {
+            switch (orientation) {
+                case ExifInterface.ORIENTATION_ROTATE_90:
+                    return 90;
+
+                case ExifInterface.ORIENTATION_ROTATE_180:
+                    return 180;
+
+                case ExifInterface.ORIENTATION_ROTATE_270:
+                    return 270;
+            }
+        }
+
+        return 0;
     }
 
     /* exif*/
