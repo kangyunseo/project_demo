@@ -99,7 +99,6 @@ public class AllItemListAdapter extends BaseAdapter{
             storageReference = firebaseStorage.child("feed/" + all.file);
         }
 
-        Toast.makeText(context, all.type, Toast.LENGTH_SHORT).show();
         String useremail = all.email;
         StorageReference storageReference2 = firebaseStorage.child("user/"+useremail);
 
