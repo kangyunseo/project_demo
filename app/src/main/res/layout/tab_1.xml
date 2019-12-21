@@ -23,21 +23,6 @@
             android:scaleType="centerInside"
             android:src="@drawable/img_add_photo" />
 
-        <EditText
-            android:id="@+id/cat_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:hint="제목"
-            android:inputType="textPersonName"
-            android:paddingLeft="24dp"
-            android:paddingTop="12dp"
-            android:paddingRight="24dp"
-            android:paddingBottom="12dp"
-            android:textColor="@color/mainTextBlack"
-            android:textColorHint="@color/thirdTextGray"
-            android:textSize="18sp" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -65,7 +50,15 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/firstBorderSilver"
-            android:orientation="horizontal"></LinearLayout>
+            android:orientation="horizontal">
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/ivPreview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="@android:color/transparent" />
 
         <EditText
             android:id="@+id/cat_context"
@@ -89,6 +82,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="1dp"
+            android:layout_marginBottom="24dp"
             android:background="@color/firstBorderSilver"
             android:orientation="horizontal">
 
@@ -96,69 +90,111 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="20dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal|center_vertical"
             android:orientation="horizontal"
+            android:paddingLeft="24dp"
+            android:paddingRight="24dp"
             android:weightSum="10">
 
             <TextView
                 android:id="@+id/pp"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:gravity="center|left"
-                android:text="Photo Date" />
+                android:text="촬영일 - "
+                android:textColor="@color/secondTextGray"
+                android:textSize="12sp"
+                android:textStyle="italic" />
 
             <TextView
                 android:id="@+id/exif"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="7"
-                android:gravity="center|left" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="알 수 없음"
+                android:textColor="@color/secondTextGray"
+                android:textColorHint="@color/secondTextGray"
+                android:textSize="12sp"
+                android:textStyle="italic" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="20dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal|center_vertical"
             android:orientation="horizontal"
-            android:weightSum="10">
+            android:paddingLeft="24dp"
+            android:paddingRight="24dp">
 
             <TextView
-                android:id="@+id/p"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="3"
-                android:gravity="center|left"
-                android:text="Photo location" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="촬영위치 - "
+                android:textColor="@color/secondTextGray"
+                android:textSize="12sp"
+                android:textStyle="italic" />
 
             <TextView
                 android:id="@+id/latitude"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center|left" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="위도"
+                android:textColor="@color/secondTextGray"
+                android:textColorHint="@color/secondTextGray"
+                android:textSize="12sp"
+                android:textStyle="italic" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=", "
+                android:textColor="@color/secondTextGray"
+                android:textSize="12sp"
+                android:textStyle="italic" />
 
             <TextView
                 android:id="@+id/longitude"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="6"
-                android:gravity="center|left" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="경도 알 수 없음"
+                android:textColor="@color/secondTextGray"
+                android:textColorHint="@color/secondTextGray"
+                android:textSize="12sp"
+                android:textStyle="italic" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal|center_vertical"
             android:orientation="horizontal"
+            android:paddingLeft="24dp"
+            android:paddingRight="24dp"
             android:weightSum="10">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center|left"
+                android:text="게시일 - "
+                android:textColor="@color/secondTextGray"
+                android:textSize="12sp"
+                android:textStyle="italic" />
 
             <EditText
                 android:id="@+id/date_now"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="7"
-                android:inputType="textPersonName" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:gravity="center_horizontal|center_vertical"
+                android:hint="알 수 없음"
+                android:inputType="textPersonName"
+                android:textColor="@color/secondTextGray"
+                android:textColorHint="@color/secondTextGray"
+                android:textSize="12sp"
+                android:textStyle="italic" />
 
         </LinearLayout>
 
@@ -167,6 +203,7 @@
             android:layout_width="150dp"
             android:layout_height="45dp"
             android:layout_gravity="center"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/button_backgound"
             android:inputType="textMultiLine"

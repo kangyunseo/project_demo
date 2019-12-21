@@ -24,6 +24,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -53,9 +54,11 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class tab_1 extends Fragment {
 
-    //ImageView ivPreview;
+    ImageView ivPreview;
+
     ImageButton btChoose;
     ImageButton btUpload;
+
     Uri filePath;
     EditText cat_info, cat_Content, date_now;
     TextView latitude;
@@ -82,14 +85,16 @@ public class tab_1 extends Fragment {
         cat_info = (EditText)rootview.findViewById(R.id.cat_info);
         date_now = (EditText)rootview.findViewById(R.id.date_now);
         Date currentTime = Calendar.getInstance().getTime();
-        String date_text = new SimpleDateFormat("yyyy년 MM월 dd일 EE요일", Locale.getDefault()).format(currentTime);
+        String date_text = new SimpleDateFormat("yyyy-MM-dd, EE", Locale.getDefault()).format(currentTime);
         date_now.setText(date_text);
 
         exiftext = (TextView) rootview.findViewById(R.id.exif);
         //업로드
         btChoose = (ImageButton) rootview.findViewById(R.id.bt_choose);
         btUpload = (ImageButton) rootview.findViewById(R.id.bt_upload);
-        //ivPreview = (ImageView) rootview.findViewById(R.id.iv_preview);
+
+        // 미리보기
+        ivPreview = (ImageView) rootview.findViewById(R.id.ivPreview);
 
         //exif
         latitude = (TextView) rootview.findViewById(R.id.latitude);
@@ -146,7 +151,8 @@ public class tab_1 extends Fragment {
                 //Uri 파일을 Bitmap으로 만들어서 ImageView에 집어 넣는다.
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), filePath);
                 //btChoose.setImageBitmap(bitmap);
-                btChoose.setImageBitmap(rotateImage(bitmap,90));
+                //ivPreview.setImageBitmap(rotateImage(bitmap,90));
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
