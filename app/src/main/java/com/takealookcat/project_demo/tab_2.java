@@ -81,7 +81,7 @@ public class tab_2 extends Fragment {
         feed_info = (EditText)rootview.findViewById(R.id.feed_info);
         date_now = (EditText)rootview.findViewById(R.id.date_now2);
         Date currentTime = Calendar.getInstance().getTime();
-        String date_text = new SimpleDateFormat("yyyy년 MM월 dd일 EE요일", Locale.getDefault()).format(currentTime);
+        String date_text = new SimpleDateFormat("yyyy-MM-dd, EE", Locale.getDefault()).format(currentTime);
         date_now.setText(date_text);
         latitude = (TextView) rootview.findViewById(R.id.latitude2);
         longitude = (TextView) rootview.findViewById(R.id.longitude2);

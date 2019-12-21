@@ -92,10 +92,7 @@ public class menu_3 extends Fragment {
                         TextView toolbarTitle;
                         ActionBar actionBar;
                         switch (item.getItemId()){
-                            case R.id.notice:
 
-
-                                break;
                             case R.id.cat:
                                 // 프래그먼트
                                 tab_1 tab_1 = new tab_1();
@@ -122,12 +119,6 @@ public class menu_3 extends Fragment {
 
                                 // 선택된 게시판 타이틀 변경
                                 selectedBoardTitle.setText("급식소");
-                                selectedBoardTitle.setTextColor(getResources().getColor(R.color.mainTextBlack));
-                                break;
-                            case R.id.talk:
-
-                                // 선택된 게시판 타이틀 변경
-                                selectedBoardTitle.setText("대화");
                                 selectedBoardTitle.setTextColor(getResources().getColor(R.color.mainTextBlack));
                                 break;
                             case R.id.dona:
