@@ -23,6 +23,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,6 +52,7 @@ import static android.app.Activity.RESULT_OK;
 import static android.content.Context.MODE_PRIVATE;
 
 public class tab_2 extends Fragment {
+    ImageView ivPreview;
 
     //ImageView ivPreview;
     ImageButton btChoose;
@@ -142,6 +144,7 @@ public class tab_2 extends Fragment {
                 //Uri 파일을 Bitmap으로 만들어서 ImageView에 집어 넣는다.
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), filePath);
                 btChoose.setImageBitmap(rotateImage(bitmap,90));
+                //ivPreview.setImageBitmap(rotateImage(bitmap,90));
             } catch (IOException e) {
                 e.printStackTrace();
             }

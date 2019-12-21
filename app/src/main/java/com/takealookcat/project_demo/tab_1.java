@@ -152,7 +152,7 @@ public class tab_1 extends Fragment {
             try {
                 //Uri 파일을 Bitmap으로 만들어서 ImageView에 집어 넣는다.
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), filePath);
-                //btChoose.setImageBitmap(bitmap);
+                btChoose.setImageBitmap(rotateImage(bitmap,90));
                 //ivPreview.setImageBitmap(rotateImage(bitmap,90));
 
             } catch (IOException e) {
