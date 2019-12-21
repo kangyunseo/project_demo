@@ -42,13 +42,13 @@
             android:hint="내용"
             android:inputType="textPersonName" />
 
-        <Button
-            android:id="@+id/bt_upload3"
-            android:layout_width="95dp"
-            android:layout_height="42dp"
-            android:layout_gravity="center"
-            android:background="@color/thema_1"
-            android:text="등록하기" />
+        <ImageButton
+            android:id="@+id/btn_upload3"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@color/thema_0"
+            android:src="@drawable/ic_icon_upload"
+            />
 
         <TextView
             android:id="@+id/exif3"
