@@ -94,8 +94,8 @@ public class FeedListAdapter extends BaseAdapter {
         // 아이템 내 각 위젯에 데이터 반영
         //iconImageView.setImageDrawable(listViewItem.getIcon());
 
-        titleTextView.setText(feed.info);
-        descTextView.setText(feed.content);
+        titleTextView.setText(feed.content);
+        descTextView.setText(feed.info);
 
         return convertView;
     }
