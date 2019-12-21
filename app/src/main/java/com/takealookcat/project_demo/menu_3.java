@@ -131,7 +131,14 @@ public class menu_3 extends Fragment {
                                 selectedBoardTitle.setTextColor(getResources().getColor(R.color.mainTextBlack));
                                 break;
                             case R.id.dona:
+                                tab_4 tab_4 = new tab_4();
 
+                                fragManager = getFragmentManager();
+                                fragTransaction = fragManager.beginTransaction();
+                                fragTransaction.replace(R.id.container, tab_4);
+                                fragTransaction.addToBackStack(null);
+                                fragTransaction.commit();
+                                
                                 // 선택된 게시판 타이틀 변경
                                 selectedBoardTitle.setText("기부");
                                 selectedBoardTitle.setTextColor(getResources().getColor(R.color.mainTextBlack));

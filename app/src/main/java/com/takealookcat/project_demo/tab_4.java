@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -48,13 +50,12 @@ public class tab_4 extends Fragment {
     EditText startDate, dueDate;
     EditText targetAmount;
 
-    Button btn_dona;
-    Button btUpload;
+    ImageButton btChoose;
+    ImageButton btUpload;
     FirebaseDatabase database;
     DatabaseReference donaRef;
     DatabaseReference allRef;
     Uri filePath;
-    ImageView dona_image;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
@@ -67,9 +68,8 @@ public class tab_4 extends Fragment {
         donaRef = database.getReference("donation");
         allRef = database.getReference("all");
 
-        btn_dona= (Button)rootview.findViewById(R.id.btn_dona);
-        btUpload = (Button) rootview.findViewById(R.id.bt_upload);
-        dona_image = (ImageView) rootview.findViewById(R.id.dona_image);
+        btChoose= ( ImageButton)rootview.findViewById(R.id.btn_dona);
+        btUpload = ( ImageButton) rootview.findViewById(R.id.bt_upload4);
 
         editTitle = (EditText)rootview.findViewById(R.id.editTitle);
         editCcontent = (EditText)rootview.findViewById(R.id.editContent);
@@ -78,7 +78,7 @@ public class tab_4 extends Fragment {
         targetAmount = (EditText)rootview.findViewById(R.id.targetAmount);
 
 
-        btn_dona.setOnClickListener(new View.OnClickListener() {
+        btChoose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //이미지를 선택
@@ -111,11 +111,22 @@ public class tab_4 extends Fragment {
             try {
                 //Uri 파일을 Bitmap으로 만들어서 ImageView에 집어 넣는다.
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), filePath);
-                dona_image.setImageBitmap(bitmap);
+                btChoose.setImageBitmap(rotateImage(bitmap,90));
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
+    }
+
+    public Bitmap rotateImage(Bitmap src, float degree) {
+
+        // Matrix 객체 생성
+        Matrix matrix = new Matrix();
+        // 회전 각도 셋팅
+        matrix.postRotate(degree);
+        // 이미지와 Matrix 를 셋팅해서 Bitmap 객체 생성
+        return Bitmap.createBitmap(src, 0, 0, src.getWidth(),
+                src.getHeight(), matrix, true);
     }
 
     private void uploadFile() {

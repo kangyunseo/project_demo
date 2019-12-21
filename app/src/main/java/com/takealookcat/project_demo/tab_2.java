@@ -216,6 +216,7 @@ public class tab_2 extends Fragment {
                             postValues2.put("latitude", lati);
                             postValues2.put("longitude", longi);
                             postValues2.put("category", "급식소");
+                            postValues2.put("file", filename);
 
                             DatabaseReference keyRef2 = locationRef.child(key2);
                             keyRef2.setValue(postValues2);
