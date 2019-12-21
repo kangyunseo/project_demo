@@ -49,9 +49,7 @@ public class FragCommupageBoard extends Fragment {
                         TextView toolbarTitle;
                         ActionBar actionBar;
                         switch (item.getItemId()){
-                            case R.id.notice:
-                                //Toast.makeText(getApplication(),"메뉴1",Toast.LENGTH_SHORT).show();
-                                break;
+
                             case R.id.cat:
                                 // 프래그먼트
                                 menu_1_1 menu_1_1 = new menu_1_1(); // 프래그먼트 생성
@@ -88,7 +86,6 @@ public class FragCommupageBoard extends Fragment {
                                 actionBar.setDisplayHomeAsUpEnabled(true); // 뒤로가기 버튼 생성
                                 actionBar.setHomeAsUpIndicator(R.drawable.ic_back); // 버튼 모양 변경(뒤로)
                                 break;
-                            case R.id.talk:
                             default:
                                 break;
                         }
