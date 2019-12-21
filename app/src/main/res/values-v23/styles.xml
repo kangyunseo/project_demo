@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/thema_1</item>
+        <item name="colorPrimaryDark">@color/thema_1</item>
+        <item name="colorAccent">@color/thema_accent_0</item>
+
+        <item name="android:actionButtonStyle">@style/myActionButtonStyle</item>
+        <item name="actionButtonStyle">@style/myActionButtonStyle</item>
+
+        <!-- color high light -->
+        <item name="colorControlHighlight">@color/thema_accent_0</item>
+
+        <!--Status Bar 글자색깔-->
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    <style name="myActionButtonStyle" parent="Widget.AppCompat.ActionButton">
+        <item name="android:width">48dp</item>
+    </style>
+</resources>
