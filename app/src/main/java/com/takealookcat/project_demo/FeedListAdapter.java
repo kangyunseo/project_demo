@@ -1,6 +1,7 @@
 package com.takealookcat.project_demo;
 
 import android.content.Context;
+import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class FeedListAdapter extends BaseAdapter {
     // Adapter에 추가된 데이터를 저장하기 위한 ArrayList
@@ -69,12 +72,25 @@ public class FeedListAdapter extends BaseAdapter {
         final ImageView iconImageView = (ImageView) convertView.findViewById(R.id.imageView1) ;
         TextView titleTextView = (TextView) convertView.findViewById(R.id.textView1) ;
         TextView descTextView = (TextView) convertView.findViewById(R.id.textView2) ;
+        TextView email = (TextView) convertView.findViewById(R.id.textView3);
+        final CircleImageView profile = (CircleImageView) convertView.findViewById(R.id.imageView2);
+//라운딩입니다.
+        GradientDrawable drawable=
+                (GradientDrawable)  context.getResources().getDrawable(R.drawable.background_thema);
+        iconImageView.setBackground(drawable);
+        iconImageView.setClipToOutline(true);
+
+        profile.setBackground(drawable);
+        profile.setClipToOutline(true);
+
 
         // Data Set(listViewItemList)에서 position에 위치한 데이터 참조 획득
         FeedItem feed = datas.get(position);
 
         StorageReference firebaseStorage = FirebaseStorage.getInstance().getReference();
         StorageReference storageReference = firebaseStorage.child("feed/"+feed.file);
+        String useremail = feed.email;
+        StorageReference storageReference2 = firebaseStorage.child("user/"+useremail);
 
         storageReference.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
             @Override
@@ -91,12 +107,31 @@ public class FeedListAdapter extends BaseAdapter {
             }
         });
 
+        storageReference2.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+                if (task.isSuccessful()) {
+                    // Glide 이용하여 이미지뷰에 로딩
+
+                    Glide.with(context)
+                            .load(task.getResult())
+                            .into(profile);
+
+
+                    //Glide.with(context).load(task.getResult()).apply(new RequestOptions().circleCrop()).into(iconImageView);
+                } else {
+                    // URL을 가져오지 못하면 토스트 메세지
+                    Toast.makeText(context, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
         // 아이템 내 각 위젯에 데이터 반영
         //iconImageView.setImageDrawable(listViewItem.getIcon());
 
-        titleTextView.setText(feed.info);
-        descTextView.setText(feed.content);
-
+        titleTextView.setText(feed.content);
+        descTextView.setText(feed.info);
+        email.setText(feed.email);
         return convertView;
     }
 
