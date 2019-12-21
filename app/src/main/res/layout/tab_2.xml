@@ -97,12 +97,14 @@
 
         <ImageButton
             android:id="@+id/bt_upload2"
-            android:layout_width="match_parent"
+            android:layout_width="150dp"
             android:layout_height="45dp"
             android:layout_gravity="center"
             android:layout_marginBottom="10dp"
-            android:background="@color/thema_0"
+            android:background="@drawable/button_backgound"
             android:inputType="textMultiLine"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
             android:src="@drawable/ic_icon_upload" />
 
     </LinearLayout>
