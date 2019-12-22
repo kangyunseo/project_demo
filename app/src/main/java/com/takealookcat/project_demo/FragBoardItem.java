@@ -64,6 +64,8 @@ public class FragBoardItem extends Fragment {
 
 
         final ImageView iconImageView = (ImageView) v.findViewById(R.id.contentsImg) ;
+        iconImageView.setAdjustViewBounds(true);
+        iconImageView.requestLayout();
 
         Bundle extra = this.getArguments();
         if(extra != null) {

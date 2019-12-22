@@ -119,24 +119,25 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
         android:background="@color/firstBorderSilver"
-        android:orientation="horizontal">
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/contentsImg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitCenter"
+            app:srcCompat="@android:color/transparent" />
+
+        <TextView
+            android:id="@+id/contentsText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/mainTextBlack"
+            android:textSize="14sp" />
 
     </LinearLayout>
-
-    <ImageView
-        android:id="@+id/contentsImg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@color/baseProfileGray" />
-
-    <TextView
-        android:id="@+id/contentsText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@color/mainTextBlack"
-        android:textSize="14sp" />
 
 </LinearLayout>
