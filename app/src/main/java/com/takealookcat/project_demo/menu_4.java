@@ -28,6 +28,11 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.skt.Tmap.TMapData;
 import com.skt.Tmap.TMapGpsManager;
 import com.skt.Tmap.TMapMarkerItem;
@@ -37,6 +42,7 @@ import com.skt.Tmap.TMapPolyLine;
 import com.skt.Tmap.TMapView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class menu_4 extends Fragment implements  View.OnClickListener {
     private Context mContext = null;
@@ -62,7 +68,11 @@ public class menu_4 extends Fragment implements  View.OnClickListener {
 
     private TMapPoint tMapPointStart = new TMapPoint(37.570841, 126.985302); // SKT타워(출발지)
     private TMapPoint tMapPointEnd = new TMapPoint(37.551135, 126.988205); // N서울타워(목적지)
-    
+    List<catfeedItem> catfeedItems = new ArrayList<>();
+    FirebaseDatabase database;
+    DatabaseReference catRef;
+    DatabaseReference feedRef;
+
     final LocationListener networkLocationListener = new LocationListener() {
         @Override
         public void onLocationChanged(Location location) {
@@ -88,6 +98,17 @@ public class menu_4 extends Fragment implements  View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup v = (ViewGroup) inflater.inflate(R.layout.menu_4,container,false);
 
+        // 1. 파이어베이스 연결 - DB Connection
+        database = FirebaseDatabase.getInstance();
+
+        // 2. CRUD 작업의 기준이 되는 노드를 레퍼런스로 가져온다.
+        catRef = database.getReference("cat");
+        feedRef = database.getReference("feed");
+
+        // 3. 레퍼런스 기준으로 데이터베이스에 쿼리를 날리는데, 자동으로 쿼리가 된다.
+        //    ( * 파이어 베이스가
+        catRef.addValueEventListener(postListener);
+        feedRef.addValueEventListener(postListener2);
 
         mContext = this.getContext();
 
@@ -102,8 +123,8 @@ public class menu_4 extends Fragment implements  View.OnClickListener {
         linearLayout.addView(tmapview);
         tmapview.setSKTMapApiKey(mApiKey);
 
-        addPoint();
-        showMarkerPoint();
+        //addPoint();
+        //showMarkerPoint();
 
         /* 현재 보는 방향*/
         tmapview.setCompassMode(true);
@@ -174,12 +195,14 @@ public class menu_4 extends Fragment implements  View.OnClickListener {
         return v;
     }
     //핀 찍을 data
+    /*
     public void addPoint() {
         // 강남 //
         //m_mapPoint.add(new MapPoint("강남", 37.510350, 127.066847));
         //칠보고등학교 //
         m_mapPoint.add(new MapPoint("칠보고등학교",  37.274594, 126.945092));
     }
+     */
     //마커 (핀) 찍는함수
     public void showMarkerPoint() {
         for(int i=0; i<m_mapPoint.size();i++) {
@@ -336,6 +359,50 @@ public class menu_4 extends Fragment implements  View.OnClickListener {
         }).start();
         Toast.makeText(mContext,"길찾기 완료" ,Toast.LENGTH_SHORT).show();
     }
+    ValueEventListener postListener = new ValueEventListener() {
+
+        @Override
+        public void onDataChange(DataSnapshot dataSnapshot) {
+            m_mapPoint.clear();
+            // 위에 선언한 저장소인 datas를 초기화하고
+            // donation 레퍼런스의 스냅샷을 가져와서 레퍼런스의 자식노드를 반복문을 통해 하나씩 꺼내서 처리.
+            for( DataSnapshot snapshot : dataSnapshot.getChildren() ) {
+                String key  = snapshot.getKey();
+                catfeedItem item = snapshot.getValue(catfeedItem.class); // 컨버팅되서 Bbs로.......
+                //System.out.println("테스트"+ item.longitude);
+                if(item.longitude != null)
+                    m_mapPoint.add(new MapPoint(item.info,  Double.parseDouble(item.longitude), Double.parseDouble(item.latitude)));
+            }
+        }
+
+        @Override
+        public void onCancelled(DatabaseError databaseError) {
+            // Getting Post failed, log a message
+            Log.w("MainActivity", "loadPost:onCancelled", databaseError.toException());
+            // ...
+        }
+    };
+    ValueEventListener postListener2 = new ValueEventListener() {
+        @Override
+        public void onDataChange(DataSnapshot dataSnapshot) {
+            // 위에 선언한 저장소인 datas를 초기화하고
+            // donation 레퍼런스의 스냅샷을 가져와서 레퍼런스의 자식노드를 반복문을 통해 하나씩 꺼내서 처리.
+            for( DataSnapshot snapshot : dataSnapshot.getChildren() ) {
+                String key  = snapshot.getKey();
+                catfeedItem item = snapshot.getValue(catfeedItem.class); // 컨버팅되서 Bbs로.......
+                if(item.longitude != null)
+                    m_mapPoint.add(new MapPoint(item.info,  Double.parseDouble(item.longitude), Double.parseDouble(item.latitude)));
+            }
+            showMarkerPoint();
+        }
+
+        @Override
+        public void onCancelled(DatabaseError databaseError) {
+            // Getting Post failed, log a message
+            Log.w("MainActivity", "loadPost:onCancelled", databaseError.toException());
+            // ...
+        }
+    };
 
 
 }
