@@ -28,7 +28,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FragCommupage extends Fragment {
-
     ListView listView;  // 리스트 뷰
     AllItemSimpleAdapter adapter; // 커뮤니티페이지 홈, 게시판 리스트 어댑터
     List<AllItem> all_list = new ArrayList<>();

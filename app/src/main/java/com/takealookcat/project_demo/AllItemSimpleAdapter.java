@@ -81,6 +81,11 @@ public class AllItemSimpleAdapter extends BaseAdapter {
             basetextTitle.setText(item.info);
             text_cate.setText("급식소");
         }
+        else if(item.type.equals("donation")){
+            TextView basetextTitle = (TextView) convertView.findViewById(R.id.textView3) ;
+            basetextTitle.setText(item.title);
+            text_cate.setText("기부");
+        }
         email.setText(item.email);
         return convertView;
     }
