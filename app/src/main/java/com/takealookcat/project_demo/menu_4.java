@@ -66,8 +66,8 @@ public class menu_4 extends Fragment implements  View.OnClickListener {
     private LinearLayout bt_find;
     private LinearLayout cat_position;
     private LinearLayout feed_position;
-    private boolean cat_p = false;
-    private boolean feed_p = false;
+    private boolean cat_p = true;
+    private boolean feed_p = true;
     //private Button bt_fac;
     //private EditText bt_fac_option;
 
@@ -174,6 +174,34 @@ public class menu_4 extends Fragment implements  View.OnClickListener {
         /* 화면 중심을 단말의 현재위치로 이동*/
         tmapview.setTrackingMode(true);
         tmapview.setSightVisible(true);
+
+        cat_position.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (cat_p) {
+                    showMarkerPoint();
+                    cat_p = false;
+                }
+                else {
+                    tmapview.removeAllMarkerItem();
+                    cat_p = true;
+                }
+            }
+        });
+
+        feed_position.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (feed_p) {
+                    showMarkerPoint2();
+                    feed_p = false;
+                }
+                else {
+                    tmapview.removeAllMarkerItem();
+                    feed_p = true;
+                }
+            }
+        });
 
         //풍선 클릭시
         tmapview.setOnCalloutRightButtonClickListener(new TMapView.OnCalloutRightButtonClickCallback(){
@@ -403,39 +431,19 @@ public class menu_4 extends Fragment implements  View.OnClickListener {
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
 
-                if(!cat_p){
-                    cat_position.setOnClickListener(new View.OnClickListener(){
-                        @Override
-                        public void onClick(View view) {
-                            cat_p = true;
-                        }
-                    });
-                } else {
-                    cat_position.setOnClickListener(new View.OnClickListener(){
-                        @Override
-                        public void onClick(View view) {
-                            cat_p = false;
-                        }
-                    });
-                }
+                     m_mapPoint.clear();
+                    // 위에 선언한 저장소인 datas를 초기화하고
+                    // donation 레퍼런스의 스냅샷을 가져와서 레퍼런스의 자식노드를 반복문을 통해 하나씩 꺼내서 처리.
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        String key = snapshot.getKey();
+                        catfeedItem item = snapshot.getValue(catfeedItem.class); // 컨버팅되서 Bbs로.......
+                        //System.out.println("테스트"+ item.longitude);
+                        if (item.longitude != null)
+                            m_mapPoint.add(new MapPoint(item.info, Double.parseDouble(item.longitude), Double.parseDouble(item.latitude)));
+                    }
+                    //showMarkerPoint();
 
-            if(cat_p) {
-                m_mapPoint.clear();
-                // 위에 선언한 저장소인 datas를 초기화하고
-                // donation 레퍼런스의 스냅샷을 가져와서 레퍼런스의 자식노드를 반복문을 통해 하나씩 꺼내서 처리.
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    String key = snapshot.getKey();
-                    catfeedItem item = snapshot.getValue(catfeedItem.class); // 컨버팅되서 Bbs로.......
-                    //System.out.println("테스트"+ item.longitude);
-                    if (item.longitude != null)
-                        m_mapPoint.add(new MapPoint(item.info, Double.parseDouble(item.longitude), Double.parseDouble(item.latitude)));
-                }
-                showMarkerPoint();
-            } else {
-                m_mapPoint.clear();
-            }
         }
-
         @Override
         public void onCancelled(DatabaseError databaseError) {
             // Getting Post failed, log a message
@@ -456,7 +464,7 @@ public class menu_4 extends Fragment implements  View.OnClickListener {
                     if(item.longitude != null)
                         m_mapPoint2.add(new MapPoint(item.info,  Double.parseDouble(item.longitude), Double.parseDouble(item.latitude)));
                 }
-                showMarkerPoint2();
+                //showMarkerPoint2();
         }
 
         @Override
