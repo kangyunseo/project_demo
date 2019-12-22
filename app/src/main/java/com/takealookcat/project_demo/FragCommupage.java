@@ -30,11 +30,11 @@ import java.util.List;
 public class FragCommupage extends Fragment {
 
     ListView listView;  // 리스트 뷰
-    CommupageListAdapter adapter; // 커뮤니티페이지 홈, 게시판 리스트 어댑터
-    List<CommupageItem> commupage_list = new ArrayList<>();
+    AllItemSimpleAdapter adapter; // 커뮤니티페이지 홈, 게시판 리스트 어댑터
+    List<AllItem> all_list = new ArrayList<>();
 
     FirebaseDatabase database;
-    DatabaseReference catRef;
+    DatabaseReference allRef;
 
     ImageView selectboardIcon; // 게시판 메뉴 더보기 아이콘
 
@@ -52,19 +52,16 @@ public class FragCommupage extends Fragment {
         database = FirebaseDatabase.getInstance();
 
         // 2. CRUD 작업의 기준이 되는 노드를 레퍼런스로 가져온다.
-        catRef = database.getReference("cat");
+        allRef = database.getReference("all");
 
         // 3. 레퍼런스 기준으로 데이터베이스에 쿼리를 날리는데, 자동으로 쿼리가 된다.
         //    ( * 파이어 베이스가
-        //      catRef.addValueEventListener(postListener);
+        allRef.addValueEventListener(postListener);
 
         // 4. 리스트뷰에 목록 세팅
-        // listView = (ListView)rootview.findViewById(R.id.listView);
-        // adapter = new CommupageListAdapter(commupage_list, getContext());
-        // listView.setAdapter(adapter);
-
-        // Inflate the layout for this fragment
-
+        listView = (ListView)rootview.findViewById(R.id.listview);
+        adapter = new AllItemSimpleAdapter(all_list, getContext());
+        listView.setAdapter(adapter);
 
 
         selectboardIcon = (ImageView)rootview.findViewById(R.id.selectboardIcon);
@@ -151,15 +148,14 @@ public class FragCommupage extends Fragment {
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
             // 위에 선언한 저장소인 datas를 초기화하고
-            commupage_list.clear();
+            all_list.clear();
 
             // donation 레퍼런스의 스냅샷을 가져와서 레퍼런스의 자식노드를 반복문을 통해 하나씩 꺼내서 처리.
             for( DataSnapshot snapshot : dataSnapshot.getChildren() ) {
                 String key  = snapshot.getKey();
-                CommupageItem item = snapshot.getValue(CommupageItem.class); // 컨버팅되서 Bbs로........
-               // item.key = key;
-                commupage_list.add(0, item);
-
+                AllItem item = snapshot.getValue(AllItem.class); // 컨버팅되서 Bbs로........
+                item.key = key;
+                all_list.add(0, item);
             }
             adapter.notifyDataSetChanged();
         }
