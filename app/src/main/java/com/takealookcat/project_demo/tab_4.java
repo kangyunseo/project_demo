@@ -224,14 +224,14 @@ public class tab_4 extends Fragment {
                             String key3 = allRef.push().getKey();
                             Map<String, String > postValues3 = new HashMap<>();
                             postValues3.put("type", "donation");
-                            postValues.put("title", title);
-                            postValues.put("content", content);
-                            postValues.put("startDate", start);
-                            postValues.put("dueDate", due);
-                            postValues.put("targetAmount", target);
-                            postValues.put("curAmount", "0");
-                            postValues.put("file", filename);
-                            postValues.put("email", email);
+                            postValues3.put("title", title);
+                            postValues3.put("content", content);
+                            postValues3.put("startDate", start);
+                            postValues3.put("dueDate", due);
+                            postValues3.put("targetAmount", target);
+                            postValues3.put("curAmount", "0");
+                            postValues3.put("file", filename);
+                            postValues3.put("email", email);
                             DatabaseReference keyRef3 = allRef.child(key3);
                             keyRef3.setValue(postValues3);
 
