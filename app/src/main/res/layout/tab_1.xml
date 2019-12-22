@@ -15,12 +15,12 @@
         <ImageButton
             android:id="@+id/bt_choose"
             android:layout_width="match_parent"
-            android:layout_height="360dp"
+            android:layout_height="48dp"
             android:adjustViewBounds="true"
             android:background="@color/addButtonGray"
             android:paddingTop="6dp"
             android:paddingBottom="6dp"
-            android:scaleType="centerCrop"
+            android:scaleType="centerInside"
             android:src="@drawable/img_add_photo" />
 
         <LinearLayout
@@ -58,6 +58,8 @@
             android:id="@+id/ivPreview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:cropToPadding="false"
+            android:scaleType="fitCenter"
             app:srcCompat="@android:color/transparent" />
 
         <EditText
@@ -157,7 +159,7 @@
                 android:id="@+id/longitude"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="경도 알 수 없음"
+                android:hint="경도"
                 android:textColor="@color/secondTextGray"
                 android:textColorHint="@color/secondTextGray"
                 android:textSize="12sp"
