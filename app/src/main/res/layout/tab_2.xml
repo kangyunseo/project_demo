@@ -15,13 +15,13 @@
         <ImageButton
             android:id="@+id/bt_choose2"
             android:layout_width="match_parent"
-            android:layout_height="360dp"
+            android:layout_height="48dp"
             android:adjustViewBounds="true"
             android:background="@color/addButtonGray"
             android:paddingTop="6dp"
             android:paddingBottom="6dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/img_add_photo"/>
+            android:scaleType="centerInside"
+            android:src="@drawable/img_add_photo" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -35,7 +35,6 @@
             android:id="@+id/feed_info"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="4"
             android:background="@android:color/transparent"
             android:hint="급식소 이름"
             android:inputType="textPersonName"
@@ -57,6 +56,7 @@
             android:id="@+id/ivPreview2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
             app:srcCompat="@android:color/transparent" />
 
         <EditText
@@ -155,7 +155,7 @@
                 android:id="@+id/longitude2"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:hint="경도 알 수 없음"
+                android:hint="경도"
                 android:textColor="@color/secondTextGray"
                 android:textColorHint="@color/secondTextGray"
                 android:textSize="12sp"
