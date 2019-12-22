@@ -1,6 +1,7 @@
 package com.takealookcat.project_demo;
 
 import android.annotation.TargetApi;
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.ContentUris;
 import android.content.Context;
@@ -21,10 +22,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -44,26 +48,32 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import static android.app.Activity.RESULT_OK;
 import static android.content.Context.MODE_PRIVATE;
 
 public class tab_4 extends Fragment {
-
+    ImageView ivPreview4;
     EditText editTitle, editCcontent;
-    EditText startDate, dueDate;
+    TextView startDate, dueDate;
     EditText targetAmount;
-
     ImageButton btChoose;
     ImageButton btUpload;
     FirebaseDatabase database;
     DatabaseReference donaRef;
     DatabaseReference allRef;
     Uri filePath;
+    LinearLayout startDateLayout, dueDateLayout;
+
+
+    boolean startDateFlag, dueDateFlag; // 1일때 날짜 작성
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
@@ -81,10 +91,19 @@ public class tab_4 extends Fragment {
 
         editTitle = (EditText)rootview.findViewById(R.id.editTitle);
         editCcontent = (EditText)rootview.findViewById(R.id.editContent);
-        startDate = (EditText)rootview.findViewById(R.id.startDate);
-        dueDate = (EditText)rootview.findViewById(R.id.dueDate);
+        startDate = (TextView)rootview.findViewById(R.id.startDate);
+        dueDate = (TextView)rootview.findViewById(R.id.dueDate);
         targetAmount = (EditText)rootview.findViewById(R.id.targetAmount);
 
+        // 기간 레이아웃
+        startDateLayout = (LinearLayout)rootview.findViewById(R.id.startDateLayout);
+        dueDateLayout = (LinearLayout)rootview.findViewById(R.id.dueDateLayout);
+        // 미리보기
+        ivPreview4 = (ImageView) rootview.findViewById(R.id.ivPreview4);
+
+        // 3자리마다 컴마
+//        DecimalFormat myFormatter = new DecimalFormat("###,###");
+  //      String formattedStringPrice = myFormatter.format(intPrice);
 
         btChoose.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,8 +125,78 @@ public class tab_4 extends Fragment {
             }
         });
 
+        // 시작일 선택
+        startDateLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // 오늘 날짜 가져오기
+                Date currentTime = Calendar.getInstance().getTime();
+                String year_text = new SimpleDateFormat("yyyy", Locale.getDefault()).format(currentTime);
+                int todayYear = Integer.parseInt(year_text);
+                String month_text = new SimpleDateFormat("MM", Locale.getDefault()).format(currentTime);
+                int todayMonth = Integer.parseInt(month_text);
+                String day_text = new SimpleDateFormat("dd", Locale.getDefault()).format(currentTime);
+                int todayDay = Integer.parseInt(day_text);
+
+                //Toast.makeText(view.getContext(), year_text + month_text + day_text, Toast.LENGTH_SHORT).show();
+
+                // DatePickerDialog 날짜 설정 후, 열기
+                DatePickerDialog dialog = new DatePickerDialog(view.getContext(), listener, todayYear, todayMonth - 1, todayDay);
+                dialog.show();
+
+                startDateFlag = true;
+            }
+        });
+
+        // 마감일 선택
+        dueDateLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // 오늘 날짜 가져오기
+                Date currentTime = Calendar.getInstance().getTime();
+                String year_text = new SimpleDateFormat("yyyy", Locale.getDefault()).format(currentTime);
+                int todayYear = Integer.parseInt(year_text);
+                String month_text = new SimpleDateFormat("MM", Locale.getDefault()).format(currentTime);
+                int todayMonth = Integer.parseInt(month_text);
+                String day_text = new SimpleDateFormat("dd", Locale.getDefault()).format(currentTime);
+                int todayDay = Integer.parseInt(day_text);
+
+                //Toast.makeText(view.getContext(), year_text + month_text + day_text, Toast.LENGTH_SHORT).show();
+
+                // DatePickerDialog 날짜 설정 후, 열기
+                DatePickerDialog dialog = new DatePickerDialog(view.getContext(), listener, todayYear, todayMonth - 1, todayDay);
+                dialog.show();
+
+                dueDateFlag = true;
+            }
+        });
+
         return rootview;
     }
+
+    // 날짜선택 리스너
+    DatePickerDialog.OnDateSetListener listener = new DatePickerDialog.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+            //Toast.makeText(((MainActivity)getActivity()).getApplicationContext(), year + "년" + monthOfYear + "월" + dayOfMonth +"일", Toast.LENGTH_SHORT).show();
+            String selectedYear, selectedMonth, selectedDay;
+            selectedYear = String.valueOf(year);
+            selectedMonth = String.valueOf(monthOfYear);
+            selectedDay = String.valueOf(dayOfMonth);
+
+            if (startDateFlag == true) {
+                startDate.setText(selectedYear + "-" + selectedMonth + "-" + selectedDay);
+                startDateFlag = false;
+            }
+            else if (dueDateFlag == true) {
+                dueDate.setText(selectedYear + "-" + selectedMonth + "-" + selectedDay);
+                dueDateFlag = false;
+            }
+        }
+    };
+
+    //
+
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
@@ -120,7 +209,11 @@ public class tab_4 extends Fragment {
             try {
                 //Uri 파일을 Bitmap으로 만들어서 ImageView에 집어 넣는다.
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), filePath);
-                btChoose.setImageBitmap(rotateImage(bitmap,getOrientationOfImage(filename)));
+                //btChoose.setImageBitmap(rotateImage(bitmap,getOrientationOfImage(filename)));
+                // 미리보기 이미지 설정
+                ivPreview4.setAdjustViewBounds(true);
+                ivPreview4.requestLayout();
+                ivPreview4.setImageBitmap(rotateImage(bitmap,getOrientationOfImage(filename)));
             } catch (IOException e) {
                 e.printStackTrace();
             }

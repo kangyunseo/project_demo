@@ -52,9 +52,7 @@ import static android.app.Activity.RESULT_OK;
 import static android.content.Context.MODE_PRIVATE;
 
 public class tab_2 extends Fragment {
-    ImageView ivPreview;
-
-    //ImageView ivPreview;
+    ImageView ivPreview2;
     ImageButton btChoose;
     ImageButton btUpload;
     Uri filePath;
@@ -90,7 +88,8 @@ public class tab_2 extends Fragment {
         //업로드
         btChoose = (ImageButton) rootview.findViewById(R.id.bt_choose2);
         btUpload = (ImageButton) rootview.findViewById(R.id.bt_upload2);
-
+        // 미리보기
+        ivPreview2 = (ImageView) rootview.findViewById(R.id.ivPreview2);
         //exif
         exiftext = (TextView) rootview.findViewById(R.id.exif2);
         geocoder = new Geocoder(getContext());
@@ -143,13 +142,17 @@ public class tab_2 extends Fragment {
             try {
                 //Uri 파일을 Bitmap으로 만들어서 ImageView에 집어 넣는다.
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), filePath);
-                btChoose.setImageBitmap(rotateImage(bitmap, getOrientationOfImage(filename)));
-                //ivPreview.setImageBitmap(rotateImage(bitmap,90));
+                //btChoose.setImageBitmap(rotateImage(bitmap, getOrientationOfImage(filename)));
+                // 미리보기 이미지 설정
+                ivPreview2.setAdjustViewBounds(true);
+                ivPreview2.requestLayout();
+                ivPreview2.setImageBitmap(rotateImage(bitmap,getOrientationOfImage(filename)));
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
+
     public Bitmap rotateImage(Bitmap src, float degree) {
 
         // Matrix 객체 생성
@@ -160,6 +163,7 @@ public class tab_2 extends Fragment {
         return Bitmap.createBitmap(src, 0, 0, src.getWidth(),
                 src.getHeight(), matrix, true);
     }
+
     public int getOrientationOfImage(String filepath) {
         ExifInterface exif = null;
 
@@ -235,6 +239,8 @@ public class tab_2 extends Fragment {
                             postValues.put("info", feedinform);
                             postValues.put("datenow", datenow);
                             postValues.put("email", email);
+                            postValues.put("latitude", lati);
+                            postValues.put("longitude", longi);
 
                             DatabaseReference keyRef = feedRef.child(key);
                             keyRef.setValue(postValues);
