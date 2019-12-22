@@ -84,28 +84,24 @@
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/bt_findadd"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="6dp"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
                 android:background="@drawable/button_backgound"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:paddingLeft="12dp"
-                android:paddingTop="6dp"
-                android:paddingRight="12dp"
-                android:paddingBottom="6dp">
+                >
 
                 <ImageView
                     android:id="@+id/imageView5"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
                     android:layout_weight="0"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/ic_botnavi_icon_map_on" />
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
                     android:layout_weight="1"
                     android:fontFamily="@font/bm_jua"
                     android:paddingLeft="10dp"
