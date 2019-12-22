@@ -252,6 +252,8 @@ public class tab_1 extends Fragment {
                             postValues.put("info", catinform);
                             postValues.put("date", datenow);
                             postValues.put("email", email);
+                            postValues.put("latitude", lati);
+                            postValues.put("longitude", longi);
 
                             DatabaseReference keyRef = catRef.child(key);
                             keyRef.setValue(postValues);
