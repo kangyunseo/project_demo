@@ -56,8 +56,8 @@ public class menu_4 extends Fragment implements  View.OnClickListener {
     private Double lat = null;
     private Double lon = null;
 
-    private Button bt_find;
-    private Button bt_fac;
+    private LinearLayout bt_find;
+    private LinearLayout bt_fac;
     private EditText bt_fac_option;
 
     private TMapPoint tMapPointStart = new TMapPoint(37.570841, 126.985302); // SKT타워(출발지)
@@ -91,8 +91,8 @@ public class menu_4 extends Fragment implements  View.OnClickListener {
 
         mContext = this.getContext();
 
-        bt_find = (Button)v.findViewById(R.id.bt_findadd);
-        bt_fac = (Button)v.findViewById(R.id.bt_findfac);
+        bt_find = (LinearLayout)v.findViewById(R.id.bt_findadd);
+        bt_fac = (LinearLayout)v.findViewById(R.id.bt_findfac);
         bt_fac_option = (EditText)v.findViewById(R.id.editText);
 
         tmapdata = new TMapData();
