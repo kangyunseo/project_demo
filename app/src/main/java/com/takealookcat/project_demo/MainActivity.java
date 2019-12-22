@@ -80,12 +80,14 @@ public class MainActivity extends AppCompatActivity implements FragCateDona.OnFr
         getSupportFragmentManager().beginTransaction().replace(R.id.view, FragItem).commit();
     }
     @Override
-    public void onFragmentInteraction_board(String title, String content, String file){
+    public void onFragmentInteraction(String title, String content, String file, String email, String type){
         FragBoardItem FragItem = new FragBoardItem();
         Bundle bundle = new Bundle();
         bundle.putString("title", title);
         bundle.putString("content", content);
         bundle.putString("file", file);
+        bundle.putString("email", email);
+        bundle.putString("type", type);
         FragItem.setArguments(bundle);
         getSupportFragmentManager().beginTransaction().replace(R.id.view, FragItem).commit();
     }

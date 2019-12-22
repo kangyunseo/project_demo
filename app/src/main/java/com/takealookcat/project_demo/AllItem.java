@@ -80,4 +80,10 @@ public class AllItem {
     public String getCurAmount() {
         return this.curAmount ;
     }
+    public String getInfo() {
+        return this.info ;
+    }
+    public String getType() {
+        return this.type ;
+    }
 }

@@ -109,12 +109,11 @@ public class FragCateDona extends Fragment {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
         }
-
     }
 
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction_dona(String title, String content, String curAmount, String targetAmount, String startDate,
                                         String dueDate, String file);
-        void onFragmentInteraction_board(String title, String content, String file);
+        void onFragmentInteraction(String title, String content, String file, String email, String type);
     }
 }

@@ -24,12 +24,14 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 
-public class FragBoardItem extends Fragment implements MainActivity.onKeyBackPressedListener{
+public class FragBoardItem extends Fragment {
     public String key;
     public String title ;
     public String content ;
     public String file;
-
+    public String email;
+    public String type;
+    /*
     //뒤로가기 구현
     @Override
     public void onAttach(Context context) {
@@ -48,16 +50,20 @@ public class FragBoardItem extends Fragment implements MainActivity.onKeyBackPre
                 .commit();
 
     }
+     */
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
         // Inflate the layout for this fragment
         View v =  inflater.inflate(R.layout.fragment_frag_board_item, container, false);
 
-        TextView ttitle = (TextView) v.findViewById(R.id.ttitle);
-        TextView tcontent = (TextView) v.findViewById(R.id.tcontent);
+        TextView ttitle = (TextView) v.findViewById(R.id.postTitle);
+        TextView temail = (TextView) v.findViewById(R.id.nicknameInPost);
+        TextView tcontent = (TextView) v.findViewById(R.id.contentsText);
+        TextView boardTitle = (TextView) v.findViewById(R.id.boardTitle);
 
-        final ImageView iconImageView = (ImageView) v.findViewById(R.id.imageView) ;
+
+        final ImageView iconImageView = (ImageView) v.findViewById(R.id.contentsImg) ;
 
         Bundle extra = this.getArguments();
         if(extra != null) {
@@ -65,12 +71,23 @@ public class FragBoardItem extends Fragment implements MainActivity.onKeyBackPre
             title = extra.getString("title");
             content = extra.getString("content");
             file = extra.getString("file");
+            type = extra.getString("type");
+            email= extra.getString("email");
             ttitle.setText(title);
             tcontent.setText(content);
+            temail.setText(email);
         }
 
         StorageReference firebaseStorage = FirebaseStorage.getInstance().getReference();
-        StorageReference storageReference = firebaseStorage.child("board/"+file);
+        StorageReference storageReference = null;
+        if(type.equals("cat")) {
+            storageReference = firebaseStorage.child("cat/" + file);
+            boardTitle.setText("고양이");
+        }
+        else if(type.equals("feed")){
+            storageReference = firebaseStorage.child("feed/" + file);
+            boardTitle.setText("급식소");
+        }
         storageReference.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
             @Override
             public void onComplete(@NonNull Task<Uri> task) {

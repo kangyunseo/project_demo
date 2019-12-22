@@ -55,7 +55,7 @@ public class FragCateBoard extends Fragment {
         adapter = new BoardListAdapter(board_list, getActivity());
         listView.setAdapter(adapter);
 
-
+        /*
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView parent, View v, int position, long id) {
@@ -67,6 +67,8 @@ public class FragCateBoard extends Fragment {
 
             }
         }) ;
+        */
+
         return rootview;            // 플레그먼트 화면으로 보여주게 된다.
     }
 
