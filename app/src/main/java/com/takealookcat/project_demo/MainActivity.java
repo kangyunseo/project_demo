@@ -92,6 +92,34 @@ public class MainActivity extends AppCompatActivity implements FragCateDona.OnFr
         FragItem.setArguments(bundle);
         getSupportFragmentManager().beginTransaction().replace(R.id.container2, FragItem).addToBackStack(null).commit();
     }
+    @Override
+    public void onFragmentInteraction_home(String title, String content, String file, String email, String type){
+        FragBoardItem FragItem = new FragBoardItem();
+        Bundle bundle = new Bundle();
+        bundle.putString("title", title);
+        bundle.putString("content", content);
+        bundle.putString("file", file);
+        bundle.putString("email", email);
+        bundle.putString("type", type);
+        FragItem.setArguments(bundle);
+        getSupportFragmentManager().beginTransaction().replace(R.id.view, FragItem).addToBackStack(null).commit();
+    }
+    @Override
+    public void onFragmentInteraction_homedona(String title, String content, String curAmount, String targetAmount, String startDate, String dueDate, String file) {
+        FragDonaItem FragItem = new FragDonaItem();
+        Bundle bundle = new Bundle();
+        bundle.putString("title", title);
+        bundle.putString("content", content);
+        bundle.putString("curAmount", curAmount);
+        bundle.putString("targetAmount", targetAmount);
+        bundle.putString("startDate", startDate);
+        bundle.putString("dueDate", dueDate);
+        bundle.putString("file", file);
+        FragItem.setArguments(bundle);
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.view, FragItem).addToBackStack(null).commit();
+    }
+
 
 
     @Override

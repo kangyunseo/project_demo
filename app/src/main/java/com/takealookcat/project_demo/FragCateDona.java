@@ -115,5 +115,10 @@ public class FragCateDona extends Fragment {
         void onFragmentInteraction_dona(String title, String content, String curAmount, String targetAmount, String startDate,
                                         String dueDate, String file);
         void onFragmentInteraction(String title, String content, String file, String email, String type);
+
+        void onFragmentInteraction_home(String title, String content, String file, String email, String type);
+
+        void onFragmentInteraction_homedona(String title, String content, String curAmount, String targetAmount, String startDate,
+                                        String dueDate, String file);
     }
 }

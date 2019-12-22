@@ -35,24 +35,7 @@ public class FragDonaItem extends Fragment{
     public String curAmount;
     public String file;
     public ImageButton btn_dona;
-    /*
-    //뒤로가기 구현
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        //메인뷰 액티비티의 뒤로가기 callback 붙이기
-        //((MainActivity)context).setOnKeyBackPressedListener(this);
-    }
 
-    @Override
-    public void onBackKey() {
-        getActivity().getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.container, new FragCateDona())
-                .addToBackStack(null)
-                .commit();
-    }
-    */
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
         // Inflate the layout for this fragment
