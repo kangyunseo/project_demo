@@ -299,4 +299,17 @@
         android:textColor="@color/mainTextBlack"
         android:textSize="14sp" />
 
+    <ImageButton
+        android:id="@+id/bt_dona"
+        android:layout_width="150dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/button_backgound"
+        android:inputType="textMultiLine"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp"
+        android:src="@drawable/ic_floatbutton_donate"/>
+
 </LinearLayout>
