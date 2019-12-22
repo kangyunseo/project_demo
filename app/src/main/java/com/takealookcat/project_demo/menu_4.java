@@ -102,7 +102,8 @@ public class menu_4 extends Fragment implements  View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup v = (ViewGroup) inflater.inflate(R.layout.menu_4,container,false);
-
+        cat_position = v.findViewById(R.id.galleryCat);
+        feed_position = v.findViewById(R.id.galleryFeedplace);
         // 1. 파이어베이스 연결 - DB Connection
         database = FirebaseDatabase.getInstance();
 
@@ -130,6 +131,7 @@ public class menu_4 extends Fragment implements  View.OnClickListener {
 
         //addPoint();
         //showMarkerPoint();
+        //showMarkerPoint2();
 
         /* 현재 보는 방향*/
         tmapview.setCompassMode(true);
@@ -342,7 +344,7 @@ public class menu_4 extends Fragment implements  View.OnClickListener {
                     TMapPOIItem item = poiItem.get(i);
                     Log.d("편의시설","POI Name: " + item.getPOIName() +"," + "Address: " + item.getPOIAddress().replace("null","") + ",Point : "+ item.getPOIPoint().getLatitude() +","+ item.getPOIPoint().getLongitude());
                     m_mapPoint.add(new MapPoint(item.getPOIName(), item.getPOIPoint().getLatitude(), item.getPOIPoint().getLongitude()));
-                    showMarkerPoint();
+                    //showMarkerPoint();
                 }
             }
 
@@ -400,17 +402,38 @@ public class menu_4 extends Fragment implements  View.OnClickListener {
 
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
-            m_mapPoint.clear();
-            // 위에 선언한 저장소인 datas를 초기화하고
-            // donation 레퍼런스의 스냅샷을 가져와서 레퍼런스의 자식노드를 반복문을 통해 하나씩 꺼내서 처리.
-            for( DataSnapshot snapshot : dataSnapshot.getChildren() ) {
-                String key  = snapshot.getKey();
-                catfeedItem item = snapshot.getValue(catfeedItem.class); // 컨버팅되서 Bbs로.......
-                //System.out.println("테스트"+ item.longitude);
-                if(item.longitude != null)
-                    m_mapPoint.add(new MapPoint(item.info,  Double.parseDouble(item.longitude), Double.parseDouble(item.latitude)));
+
+                if(!cat_p){
+                    cat_position.setOnClickListener(new View.OnClickListener(){
+                        @Override
+                        public void onClick(View view) {
+                            cat_p = true;
+                        }
+                    });
+                } else {
+                    cat_position.setOnClickListener(new View.OnClickListener(){
+                        @Override
+                        public void onClick(View view) {
+                            cat_p = false;
+                        }
+                    });
+                }
+
+            if(cat_p) {
+                m_mapPoint.clear();
+                // 위에 선언한 저장소인 datas를 초기화하고
+                // donation 레퍼런스의 스냅샷을 가져와서 레퍼런스의 자식노드를 반복문을 통해 하나씩 꺼내서 처리.
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    String key = snapshot.getKey();
+                    catfeedItem item = snapshot.getValue(catfeedItem.class); // 컨버팅되서 Bbs로.......
+                    //System.out.println("테스트"+ item.longitude);
+                    if (item.longitude != null)
+                        m_mapPoint.add(new MapPoint(item.info, Double.parseDouble(item.longitude), Double.parseDouble(item.latitude)));
+                }
+                showMarkerPoint();
+            } else {
+                m_mapPoint.clear();
             }
-            showMarkerPoint();
         }
 
         @Override
@@ -423,8 +446,7 @@ public class menu_4 extends Fragment implements  View.OnClickListener {
     ValueEventListener postListener2 = new ValueEventListener() {
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
-            //여기에 조건(버튼)
-            //리스너 방식임
+
                 m_mapPoint2.clear();
                 // 위에 선언한 저장소인 datas를 초기화하고
                 // donation 레퍼런스의 스냅샷을 가져와서 레퍼런스의 자식노드를 반복문을 통해 하나씩 꺼내서 처리.
@@ -435,7 +457,6 @@ public class menu_4 extends Fragment implements  View.OnClickListener {
                         m_mapPoint2.add(new MapPoint(item.info,  Double.parseDouble(item.longitude), Double.parseDouble(item.latitude)));
                 }
                 showMarkerPoint2();
-                m_mapPoint2.clear();
         }
 
         @Override
