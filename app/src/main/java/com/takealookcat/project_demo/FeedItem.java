@@ -9,6 +9,8 @@ public class FeedItem {
     public String content ;
     public String file ;
     public String email;
+    public String latitude ;
+    public String longitude ;
 
     public void setinfo(String info) {
         this.info = info ;
@@ -26,9 +28,12 @@ public class FeedItem {
     public void setEmail(String email) {
         this.email = email ;
     }
-    public Drawable getIcon() {
-        return this.iconDrawable ;
+    public void setLatitude(String latitude) {
+        this.latitude = latitude ;
     }
+    public void setLongitude(String longitude) { this.longitude = longitude ; }
+
+    public Drawable getIcon() { return this.iconDrawable ; }
     public String getTitle() {
         return this.info ;
     }
@@ -41,4 +46,8 @@ public class FeedItem {
     public String getemail() {
         return this.email ;
     }
+    public String getLatitude() {
+        return this.latitude;
+    }
+    public String getLongitude() { return this.longitude; }
 }
