@@ -19,6 +19,20 @@
             android:text="주소로 찾기" />
 
         <Button
+            android:id="@+id/cat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/thema_1"
+            android:text="고양이" />
+
+        <Button
+            android:id="@+id/feed_place"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/thema_1"
+            android:text="급식소" />
+
+        <Button
             android:id="@+id/bt_findfac"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -29,13 +43,11 @@
             android:id="@+id/editText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:ems="10"
             android:hint="검색"
             android:inputType="textPersonName" />
 
     </LinearLayout>
-
     <LinearLayout
         android:id="@+id/map_view"
         android:layout_width="match_parent"
