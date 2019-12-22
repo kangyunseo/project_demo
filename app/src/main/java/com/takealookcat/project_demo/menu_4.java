@@ -64,8 +64,12 @@ public class menu_4 extends Fragment implements  View.OnClickListener {
     private Double lon = null;
 
     private LinearLayout bt_find;
-    private Button bt_fac;
-    private EditText bt_fac_option;
+    private LinearLayout cat_position;
+    private LinearLayout feed_position;
+    private boolean cat_p = false;
+    private boolean feed_p = false;
+    //private Button bt_fac;
+    //private EditText bt_fac_option;
 
     private TMapPoint tMapPointStart = new TMapPoint(37.570841, 126.985302); // SKT타워(출발지)
     private TMapPoint tMapPointEnd = new TMapPoint(37.551135, 126.988205); // N서울타워(목적지)
@@ -192,7 +196,7 @@ public class menu_4 extends Fragment implements  View.OnClickListener {
         });
 
         bt_find.setOnClickListener(this);
-        bt_fac.setOnClickListener(this);
+        //bt_fac.setOnClickListener(this);
         return v;
     }
     //핀 찍을 data

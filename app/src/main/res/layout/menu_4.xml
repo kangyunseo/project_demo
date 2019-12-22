@@ -78,7 +78,6 @@
                 android:text="급식소 위치"
                 android:textColor="@color/mainTextBlack" />
         </LinearLayout>
-
         <LinearLayout
             android:id="@+id/bt_findadd"
             android:layout_width="wrap_content"
@@ -112,6 +111,19 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/bt_findfac"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/thema_1"
+        android:text="주변 편의시설" />
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:hint="검색"
+        android:inputType="textPersonName" />
 
     <LinearLayout
         android:id="@+id/map_view"
