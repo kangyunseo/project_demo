@@ -77,7 +77,8 @@ public class MainActivity extends AppCompatActivity implements FragCateDona.OnFr
         bundle.putString("dueDate", dueDate);
         bundle.putString("file", file);
         FragItem.setArguments(bundle);
-        getSupportFragmentManager().beginTransaction().replace(R.id.view, FragItem).commit();
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.container2, FragItem).addToBackStack(null).commit();
     }
     @Override
     public void onFragmentInteraction(String title, String content, String file, String email, String type){
@@ -89,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements FragCateDona.OnFr
         bundle.putString("email", email);
         bundle.putString("type", type);
         FragItem.setArguments(bundle);
-        getSupportFragmentManager().beginTransaction().replace(R.id.view, FragItem).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.container2, FragItem).addToBackStack(null).commit();
     }
 
 
