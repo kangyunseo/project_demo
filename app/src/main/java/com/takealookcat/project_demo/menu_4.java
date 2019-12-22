@@ -63,7 +63,7 @@ public class menu_4 extends Fragment implements  View.OnClickListener {
     private Double lat = null;
     private Double lon = null;
 
-    private Button bt_find;
+    private LinearLayout bt_find;
     private Button bt_fac;
     private EditText bt_fac_option;
 
@@ -113,9 +113,9 @@ public class menu_4 extends Fragment implements  View.OnClickListener {
 
         mContext = this.getContext();
 
-        bt_find = (Button)v.findViewById(R.id.bt_findadd);
-        bt_fac = (Button)v.findViewById(R.id.bt_findfac);
-        bt_fac_option = (EditText)v.findViewById(R.id.editText);
+        bt_find = (LinearLayout)v.findViewById(R.id.bt_findadd);
+        //bt_fac = (Button)v.findViewById(R.id.bt_findfac);
+        //bt_fac_option = (EditText)v.findViewById(R.id.editText);
 
         tmapdata = new TMapData();
         LinearLayout linearLayout = (LinearLayout)v.findViewById(R.id.map_view);
@@ -276,9 +276,9 @@ public class menu_4 extends Fragment implements  View.OnClickListener {
                 Intent intent = new Intent(mContext,SearchActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.bt_findfac:
-                getAroundBizPoi(bt_fac_option.getText().toString());
-                break;
+            //case R.id.bt_findfac:
+            //    getAroundBizPoi(bt_fac_option.getText().toString());
+            //    break;
         }
     }
 
