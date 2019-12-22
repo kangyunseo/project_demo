@@ -246,7 +246,7 @@ public class menu_4 extends Fragment implements  View.OnClickListener {
             Bitmap bitmap = null;
             /* 핀 이미지 */
             //바꿀 이미지(고양이)
-            bitmap = BitmapFactory.decodeResource(mContext.getResources(),R.mipmap.poi_dot);
+            bitmap = BitmapFactory.decodeResource(mContext.getResources(),R.drawable.pin_catmaker);
 
             item1.setTMapPoint(point);
             item1.setName(m_mapPoint.get(i).getName());
@@ -278,7 +278,7 @@ public class menu_4 extends Fragment implements  View.OnClickListener {
             Bitmap bitmap = null;
             /* 핀 이미지 */
             //이미지 다른걸로 (feed)
-            bitmap = BitmapFactory.decodeResource(mContext.getResources(),R.mipmap.poi_dot);
+            bitmap = BitmapFactory.decodeResource(mContext.getResources(),R.drawable.pin_feedmaker);
 
             item1.setTMapPoint(point);
             item1.setName(m_mapPoint2.get(i).getName());
