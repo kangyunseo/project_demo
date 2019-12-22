@@ -92,11 +92,16 @@ public class AllItemListAdapter extends BaseAdapter{
         StorageReference firebaseStorage = FirebaseStorage.getInstance().getReference();
         StorageReference storageReference = null;
 
+        descTextView.setText(all.info);
         if((all.type).equals("cat")) {
            storageReference = firebaseStorage.child("cat/" + all.file);
         }
         else if(all.type.equals("feed")){
             storageReference = firebaseStorage.child("feed/" + all.file);
+        }
+        else if(all.type.equals("donation")){
+            storageReference = firebaseStorage.child("donation/" + all.file);
+            descTextView.setText(all.title);
         }
 
         String useremail = all.email;
@@ -137,7 +142,7 @@ public class AllItemListAdapter extends BaseAdapter{
         // 아이템 내 각 위젯에 데이터 반영
         //iconImageView.setImageDrawable(listViewItem.getIcon());
         titleTextView.setText(all.content);
-        descTextView.setText(all.info);
+
         email.setText(all.email);
         return convertView;
     }

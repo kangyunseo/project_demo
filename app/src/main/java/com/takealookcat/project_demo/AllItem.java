@@ -11,6 +11,11 @@ public class AllItem {
     public String info ;
     public String type ;
     private Drawable iconDrawable ;
+    //donation
+    public String startDate ;
+    public String dueDate ;
+    public String targetAmount;
+    public String curAmount;
 
     public void setType(String type) {
         this.type = type ;
@@ -24,6 +29,27 @@ public class AllItem {
     public void setFile(String file) {
         this.file = file ;
     }
+    public void setStartDate(String startDate) {
+        this.startDate = startDate ;
+    }
+    public void setDueDate(String dueDate) {
+        this.dueDate = dueDate ;
+    }
+    public void setTargetAmount(String targetAmount) {
+        this.targetAmount = targetAmount ;
+    }
+    public void setCurAmount(String curAmount) {
+        this.curAmount = curAmount ;
+    }
+    public void setinfo(String info) {
+        this.info = info ;
+    }
+    public void setDesc(String con) { content = con ; }
+    public void setEmail(String email) { this.email = email ; }
+    public void setIcon(Drawable icon) {
+        iconDrawable = icon ;
+    }
+
     public String getTitle() {
         return this.title ;
     }
@@ -36,20 +62,22 @@ public class AllItem {
     public String getemail() {
         return this.email ;
     }
-    public void setinfo(String info) {
-        this.info = info ;
-    }
-    public void setEmail(String email) {
-        this.email = email ;
-    }
-    public void setDesc(String con) { content = con ; }
     public String getDesc() {
         return this.content ;
     }
-    public void setIcon(Drawable icon) {
-        iconDrawable = icon ;
-    }
     public Drawable getIcon() {
         return this.iconDrawable ;
+    }
+    public String getStartDate() {
+        return this.startDate ;
+    }
+    public String getDueDate() {
+        return this.dueDate ;
+    }
+    public String getTargetAmount() {
+        return this.targetAmount ;
+    }
+    public String getCurAmount() {
+        return this.curAmount ;
     }
 }
