@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity implements FragCateDona.OnFr
 
         // 툴바 타이틀 변경
         toolbarTitle = (TextView)findViewById(R.id.toolbarTitle);
-        toolbarTitle.setText("TAKE A LOOK 고양이");
+        toolbarTitle.setText("Take A Look 고양이");
 
         // * 1. 홈
         button1.setOnClickListener(new View.OnClickListener() {

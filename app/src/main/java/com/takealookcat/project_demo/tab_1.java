@@ -53,12 +53,9 @@ import static android.app.Activity.RESULT_OK;
 import static android.content.Context.MODE_PRIVATE;
 
 public class tab_1 extends Fragment {
-
     ImageView ivPreview;
-
     ImageButton btChoose;
     ImageButton btUpload;
-
     Uri filePath;
     EditText cat_info, cat_Content, date_now;
     TextView latitude;
@@ -153,8 +150,11 @@ public class tab_1 extends Fragment {
                 //Uri 파일을 Bitmap으로 만들어서 ImageView에 집어 넣는다.
 
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), filePath);
-                btChoose.setImageBitmap(rotateImage(bitmap,getOrientationOfImage(filename)));
-                //ivPreview.setImageBitmap(rotateImage(bitmap,90));
+                //btChoose.setImageBitmap(rotateImage(bitmap,getOrientationOfImage(filename)));
+                // 미리보기 이미지 설정
+                ivPreview.setAdjustViewBounds(true);
+                ivPreview.requestLayout();
+                ivPreview.setImageBitmap(rotateImage(bitmap,getOrientationOfImage(filename)));
 
             } catch (IOException e) {
                 e.printStackTrace();
