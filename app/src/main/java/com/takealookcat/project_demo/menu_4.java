@@ -245,6 +245,7 @@ public class menu_4 extends Fragment implements  View.OnClickListener {
             TMapMarkerItem item1 = new TMapMarkerItem();
             Bitmap bitmap = null;
             /* 핀 이미지 */
+            //바꿀 이미지(고양이)
             bitmap = BitmapFactory.decodeResource(mContext.getResources(),R.mipmap.poi_dot);
 
             item1.setTMapPoint(point);
