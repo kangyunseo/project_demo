@@ -221,7 +221,7 @@ public class menu_4 extends Fragment implements  View.OnClickListener {
                     }
                 });
 
-                Toast.makeText(mContext,"도착지가 설정되었습니다. : " ,Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext,"도착지가 설정되었습니다." ,Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -260,7 +260,7 @@ public class menu_4 extends Fragment implements  View.OnClickListener {
             //item1.setAutoCalloutVisible(true);
 
             /*풍선 안 우측 버튼*/
-            Bitmap bitmap_i = BitmapFactory.decodeResource(mContext.getResources(),R.mipmap.i_go);
+            Bitmap bitmap_i = BitmapFactory.decodeResource(mContext.getResources(),R.drawable.rightbtn);
 
             item1.setCalloutRightButtonImage(bitmap_i);
 
@@ -292,7 +292,7 @@ public class menu_4 extends Fragment implements  View.OnClickListener {
             //item1.setAutoCalloutVisible(true);
 
             /*풍선 안 우측 버튼*/
-            Bitmap bitmap_i = BitmapFactory.decodeResource(mContext.getResources(),R.mipmap.i_go);
+            Bitmap bitmap_i = BitmapFactory.decodeResource(mContext.getResources(),R.drawable.rightbtn);
 
             item1.setCalloutRightButtonImage(bitmap_i);
 
@@ -389,29 +389,35 @@ public class menu_4 extends Fragment implements  View.OnClickListener {
 
                 // 마커 아이콘
                 Context context = mContext;
-                Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.mipmap.poi_dot);
+                Bitmap startbitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.pin_startmaker);
+                Bitmap endbitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.pin_endmaker);
 
                 // 3번째 파라미터 true == 지도 이동 Animation 사용
                 tmapview.setCenterPoint(tMapPointStart.getLongitude(), tMapPointStart.getLatitude());
 
                 //마커1(출발지)
-                markerItem1.setIcon(bitmap); // 마커 아이콘 지정
+                markerItem1.setIcon(startbitmap); // 마커 아이콘 지정
                 markerItem1.setPosition(0.5f, 1.0f); // 마커의 중심점을 중앙, 하단으로 설정
                 markerItem1.setTMapPoint(tMapPointStart); // 마커의 좌표 지정
-                markerItem1.setName("출발지"); // 마커의 타이틀 지정
+                markerItem1.setName("출발"); // 마커의 타이틀 지정
 
                 //마커2(도착지)
-                markerItem2.setIcon(bitmap); // 마커 아이콘 지정
+                markerItem2.setIcon(endbitmap); // 마커 아이콘 지정
                 markerItem2.setPosition(0.5f, 1.0f); // 마커의 중심점을 중앙, 하단으로 설정
                 markerItem2.setTMapPoint(tMapPointEnd); // 마커의 좌표 지정
-                markerItem2.setName("N서울타워"); // 마커의 타이틀 지정
+                markerItem2.setName("도착"); // 마커의 타이틀 지정
 
                 //경로안내
                 try {
                     TMapData tmapdata = new TMapData();
                     TMapPolyLine tMapPolyLine = tmapdata.findPathDataWithType(TMapData.TMapPathType.PEDESTRIAN_PATH, tMapPointStart, tMapPointEnd);
-                    tMapPolyLine.setLineColor(Color.BLUE);
-                    tMapPolyLine.setLineWidth(5);
+
+                    tMapPolyLine.setLineColor(R.color.pathLineColor); // 라인 색상
+                    tMapPolyLine.setLineWidth(10); // 라인 너비
+                    tMapPolyLine.setOutLineColor(R.color.pathOutlineColor); // 라인 테두리색
+                    tMapPolyLine.setOutLineWidth(30); // 테두리 너비
+
+
                     ArrayList<TMapPoint> alTMapPoint = new ArrayList<TMapPoint>();
                     for (int i = 0; i < alTMapPoint.size(); i++) {
                         tMapPolyLine.addLinePoint(alTMapPoint.get(i));
