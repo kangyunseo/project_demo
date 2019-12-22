@@ -57,6 +57,7 @@ public class menu_4 extends Fragment implements  View.OnClickListener {
     private ArrayList<TMapPoint> m_tmapPoint = new ArrayList<TMapPoint>();
     private ArrayList<String> mArrayMarkerID = new ArrayList<String>();
     private ArrayList<MapPoint> m_mapPoint = new ArrayList<MapPoint>();
+    private ArrayList<MapPoint> m_mapPoint2 = new ArrayList<MapPoint>();
 
     private String address;
     private Double lat = null;
@@ -234,6 +235,38 @@ public class menu_4 extends Fragment implements  View.OnClickListener {
             mArrayMarkerID.add(strId);
         }
     }
+    //feed 함수
+    public void showMarkerPoint2() {
+        for(int i=0; i<m_mapPoint2.size();i++) {
+            TMapPoint point = new TMapPoint(m_mapPoint2.get(i).getLatitude(), m_mapPoint2.get(i).getLongitude());
+            TMapMarkerItem item1 = new TMapMarkerItem();
+            Bitmap bitmap = null;
+            /* 핀 이미지 */
+            //이미지 다른걸로 (feed)
+            bitmap = BitmapFactory.decodeResource(mContext.getResources(),R.mipmap.poi_dot);
+
+            item1.setTMapPoint(point);
+            item1.setName(m_mapPoint2.get(i).getName());
+            item1.setVisible(item1.VISIBLE);
+
+            item1.setIcon(bitmap);
+
+            item1.setCalloutTitle(m_mapPoint2.get(i).getName());
+            item1.setCalloutSubTitle("서울");
+            item1.setCanShowCallout(true);
+            //item1.setAutoCalloutVisible(true);
+
+            /*풍선 안 우측 버튼*/
+            Bitmap bitmap_i = BitmapFactory.decodeResource(mContext.getResources(),R.mipmap.i_go);
+
+            item1.setCalloutRightButtonImage(bitmap_i);
+
+            String strId = String.format("pmarker%d",mMarkerID++);
+
+            tmapview.addMarkerItem(strId, item1);
+            mArrayMarkerID.add(strId);
+        }
+    }
 
     @Override
     public void onClick(View view) {
@@ -373,6 +406,7 @@ public class menu_4 extends Fragment implements  View.OnClickListener {
                 if(item.longitude != null)
                     m_mapPoint.add(new MapPoint(item.info,  Double.parseDouble(item.longitude), Double.parseDouble(item.latitude)));
             }
+            showMarkerPoint();
         }
 
         @Override
@@ -385,15 +419,16 @@ public class menu_4 extends Fragment implements  View.OnClickListener {
     ValueEventListener postListener2 = new ValueEventListener() {
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
+            m_mapPoint2.clear();
             // 위에 선언한 저장소인 datas를 초기화하고
             // donation 레퍼런스의 스냅샷을 가져와서 레퍼런스의 자식노드를 반복문을 통해 하나씩 꺼내서 처리.
             for( DataSnapshot snapshot : dataSnapshot.getChildren() ) {
                 String key  = snapshot.getKey();
                 catfeedItem item = snapshot.getValue(catfeedItem.class); // 컨버팅되서 Bbs로.......
                 if(item.longitude != null)
-                    m_mapPoint.add(new MapPoint(item.info,  Double.parseDouble(item.longitude), Double.parseDouble(item.latitude)));
+                    m_mapPoint2.add(new MapPoint(item.info,  Double.parseDouble(item.longitude), Double.parseDouble(item.latitude)));
             }
-            showMarkerPoint();
+            showMarkerPoint2();
         }
 
         @Override
@@ -406,4 +441,3 @@ public class menu_4 extends Fragment implements  View.OnClickListener {
 
 
 }
-
