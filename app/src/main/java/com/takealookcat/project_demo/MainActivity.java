@@ -260,7 +260,7 @@ public class MainActivity extends AppCompatActivity implements FragCateDona.OnFr
                 toolbarTitle.setText("지도"); // 타이틀 변경
 
                 ActionBar actionBar = getSupportActionBar();
-                actionBar.hide();
+                //actionBar.hide();
                 //actionBar.setDisplayHomeAsUpEnabled(false); // 뒤로가기 버튼 지우기
                 /*
                 if (toolbarRightBtn != null) {
