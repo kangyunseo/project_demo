@@ -1,11 +1,13 @@
 package com.takealookcat.project_demo;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import androidx.annotation.Nullable;
@@ -21,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FragMypost extends Fragment {
+    private FragCateDona.OnFragmentInteractionListener mListener;
     ListView listView;  // 리스트 뷰
     AllItemSimpleAdapter adapter; // 커뮤니티페이지 홈, 게시판 리스트 어댑터
     List<AllItem> all_list = new ArrayList<>();
@@ -55,6 +58,32 @@ public class FragMypost extends Fragment {
         adapter = new AllItemSimpleAdapter(all_list, getContext());
         listView.setAdapter(adapter);
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView parent, View v, int position, long id) {
+                // TODO :
+                if(all_list.get(position).type.equals("donation")) {
+                    String content = all_list.get(position).getContent();
+                    String title = all_list.get(position).getTitle();
+                    String camount = all_list.get(position).getCurAmount();
+                    String tamount = all_list.get(position).getTargetAmount();
+                    String sday = all_list.get(position).getStartDate();
+                    String dday = all_list.get(position).getDueDate();
+                    String file = all_list.get(position).getFile();
+                    mListener.onFragmentInteraction_dona(content, title, camount, tamount, sday, dday, file);
+                }
+                else{
+                    String content = all_list.get(position).getContent();
+                    String title = all_list.get(position).getInfo();
+                    String email = all_list.get(position).getemail();
+                    String file = all_list.get(position).getFile();
+                    String type = all_list.get(position).getType();
+                    mListener.onFragmentInteraction(title, content,  file, email, type);
+                }
+
+            }
+        }) ;
+
         return rootview;
     }
     ValueEventListener postListener = new ValueEventListener() {
@@ -87,4 +116,16 @@ public class FragMypost extends Fragment {
             // ...
         }
     };
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try{
+            mListener = (FragCateDona.OnFragmentInteractionListener) context;
+        }catch(ClassCastException e){
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+
+    }
 }
