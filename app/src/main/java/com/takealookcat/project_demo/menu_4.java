@@ -421,7 +421,6 @@ public class menu_4 extends Fragment implements  View.OnClickListener {
         public void onDataChange(DataSnapshot dataSnapshot) {
             //여기에 조건(버튼)
             //리스너 방식임
-
                 m_mapPoint2.clear();
                 // 위에 선언한 저장소인 datas를 초기화하고
                 // donation 레퍼런스의 스냅샷을 가져와서 레퍼런스의 자식노드를 반복문을 통해 하나씩 꺼내서 처리.
