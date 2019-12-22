@@ -19,7 +19,9 @@
             android:id="@+id/imageView2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:layout_weight="1"
             android:adjustViewBounds="false"
             android:paddingVertical="8dp"
             android:scaleType="centerCrop"
@@ -30,8 +32,8 @@
             android:id="@+id/textView3"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="6"
-            android:gravity="center|left"
+            android:layout_weight="7"
+            android:gravity="left|center_vertical"
             android:text="New Text"
             android:textColor="@color/mainTextBlack"
             android:textSize="16sp" />
@@ -51,9 +53,10 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
-            android:gravity="center|left"
+            android:gravity="left|center_vertical"
+            android:paddingRight="12dp"
             android:textColor="@color/secondTextGray"
-            android:textSize="16sp" />
+            android:textSize="14sp" />
 
 
     </LinearLayout>
@@ -73,7 +76,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:background="@drawable/background_thema"
-        android:padding="15dp"
+        android:paddingLeft="12dp"
+        android:paddingTop="15dp"
+        android:paddingRight="12dp"
+        android:paddingBottom="15dp"
         android:text="New Text"
         android:textColor="@color/mainTextBlack"
         android:textSize="14sp" />
