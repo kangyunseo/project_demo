@@ -1,13 +1,28 @@
 package com.takealookcat.project_demo;
 
 import android.content.Context;
+import android.graphics.drawable.GradientDrawable;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class DonationListAdapter extends BaseAdapter{
     private final static String TAG = "PINGPONG";
@@ -43,18 +58,79 @@ public class DonationListAdapter extends BaseAdapter{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Log.i(TAG, "=================================getView()");
-        if(convertView == null){
-            convertView = inflater.inflate(R.layout.list_item, null);
+        final int pos = position;
+        final Context context = parent.getContext();
+
+        // "listview_item" Layout을 inflate하여 convertView 참조 획득.
+        if (convertView == null) {
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView = inflater.inflate(R.layout.listview_item, parent, false);
         }
 
-        TextView txtTitle = (TextView)convertView.findViewById(R.id.txtTitle);
-        //TextView txtContent = (TextView)convertView.findViewById(R.id.txtContent);
+        // 화면에 표시될 View(Layout이 inflate된)으로부터 위젯에 대한 참조 획득
+        final ImageView iconImageView = (ImageView) convertView.findViewById(R.id.imageView1) ;
+        TextView titleTextView = (TextView) convertView.findViewById(R.id.textView1) ;
+        TextView descTextView = (TextView) convertView.findViewById(R.id.textView2) ;
+        TextView email = (TextView) convertView.findViewById(R.id.textView3);
+        final CircleImageView profile = (CircleImageView) convertView.findViewById(R.id.imageView2);
+//라운딩입니다.
+        GradientDrawable drawable=
+                (GradientDrawable)  context.getResources().getDrawable(R.drawable.background_thema);
+        iconImageView.setBackground(drawable);
+        iconImageView.setClipToOutline(true);
 
-        DonationItem bbs = datas.get(position);
-        txtTitle.setText(bbs.title);
-        //txtContent.setText(bbs.content);
+        profile.setBackground(drawable);
+        profile.setClipToOutline(true);
 
+
+        // Data Set(listViewItemList)에서 position에 위치한 데이터 참조 획득
+        DonationItem donaItem = datas.get(position);
+
+        StorageReference firebaseStorage = FirebaseStorage.getInstance().getReference();
+        StorageReference storageReference = firebaseStorage.child("donation/"+donaItem.file);
+        String useremail = donaItem.email;
+        StorageReference storageReference2 = firebaseStorage.child("user/"+useremail);
+
+        storageReference.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+                if (task.isSuccessful()) {
+                    // Glide 이용하여 이미지뷰에 로딩
+                    Glide.with(context)
+                            .load(task.getResult())
+                            .into(iconImageView);
+                } else {
+                    // URL을 가져오지 못하면 토스트 메세지
+                    Toast.makeText(context, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        storageReference2.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+                if (task.isSuccessful()) {
+                    // Glide 이용하여 이미지뷰에 로딩
+
+                    Glide.with(context)
+                            .load(task.getResult())
+                            .into(profile);
+
+
+                    //Glide.with(context).load(task.getResult()).apply(new RequestOptions().circleCrop()).into(iconImageView);
+                } else {
+                    // URL을 가져오지 못하면 토스트 메세지
+                    Toast.makeText(context, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        // 아이템 내 각 위젯에 데이터 반영
+        //iconImageView.setImageDrawable(listViewItem.getIcon());
+
+        titleTextView.setText(donaItem.content);
+        descTextView.setText(donaItem.title);
+        email.setText(donaItem.email);
         return convertView;
     }
 

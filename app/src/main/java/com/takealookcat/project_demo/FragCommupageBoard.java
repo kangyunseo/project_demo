@@ -96,6 +96,7 @@ public class FragCommupageBoard extends Fragment {
                                 actionBar.setDisplayHomeAsUpEnabled(true); // 뒤로가기 버튼 생성
                                 actionBar.setHomeAsUpIndicator(R.drawable.ic_back); // 버튼 모양 변경(뒤로)
                                 break;
+
                             default:
                                 break;
                         }

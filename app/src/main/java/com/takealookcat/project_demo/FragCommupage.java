@@ -128,6 +128,26 @@ public class FragCommupage extends Fragment {
                                 actionBar.setDisplayHomeAsUpEnabled(true); // 뒤로가기 버튼 생성
                                 actionBar.setHomeAsUpIndicator(R.drawable.ic_back); // 버튼 모양 변경(뒤로)
                                 break;
+
+                            case R.id.dona:
+                                // 프래그먼트
+                                menu_1_3 menu_1_3 = new menu_1_3();
+
+                                fragManager = getFragmentManager();
+                                fragTransaction = fragManager.beginTransaction();
+                                fragTransaction.replace(R.id.container2, menu_1_3);
+                                fragTransaction.addToBackStack(null);
+                                fragTransaction.commit();
+
+                                // 툴바 타이틀 변경
+                                toolbarTitle = ((MainActivity)getActivity()).findViewById(R.id.toolbarTitle);
+                                toolbarTitle.setText("기부갤러리");
+
+                                actionBar = ((MainActivity)getActivity()).getSupportActionBar();
+                                actionBar.setDisplayHomeAsUpEnabled(true); // 뒤로가기 버튼 생성
+                                actionBar.setHomeAsUpIndicator(R.drawable.ic_back); // 버튼 모양 변경(뒤로)
+                                break;
+
                             default:
                                 break;
                         }

@@ -22,11 +22,11 @@ import java.util.List;
 public class menu_1_3 extends Fragment {
 
     ListView listView;
-    BoardListAdapter adapter;
-    List<BoardItem> board_list = new ArrayList<>();
+    DonationListAdapter adapter;
+    List<DonationItem> dona_list = new ArrayList<>();
 
     FirebaseDatabase database;
-    DatabaseReference boardRef;
+    DatabaseReference donaRef;
 
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,15 +39,15 @@ public class menu_1_3 extends Fragment {
         database = FirebaseDatabase.getInstance();
 
         // 2. CRUD 작업의 기준이 되는 노드를 레퍼런스로 가져온다.
-        boardRef = database.getReference("board");
+        donaRef = database.getReference("donation");
 
         // 3. 레퍼런스 기준으로 데이터베이스에 쿼리를 날리는데, 자동으로 쿼리가 된다.
         //    ( * 파이어 베이스가
-        boardRef.addValueEventListener(postListener);
+        donaRef.addValueEventListener(postListener);
 
         // 4. 리스트뷰에 목록 세팅
         listView = (ListView)rootview.findViewById(R.id.listview3);
-        adapter = new BoardListAdapter(board_list, getContext());
+        adapter = new DonationListAdapter(dona_list, getContext());
         listView.setAdapter(adapter);
 
         return rootview;
@@ -57,13 +57,13 @@ public class menu_1_3 extends Fragment {
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
             // 위에 선언한 저장소인 datas를 초기화하고
-            board_list.clear();
+            dona_list.clear();
             // donation 레퍼런스의 스냅샷을 가져와서 레퍼런스의 자식노드를 반복문을 통해 하나씩 꺼내서 처리.
             for( DataSnapshot snapshot : dataSnapshot.getChildren() ) {
                 String key  = snapshot.getKey();
-                BoardItem item = snapshot.getValue(BoardItem.class); // 컨버팅되서 Bbs로........
+                DonationItem item = snapshot.getValue(DonationItem.class); // 컨버팅되서 Bbs로........
                 item.key = key;
-                board_list.add(0,item);
+                dona_list.add(0,item);
 
             }
             adapter.notifyDataSetChanged();
