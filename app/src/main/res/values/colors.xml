@@ -18,6 +18,10 @@
     <color name="firstBorderSilver">#eeeeee</color>
     <color name="secondBorderSilver">#f0f0f0</color>
 
+    <!-- 지도 -->
+    <color name="pathLineColor">#00A2FF</color>
+    <color name="pathOutlineColor">#00619B</color>
+
     <!-- 기타 -->
     <color name="addButtonGray">#CCCCCC</color>
     <color name="baseProfileGray">#F7F7F7</color>
