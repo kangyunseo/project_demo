@@ -38,7 +38,7 @@ public class catitem {
     public String getTitle() {
         return this.info ;
     }
-    public String getDesc() {
+    public String getContent() {
         return this.content ;
     }
     public String getFile() {
@@ -51,4 +51,5 @@ public class catitem {
         return this.latitude;
     }
     public String getLongitude() { return this.longitude; }
+    public String getInfo() { return this.info; }
 }

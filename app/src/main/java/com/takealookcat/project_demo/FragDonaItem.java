@@ -52,8 +52,8 @@ public class FragDonaItem extends Fragment{
 
         TextView ttitle = (TextView) v.findViewById(R.id.donaTitle);
         TextView ttargetAmount = (TextView) v.findViewById(R.id.targetAmount);
-        TextView tdueDate = (TextView) v.findViewById(R.id.startDate);
-        TextView tstartDate = (TextView) v.findViewById(R.id.dueDate);
+        TextView tstartDate = (TextView) v.findViewById(R.id.startDate);
+        TextView tdueDate = (TextView) v.findViewById(R.id.dueDate);
 
         Bundle extra = this.getArguments();
         if(extra != null) {

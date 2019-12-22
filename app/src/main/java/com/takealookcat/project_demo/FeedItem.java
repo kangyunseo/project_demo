@@ -37,7 +37,7 @@ public class FeedItem {
     public String getTitle() {
         return this.info ;
     }
-    public String getDesc() {
+    public String getContent() {
         return this.content ;
     }
     public String getFile() {

@@ -1,10 +1,12 @@
 package com.takealookcat.project_demo;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import androidx.annotation.Nullable;
@@ -20,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class menu_1_1 extends Fragment {
-
+    private FragCateDona.OnFragmentInteractionListener mListener;
     ListView listView;
     CatListAdapter adapter;
     List<catitem> cat_list = new ArrayList<>();
@@ -50,6 +52,18 @@ public class menu_1_1 extends Fragment {
         adapter = new CatListAdapter(cat_list, getContext());
         listView.setAdapter(adapter);
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView parent, View v, int position, long id) {
+                    String title = cat_list.get(position).getInfo();
+                    String email = cat_list.get(position).getemail();
+                    String file = cat_list.get(position).getFile();
+                    String content = cat_list.get(position).getContent();
+                    mListener.onFragmentInteraction(title, content,  file, email, "cat");
+            }
+        }) ;
+
+
         return rootview;
     }
 
@@ -76,4 +90,16 @@ public class menu_1_1 extends Fragment {
             // ...
         }
     };
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try{
+            mListener = (FragCateDona.OnFragmentInteractionListener) context;
+        }catch(ClassCastException e){
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+
+    }
 }
