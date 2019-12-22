@@ -235,6 +235,8 @@ public class tab_2 extends Fragment {
                             postValues.put("info", feedinform);
                             postValues.put("datenow", datenow);
                             postValues.put("email", email);
+                            postValues.put("latitude", lati);
+                            postValues.put("longitude", longi);
 
                             DatabaseReference keyRef = feedRef.child(key);
                             keyRef.setValue(postValues);
